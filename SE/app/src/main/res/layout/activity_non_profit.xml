@@ -9,7 +9,7 @@
     <View
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="55dp"
         android:background="@color/light_blue"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,6 +22,7 @@
 
 
     <TextView
+        android:id="@+id/npNameDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -46,26 +47,25 @@
         android:onClick="goBack"
         android:contentDescription="@string/todo" />
 
-    <TextView
+    <ImageView
         android:id="@+id/profilePic"
-        android:layout_width="250dp"
-        android:layout_height="200dp"
+        android:layout_width="220dp"
+        android:layout_height="170dp"
         android:background="@color/grey"
-        android:text="@string/profile_pic"
         android:textAlignment="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="80dp"/>
+        android:layout_marginTop="60dp"/>
 
     <TextView
         android:id="@+id/profilePart"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="180dp"
         app:layout_constraintBottom_toTopOf="@id/botBord"
         android:background="@color/purple_200"
         android:text="@string/profile_details"
-        android:layout_margin="20dp"
+        android:layout_margin="10dp"
         android:textAlignment="center"/>
 
     <View
@@ -84,35 +84,32 @@
 
 
     <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
         app:layout_constraintBottom_toTopOf="@id/profilePart"
         app:layout_constraintTop_toBottomOf="@id/profilePic"
         app:layout_constraintEnd_toEndOf="@id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         android:background="@color/dark_blue"
-        android:contentDescription="@string/todo"
-        android:layout_margin="10dp" />
+        android:contentDescription="@string/todo" />
     <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
         app:layout_constraintBottom_toTopOf="@id/profilePart"
         app:layout_constraintTop_toBottomOf="@id/profilePic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:background="@color/dark_blue"
-        android:contentDescription="@string/todo"
-        android:layout_margin="10dp" />
+        android:contentDescription="@string/todo" />
     <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
         app:layout_constraintBottom_toTopOf="@id/profilePart"
         app:layout_constraintTop_toBottomOf="@id/profilePic"
         app:layout_constraintStart_toStartOf="@id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@color/dark_blue"
-        android:contentDescription="@string/todo"
-        android:layout_margin="10dp" />
+        android:contentDescription="@string/todo" />
 
     <ImageButton
         android:layout_width="wrap_content"
