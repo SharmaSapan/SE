@@ -17,7 +17,7 @@ public class nonProfit extends AppCompatActivity {
 
     private String npName;
     private String npDesc;
-    private Image profilePic;
+    private int profilePic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class nonProfit extends AppCompatActivity {
         if (extras == null) {
             //if there is no nonprofit name given in the intent display a default one
             npName = "Test Non-Profit";
-
+            profilePic = R.drawable.blank_profile_picture;
             npDesc = "Test non-profit description";
         } else {
             //get all info from the database here
@@ -49,9 +49,8 @@ public class nonProfit extends AppCompatActivity {
         nonProfitName.setText(npName);
 
         //update profile picture
-        //this part needs to be updated to match the one from the database
         ImageView nonProfitPic = (ImageView) findViewById(R.id.profilePic);
-        nonProfitPic.setImageResource(R.drawable.blank_profile_picture);
+        nonProfitPic.setImageResource(profilePic);
 
         //update description
         TextView nonProfitDescription = (TextView) findViewById(R.id.profilePart);
