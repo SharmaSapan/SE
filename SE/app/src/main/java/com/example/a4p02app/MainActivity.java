@@ -2,33 +2,46 @@ package com.example.a4p02app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.Toast;
 
+import com.example.a4p02app.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class MainActivity extends AppCompatActivity {
 
-    boolean searcherIsDown;
-    View slidingSearch;
-    View searcher;
-    View closerArrow;
-    View header;
-    View headerline;
-    View sb;
-    View standin;
-    View searchbar;
+    private FirebaseUser activeUser;
+    private FirebaseAuth mAuth;
+
+    private boolean searcherIsDown;
+    private View slidingSearch;
+    private View searcher;
+    private View closerArrow;
+    private View header;
+    private View headerline;
+    private View sb;
+    private View standin;
+    private View searchbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //initialize main page
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        slidingSearch = findViewById(R.id.searcher);
-        slidingSearch.setVisibility(View.INVISIBLE);
-        searcherIsDown = false;
+        //FirebaseAuth.getInstance().signOut();
+
+        mAuth = FirebaseAuth.getInstance();
+        activeUser = mAuth.getCurrentUser();
+
+        if (activeUser == null) {
+            goLogin();
+        }
+        else {
+            goHome();
+        }
     }
 
     private void slideUp() {
@@ -83,11 +96,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-    public void goHome(View view) {//will not change page if already Home
-        Toast.makeText(MainActivity.this, "You are Home", Toast.LENGTH_SHORT).show();
-    }
-
     public void goProfile(View view) {//will go to User profile
         Toast.makeText(MainActivity.this, "Profile not yet completed", Toast.LENGTH_SHORT).show();
     }
@@ -107,5 +115,24 @@ public class MainActivity extends AppCompatActivity {
 
     public void goInfo(View view) {
         Toast.makeText(MainActivity.this, "Info page not yet implemented", Toast.LENGTH_SHORT).show();
+    }
+
+    public void goLogin() {
+        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(i);
+    }
+
+    public void goHome() {
+        setContentView(R.layout.activity_main);
+
+        slidingSearch = findViewById(R.id.searcher);
+        slidingSearch.setVisibility(View.INVISIBLE);
+        searcherIsDown = false;
+        Toast.makeText(MainActivity.this, "You are Home", Toast.LENGTH_SHORT).show();
+    }
+
+
+    public void updateUser(FirebaseUser activeUser){
+        this.activeUser = activeUser;
     }
 }

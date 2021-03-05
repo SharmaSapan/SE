@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".MainActivity">
+    tools:context="app.src.main.java.com.example.a4p02app.MainActivity">
 
     <View
         android:id="@+id/header"
