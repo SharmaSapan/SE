@@ -1,47 +1,87 @@
 package com.example.a4p02app;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.LinkedList;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.view.animation.TranslateAnimation;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class favourites extends AppCompatActivity {
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseUser activeUser;
+    private FirebaseAuth mAuth;
+
+    private FirebaseFirestore db =  FirebaseFirestore.getInstance();
+
+    String userID;
+    LinkedList<String> favID = new LinkedList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //initialize favourites page
+
+        mAuth = FirebaseAuth.getInstance();
+        activeUser = mAuth.getCurrentUser();
+
+        userID = String.valueOf(activeUser);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourites);
     }
 
     public void getPostsFromDatabase () {
-        DocumentReference docRef = db.collection("cities").document("SF");
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        //Retrieve a list of all favourited items connected to the currently logged in user
+        db.collection("accounts/"+userID+"/favourites").whereEqualTo("favourited", true)
+            .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-
-                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                    } else {
-                        Log.d(TAG, "No such document");
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        favID.add(document.getId()); //Add favourited document to list
+                        Log.d("TAG: ", document.getId() + " => " + document.getData());
                     }
                 } else {
-                    Log.d(TAG, "get failed with ", task.getException());
+                    Log.d("TAG: ", "Error getting documents: ", task.getException());
                 }
             }
         });
+        //Connect favourited documents with documents in database and print to screen
+        //not finished
+        while(favID.getFirst() != null){
+            DocumentReference docRef = db.collection("posts").document(favID.removeFirst());
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            //print to screen
+                            Log.d("TAG: ", "DocumentSnapshot data: " + document.getData());
+                        } else {
+                            Log.d("TAG: ", "No such document");
+                        }
+                    } else {
+                        Log.d("TAG: ", "get failed with ", task.getException());
+                    }
+                }
+            });
+        }
     }
 
     public void getInfo() {
