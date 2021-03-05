@@ -15,7 +15,9 @@
         <activity android:name=".messages" />
         <activity android:name=".favourites" />
         <activity android:name=".profile" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.a4p02app.LoginActivity"/>
+        <activity android:name="com.example.a4p02app.SignUpActivity"/>
+        <activity android:name="com.example.a4p02app.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
