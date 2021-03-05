@@ -20,10 +20,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class nonProfit extends AppCompatActivity {
 
-    private String npName;
-    private String npDesc;
-    private int profilePic;
-    private String profilePicName;
+    String npName;
+    String npDesc;
+    String profilePicName;
+    String documentID;
 
     //get an instance of Firebase so that the firestore database can be used
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -33,23 +33,20 @@ public class nonProfit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_non_profit);
 
-        //this page should be sent the name of the non-profit in the intent so that
+        //this page should be sent the id of the non-profit in the intent so that
         //the correct non-profit is displayed
         Bundle extras = getIntent().getExtras();
-       // if (extras == null) {
+        if (extras == null) {
             //if there is no nonprofit name given in the intent display a default one
-       //     npName = "Test Non-Profit";
-       //     profilePic = R.drawable.blank_profile_picture;
-       //     npDesc = "Test non-profit description";
-       // } else {
+            npName = "No Profile Found";
+            profilePicName = "blank_profile_picture";
+            npDesc = "An error occurred, please try again.";
+            getInfo();
+        } else {
             //get all info from the database here
-            //npName = extras.getString("NON_PROFIT_TO_DISPLAY");
-
+            documentID = extras.getString("NON_PROFIT_TO_DISPLAY");
             getFromDatabase();
-       // }
-
-        //update the page (will need to add test nonprofits to the database, for now am just testing with hard-coded strings)
-        getInfo();
+        }
     }
 
     //this method gets the info from the database
@@ -57,17 +54,21 @@ public class nonProfit extends AppCompatActivity {
     //for more info on this, go to https://firebase.google.com/docs/firestore/query-data/get-data
     public void getFromDatabase() {
         //should change testNP later
-        DocumentReference docRef = db.collection("nonprofits").document("cYHsj179NpLh2Hp6evoNcYHsj179NpLh2Hp6evoN");
+        DocumentReference docRef = db.collection("nonprofits").document(documentID);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
+                    assert document != null;
                     if (document.exists()) {
                         Log.d("TAG: ", "DocumentSnapshot data: " + document.getData());
-                        npName = (String) document.getString("npName");
-                        npDesc = (String) document.getString("npDesc");
+                        npName = document.getString("npName");
+                        npDesc = document.getString("npDescription");
                         profilePicName = document.getString("profilePic");
+
+                        //update the page
+                        getInfo();
                     } else {
                         Log.d("TAG: ", "No such document");
                     }
@@ -86,7 +87,8 @@ public class nonProfit extends AppCompatActivity {
 
         //update profile picture
         ImageView nonProfitPic = (ImageView) findViewById(R.id.profilePic);
-        nonProfitPic.setImageResource(profilePic);
+        int id = getResources().getIdentifier(profilePicName, "drawable", getPackageName());
+        nonProfitPic.setImageResource(id);
 
         //update description
         TextView nonProfitDescription = (TextView) findViewById(R.id.profilePart);
