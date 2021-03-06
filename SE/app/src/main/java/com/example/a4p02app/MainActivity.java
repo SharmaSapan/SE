@@ -1,14 +1,12 @@
 package com.example.a4p02app;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
-import android.widget.Toast;
 
-import com.example.a4p02app.R;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -25,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private View headerline;
     private View sb;
     private View standin;
-    private View searchbar;
+    private View view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             goLogin();
         }
         else {
-            goHome();
+            goHome(view);
         }
     }
 
@@ -96,41 +94,40 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void goProfile(View view) {//will go to User profile
-        Toast.makeText(MainActivity.this, "Profile not yet completed", Toast.LENGTH_SHORT).show();
-    }
-
-
-    public void goFavs(View view) {//will go to User favourites
-        Toast.makeText(MainActivity.this, "Favourites not yet completed", Toast.LENGTH_SHORT).show();
-    }
-
-    public void goDonos(View view) {//will go to users completed donations
-        Toast.makeText(MainActivity.this, "Donations not yet completed", Toast.LENGTH_SHORT).show();
-    }
-
-    public void makePost(View view) {
-        Toast.makeText(MainActivity.this, "Posts not yet implemented", Toast.LENGTH_SHORT).show();
-    }
-
-    public void goInfo(View view) {
-        Toast.makeText(MainActivity.this, "Info page not yet implemented", Toast.LENGTH_SHORT).show();
-    }
-
-    public void goLogin() {
-        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-        startActivity(i);
-    }
-
-    public void goHome() {
+    public void goHome(View view) {//reloads Home page since user is at home page already
         setContentView(R.layout.activity_main);
 
         slidingSearch = findViewById(R.id.searcher);
         slidingSearch.setVisibility(View.INVISIBLE);
         searcherIsDown = false;
-        Toast.makeText(MainActivity.this, "You are Home", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
+    public void goProfile(View view) {//will go to User profile
+        Intent intent = new Intent(this, profile.class);
+        startActivity(intent);
+    }
+
+    public void goInfo(View view) {//will bring user to the info page for selected non-profit
+        Intent intent = new Intent(this, nonProfit.class);
+        startActivity(intent);
+    }
+
+    public void goFavs(View view) {//will go to Users favourited non-profits
+        Intent intent = new Intent(this, favourites.class);
+        startActivity(intent);
+    }
+
+    public void makePost(View view) {//will bring user to post writing page
+        Intent intent = new Intent(this, makePost.class);
+        startActivity(intent);
+    }
+
+    public void goLogin() {//brings user to the login page
+        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(i);
+    }
 
     public void updateUser(FirebaseUser activeUser){
         this.activeUser = activeUser;

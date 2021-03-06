@@ -1,14 +1,14 @@
 package com.example.a4p02app;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -100,28 +100,32 @@ public class nonProfit extends AppCompatActivity {
         finish();
     }
 
-    public void goHome(View view) {
+    public void goHome(View view) {//will go to Home page
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
-    public void goProfile(View view) {
+    public void goProfile(View view) {//will go to User profile
         Intent intent = new Intent(this, profile.class);
         startActivity(intent);
     }
 
-    public void goFavs(View view) {
+    public void goInfo(View view) {//reloads the current page?
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+    public void goFavs(View view) {//will go to Users favourited non-profits
         Intent intent = new Intent(this, favourites.class);
         startActivity(intent);
     }
 
-    public void goDonos(View view) {
-        Intent intent = new Intent(this, donations.class);
+    public void makePost(View view) {//will bring user to post writing page
+        Intent intent = new Intent(this, makePost.class);
         startActivity(intent);
     }
 
-    public void goInfo(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+    public void writeMessage(View view) {
+        //message writing pop-up?
+        //then when sent it saves to past messages accessible by user profile
     }
 }
