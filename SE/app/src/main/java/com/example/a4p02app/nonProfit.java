@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,6 +26,7 @@ public class nonProfit extends AppCompatActivity {
     String npDesc;
     String profilePicName;
     String documentID;
+    String webURL;
 
     //get an instance of Firebase so that the firestore database can be used
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -41,6 +44,7 @@ public class nonProfit extends AppCompatActivity {
             npName = "No Profile Found";
             profilePicName = "blank_profile_picture";
             npDesc = "An error occurred, please try again.";
+            webURL ="";
             getInfo();
         } else {
             //get all info from the database here
@@ -66,7 +70,7 @@ public class nonProfit extends AppCompatActivity {
                         npName = document.getString("npName");
                         npDesc = document.getString("npDescription");
                         profilePicName = document.getString("profilePic");
-
+                        webURL = document.getString("webURL");
                         //update the page
                         getInfo();
                     } else {
@@ -93,6 +97,17 @@ public class nonProfit extends AppCompatActivity {
         //update description
         TextView nonProfitDescription = (TextView) findViewById(R.id.profilePart);
         nonProfitDescription.setText(npDesc);
+    }
+
+    public void openWebsite(View view){
+        if (webURL.equals("")) {
+            Toast toast = Toast.makeText(getApplicationContext(), "This organization does not have a website available.", Toast.LENGTH_SHORT);
+            toast.show();
+        } else {
+            Uri uri = Uri.parse(webURL);
+            Intent i = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(i);
+        }
     }
 
     public void goBack(View view) {

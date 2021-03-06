@@ -102,6 +102,8 @@
         android:background="@color/dark_blue"
         android:contentDescription="@string/todo" />
     <ImageView
+        android:id="@+id/visitWebsite"
+        android:onClick="openWebsite"
         android:layout_width="70dp"
         android:layout_height="50dp"
         app:layout_constraintBottom_toTopOf="@id/profilePart"
@@ -109,7 +111,8 @@
         app:layout_constraintStart_toStartOf="@id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@color/dark_blue"
-        android:contentDescription="@string/todo" />
+        android:contentDescription="@string/todo"
+        android:src="@drawable/visit_web_icon"/>
 
     <ImageButton
         android:layout_width="wrap_content"
