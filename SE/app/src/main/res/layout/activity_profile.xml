@@ -43,7 +43,8 @@
         app:layout_constraintStart_toStartOf="parent"
         android:background="@color/light_blue"
         android:src="@drawable/ic_round_arrow_back_24"
-        android:onClick="goBack"/>
+        android:onClick="goBack"
+        android:contentDescription="@string/todo" />
 
     <TextView
         android:id="@+id/profilePic"
@@ -92,7 +93,8 @@
         android:text="@string/past_donations"
         android:background="@color/light_orange"
         android:textColor="@color/dark_blue"
-        android:padding="5dp" />
+        android:padding="5dp"
+        android:onClick="goDonos"/>
 
     <Button
         android:id="@+id/messages"
@@ -106,7 +108,8 @@
         android:background="@color/light_orange"
         android:textColor="@color/dark_blue"
         android:padding="5dp"
-        android:layout_margin="20dp"/>
+        android:layout_margin="20dp"
+        android:onClick="goMessages"/>
 
     <ImageButton
         android:layout_width="wrap_content"

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeList">
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/homeList"
+        android:background="@color/white"
+        android:divider="@color/dark_blue"
+        android:dividerHeight="3dp"
+        android:listSelector="@color/light_orange"
+        android:padding="10sp"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        />
+
+</FrameLayout>
