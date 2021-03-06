@@ -1,12 +1,16 @@
 package com.example.a4p02app;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.LinkedList;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -14,11 +18,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.LinkedList;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class favourites extends AppCompatActivity {
 
@@ -82,32 +84,19 @@ public class favourites extends AppCompatActivity {
         }
     }
 
-    public void goBack(View view) {
-        //go back to the previous activity
-        finish();
+    public void getInfo() {
+
     }
 
-    public void goHome(View view) {//will go to Home page
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+    public void goDonos(View view) {
     }
 
-    public void goProfile(View view) {//will go to User profile
-        Intent intent = new Intent(this, profile.class);
-        startActivity(intent);
-    }
-    public void goInfo(View view) {//will go to info page of non-profit
-        Intent intent = new Intent(this, nonProfit.class);
-        startActivity(intent);
+    public void goFavs(View view) {
     }
 
-    public void goFavs(View view) {//will reload the page
-        Intent intent = new Intent(this, favourites.class);
-        startActivity(intent);
+    public void goProfile(View view) {
     }
 
-    public void makePost(View view) {//will pop up post writing page
-        Intent intent = new Intent(this, makePost.class);
-        startActivity(intent);
+    public void goHome(View view) {
     }
 }

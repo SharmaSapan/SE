@@ -122,7 +122,6 @@
         android:src="@drawable/ic_round_comment_24"
         android:layout_margin="10dp"
         android:background="@null"
-        android:onClick="writeMessage"
         android:contentDescription="@string/todo" />
 
     <ImageButton
@@ -174,7 +173,7 @@
         app:layout_constraintStart_toEndOf="@id/favs"
         android:background="@color/light_orange"
         android:src="@drawable/ic_round_edit_24"
-        android:onClick="makePost"
+        android:onClick="goDonos"
         android:contentDescription="@string/todo" />
     <ImageButton
         android:id="@+id/info"

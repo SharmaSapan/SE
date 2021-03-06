@@ -1,5 +1,8 @@
 package com.example.a4p02app;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,9 +11,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -115,32 +115,28 @@ public class nonProfit extends AppCompatActivity {
         finish();
     }
 
-    public void goHome(View view) {//will go to Home page
+    public void goHome(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
-    public void goProfile(View view) {//will go to User profile
+    public void goProfile(View view) {
         Intent intent = new Intent(this, profile.class);
         startActivity(intent);
     }
 
-    public void goInfo(View view) {//reloads the current page?
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-    public void goFavs(View view) {//will go to Users favourited non-profits
+    public void goFavs(View view) {
         Intent intent = new Intent(this, favourites.class);
         startActivity(intent);
     }
 
-    public void makePost(View view) {//will bring user to post writing page
-        Intent intent = new Intent(this, makePost.class);
+    public void goDonos(View view) {
+        Intent intent = new Intent(this, donations.class);
         startActivity(intent);
     }
 
-    public void writeMessage(View view) {
-        //message writing pop-up?
-        //then when sent it saves to past messages accessible by user profile
+    public void goInfo(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }
