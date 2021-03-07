@@ -3,6 +3,7 @@ package com.example.a4p02app;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,6 +28,8 @@ public class nonProfit extends AppCompatActivity {
     String profilePicName;
     String documentID;
     String webURL;
+    String phoneNum;
+    String address;
 
     //get an instance of Firebase so that the firestore database can be used
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -45,6 +48,8 @@ public class nonProfit extends AppCompatActivity {
             profilePicName = "blank_profile_picture";
             npDesc = "An error occurred, please try again.";
             webURL ="";
+            phoneNum ="No phone number found.";
+            address = "No address found.";
             getInfo();
         } else {
             //get all info from the database here
@@ -71,6 +76,8 @@ public class nonProfit extends AppCompatActivity {
                         npDesc = document.getString("npDescription");
                         profilePicName = document.getString("profilePic");
                         webURL = document.getString("webURL");
+                        address = document.getString("address");
+                        phoneNum = document.getString("phoneNumber");
                         //update the page
                         getInfo();
                     } else {
@@ -96,7 +103,8 @@ public class nonProfit extends AppCompatActivity {
 
         //update description
         TextView nonProfitDescription = (TextView) findViewById(R.id.profilePart);
-        nonProfitDescription.setText(npDesc);
+        String s = npDesc + "\n\n Address: " + address + "\nPhone number: " + phoneNum;
+        nonProfitDescription.setText(s);
     }
 
     public void openWebsite(View view){
