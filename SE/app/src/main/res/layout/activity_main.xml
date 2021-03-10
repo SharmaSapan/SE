@@ -149,7 +149,7 @@
         app:layout_constraintStart_toEndOf="@id/favs"
         android:src="@drawable/ic_round_edit_24"
         android:background="@color/light_orange"
-        android:onClick="goDonos"
+        android:onClick="makePost"
         android:contentDescription="@string/todo"
         />
     <ImageButton

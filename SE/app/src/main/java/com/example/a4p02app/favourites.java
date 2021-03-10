@@ -84,19 +84,32 @@ public class favourites extends AppCompatActivity {
         }
     }
 
-    public void getInfo() {
-
+    public void goBack(View view) {
+        //go back to the previous activity
+        finish();
     }
 
-    public void goDonos(View view) {
+    public void goHome(View view) {//will go to Home page
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
-    public void goFavs(View view) {
+    public void goProfile(View view) {//will go to User profile
+        Intent intent = new Intent(this, profile.class);
+        startActivity(intent);
+    }
+    public void goInfo(View view) {//will go to info page of non-profit
+        Intent intent = new Intent(this, nonProfit.class);
+        startActivity(intent);
     }
 
-    public void goProfile(View view) {
+    public void goFavs(View view) {//will reload the page
+        Intent intent = new Intent(this, favourites.class);
+        startActivity(intent);
     }
 
-    public void goHome(View view) {
+    public void makePost(View view) {//will pop up post writing page
+        Intent intent = new Intent(this, makePost.class);
+        startActivity(intent);
     }
 }
