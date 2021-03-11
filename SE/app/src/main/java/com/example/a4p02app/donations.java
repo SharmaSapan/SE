@@ -39,7 +39,7 @@ public class donations extends AppCompatActivity {
     }
 
     public void makePost(View view) {//will pop up post writing page
-        Intent intent = new Intent(this, donations.class);
+        Intent intent = new Intent(this, makePost.class);
         startActivity(intent);
     }
 }

@@ -10,7 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.a4p02app.data.Firestore;
+//import com.example.a4p02app.data.Firestore;
 import com.firebase.ui.auth.data.model.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -131,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "signInWithCredential:success");
                         FirebaseUser user = mAuth.getCurrentUser();
-                        Firestore.addAccount(user.getEmail(), user, 0); //default to personal account
+                       // Firestore.addAccount(user.getEmail(), user, 0); //default to personal account
 
                         Intent i = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(i);

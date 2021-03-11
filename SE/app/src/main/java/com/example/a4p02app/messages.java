@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class messages extends AppCompatActivity {
 
@@ -18,17 +20,24 @@ public class messages extends AppCompatActivity {
     View sb;
     View standin;
     View searchbar;
+    ListView mList;
+    String[] messageList = {"Message 1", "Message 2", "Message 3", "Message 4",
+            "Message 5", "Message 6","Message 7","Message 8","Message 9",
+            "Message 10"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //initialize messages page
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.messages);
 
         slidingSearch = findViewById(R.id.searcher);
         slidingSearch.setVisibility(View.INVISIBLE);
-        searcherIsDown = false;
+        searcherIsDown = false;//starts the searcher off as not visible
+        mList = (ListView)findViewById(R.id.homeList); //sets up the array of announcements
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_home_list, R.id.textView_, messageList);
+        mList.setAdapter(arrayAdapter);
     }
 
     private void slideUp() {
@@ -47,7 +56,7 @@ public class messages extends AppCompatActivity {
         slidingSearch.startAnimation(animate);
         slidingSearch.setVisibility(View.GONE); //sets the search area to be gone
 
-        standin = findViewById(R.id.standin); //to be replaced by search bar
+        standin = findViewById(R.id.searchbar); //to be replaced by search bar
         standin.setVisibility(View.GONE);
         closerArrow = findViewById(R.id.closerArrow); //sets the closer arrow to be gone
         closerArrow.setVisibility(View.GONE);
@@ -65,7 +74,7 @@ public class messages extends AppCompatActivity {
             header.setVisibility(View.VISIBLE);
             headerline = findViewById(R.id.headerline); //sets the header border to be gone
             headerline.setVisibility(View.GONE);
-            standin = findViewById(R.id.standin); //to be replaced with search bar
+            standin = findViewById(R.id.searchbar); //to be replaced with search bar
             standin.setVisibility(View.GONE);
             TranslateAnimation animate = new TranslateAnimation(0,0, slidingSearch.getHeight()*-1,0);
             animate.setDuration(500);

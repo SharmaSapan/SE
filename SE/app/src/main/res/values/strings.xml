@@ -10,7 +10,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="todo">TODO</string>
-    <string name="search_bar_here">Search bar here</string>
+    <string name="search_non_profits">Search Non-Profits</string>
     <string name="my_donations">My Donations</string>
     <string name="profile_details">Profile details</string>
     <string name="profile_pic">Profile pic</string>
@@ -18,7 +18,7 @@
     <string name="profile">Profile</string>
     <string name="past_donations">Past Donations</string>
     <string name="messages">Messages</string>
-
+    <string name="search_messages">Search Messages</string>
     <string name="donate_title">Donation Machine</string>
     <string name="donor_app">Donor App</string>
     <string name="email">E-Mail</string>
