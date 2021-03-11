@@ -7,9 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="light_orange">#FFAF19</color>
-    <color name="light_blue">#08CDE6</color>
-    <color name="dark_orange">#F46336</color>
-    <color name="dark_blue">#065695</color>
+    <color name="light_orange">#FBFF12</color>
+    <color name="light_blue">#41EAD4</color>
+    <color name="dark_orange">#FF206E</color>
+    <color name="dark_blue">#3F51B5</color>
     <color name="grey">#B6CADA</color>
+
+    !--https://coolors.co/0c0f0a-ff206e-fbff12-41ead4-ffffff palette used
 </resources>

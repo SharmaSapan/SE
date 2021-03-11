@@ -27,7 +27,9 @@
     <string name="login">Login</string>
     <string name="create_an_account">No Account? Click Here!</string>
     <string name="account_type">Account Type:</string>
-
+    <string name="home">Home</string>
+    <string name="info">Info</string>
+    <string name="favourites">Favourites</string>
 
     <string name="write_a_post">Post</string>
     <string name="sign_up">Sign Up</string>
