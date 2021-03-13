@@ -35,13 +35,13 @@ public class favourites extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //initialize favourites page
-
+        super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
         activeUser = mAuth.getCurrentUser();
 
         userID = String.valueOf(activeUser);
 
-        super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_favourites);
     }
 

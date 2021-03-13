@@ -30,6 +30,8 @@
     <string name="home">Home</string>
     <string name="info">Info</string>
     <string name="favourites">Favourites</string>
+    <string name="join">Join Us!</string>
+    <string name="search_donos">Search Donations</string>
 
     <string name="write_a_post">Post</string>
     <string name="sign_up">Sign Up</string>

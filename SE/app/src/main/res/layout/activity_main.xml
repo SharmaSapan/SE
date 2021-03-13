@@ -98,6 +98,7 @@
             android:searchIcon="@null"
             android:queryBackground="@color/light_orange"
             android:textAlignment="textStart"
+            android:fontFamily="@font/raleway_bold"
             />
     </RelativeLayout>
 
@@ -197,6 +198,7 @@
         android:textSize="12sp"
         android:textAlignment="center"
         android:textColor="@color/dark_orange"
+        android:fontFamily="@font/raleway_bold"
         />
 
     <androidx.constraintlayout.widget.Guideline

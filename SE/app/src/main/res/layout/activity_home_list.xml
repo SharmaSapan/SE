@@ -10,5 +10,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:padding="@dimen/activity_horizontal_margin"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:fontFamily="@font/raleway_bold"/>
 </LinearLayout>

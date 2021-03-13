@@ -16,9 +16,8 @@ public class messages extends AppCompatActivity {
     View searcher;
     View closerArrow;
     View header;
-    View headerline;
+    View back;
     View sb;
-    View standin;
     View searchbar;
     ListView mList;
     String[] messageList = {"Message 1", "Message 2", "Message 3", "Message 4",
@@ -47,19 +46,18 @@ public class messages extends AppCompatActivity {
         header.setVisibility(View.VISIBLE);
         searcher = findViewById(R.id.searcher);//sets the entire search area to be visible
         searcher.setVisibility(View.VISIBLE);
-        headerline.setElevation(1);   //this is to under impose searcher onto what is in background
         TranslateAnimation animate = new TranslateAnimation(0, 0, 0, slidingSearch.getHeight()*-1);
-        animate.setDuration(0);
+        animate.setDuration(500);
         animate.setFillAfter(true);
         sb = findViewById(R.id.search_button); //sets the search button to be visible
         sb.setVisibility(View.VISIBLE);
         slidingSearch.startAnimation(animate);
+        slidingSearch.postDelayed(() -> searchbar.setVisibility(View.INVISIBLE), 300);
         slidingSearch.setVisibility(View.GONE); //sets the search area to be gone
-
-        standin = findViewById(R.id.searchbar); //to be replaced by search bar
-        standin.setVisibility(View.GONE);
+        //standin = findViewById(R.id.searchbar); //to be replaced by search bar
+        //standin.setVisibility(View.GONE);
         closerArrow = findViewById(R.id.closerArrow); //sets the closer arrow to be gone
-        closerArrow.setVisibility(View.GONE);
+        closerArrow.setVisibility(View.INVISIBLE);
 
         searcherIsDown = false;
     }
@@ -72,21 +70,20 @@ public class messages extends AppCompatActivity {
         else {
             header = findViewById(R.id.header); //sets the header to be visible
             header.setVisibility(View.VISIBLE);
-            headerline = findViewById(R.id.headerline); //sets the header border to be gone
-            headerline.setVisibility(View.GONE);
-            standin = findViewById(R.id.searchbar); //to be replaced with search bar
-            standin.setVisibility(View.GONE);
+            searchbar = findViewById(R.id.searchbar); //to be replaced with search bar
+            searchbar.setVisibility(View.INVISIBLE);
             TranslateAnimation animate = new TranslateAnimation(0,0, slidingSearch.getHeight()*-1,0);
             animate.setDuration(500);
             animate.setFillAfter(true);
             slidingSearch.startAnimation(animate);
-            slidingSearch.postDelayed(() -> standin.setVisibility(View.VISIBLE), 300);
+            slidingSearch.postDelayed(() -> searchbar.setVisibility(View.VISIBLE), 300);
             //delays start of Visibility of standin/searchbar
             sb = findViewById(R.id.search_button); //sets the search button to be gone
-            sb.setVisibility(View.GONE);
+            sb.setVisibility(View.INVISIBLE);
             closerArrow = findViewById(R.id.closerArrow); //sets the closer arrow to be visible
             closerArrow.setVisibility(View.VISIBLE);
-
+            back = findViewById(R.id.back);
+            back.setVisibility(View.VISIBLE);
 
             searcherIsDown = true;
         }

@@ -33,7 +33,7 @@ public class makePost extends AppCompatActivity {
         startActivity(intent);
     }
     public void goInfo(View view) {//will bring user to the info page for selected non-profit
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, nonProfit.class);
         startActivity(intent);
     }
     public void goFavs(View view) {//will go to Users favourited non-profits
