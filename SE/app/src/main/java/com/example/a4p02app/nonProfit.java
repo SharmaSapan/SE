@@ -30,6 +30,7 @@ public class nonProfit extends AppCompatActivity {
     String webURL;
     String phoneNum;
     String address;
+    String emailAddress;
 
     //get an instance of Firebase so that the firestore database can be used
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -78,6 +79,7 @@ public class nonProfit extends AppCompatActivity {
                         webURL = document.getString("webURL");
                         address = document.getString("address");
                         phoneNum = document.getString("phoneNumber");
+                        emailAddress = document.getString("email");
                         //update the page
                         getInfo();
                     } else {
@@ -103,7 +105,7 @@ public class nonProfit extends AppCompatActivity {
 
         //update description
         TextView nonProfitDescription = (TextView) findViewById(R.id.profilePart);
-        String s = npDesc + "\n\n Address: " + address + "\nPhone number: " + phoneNum;
+        String s = npDesc + "\n\n Address: " + address + "\nPhone number: " + phoneNum + "\nEmail Address: " + emailAddress;
         nonProfitDescription.setText(s);
     }
 
@@ -116,6 +118,32 @@ public class nonProfit extends AppCompatActivity {
             Intent i = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(i);
         }
+    }
+    
+    //this method allows the user to start a phone call with with the organization
+    public void callOrganization(View view) {
+        if(phoneNum.equals("")) {
+            Toast toast = Toast.makeText(getApplicationContext(), "This organization doe not have a phone number available.", Toast.LENGTH_SHORT);
+            toast.show();
+        } else {
+            Intent callInt = new Intent(Intent.ACTION_VIEW);
+            callInt.setData(Uri.parse("tel:" + phoneNum));
+            startActivity(callInt);
+        }
+    }
+
+    //this method allows the user to send an email to the organization
+    public void sendEmail(View view){
+        //Intent emailInt = new Intent(Intent.ACTION_SEND);
+        //emailInt.setData(Uri.parse("mailto:" + emailAddress + "?subject=" + "DonApp Inquiry" + "&body=" +""));
+        //startActivity(emailInt);
+    }
+
+    //this method opens the map
+    public void openMap(View view){
+        //String map = String.format(Locale.ENGLISH, "geo:0,0?q=" + address);
+        //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(map));
+        //startActivity(intent);
     }
 
     public void goBack(View view) {
