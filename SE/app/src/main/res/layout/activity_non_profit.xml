@@ -84,28 +84,45 @@
         app:layout_constraintBottom_toBottomOf="parent" />
 
 
-    <ImageView
-        android:layout_width="70dp"
+     <ImageView
+        android:layout_width="50dp"
         android:layout_height="50dp"
         app:layout_constraintBottom_toTopOf="@id/profilePart"
         app:layout_constraintTop_toBottomOf="@id/profilePic"
         app:layout_constraintEnd_toEndOf="@id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         android:background="@color/dark_blue"
-        android:contentDescription="@string/todo" />
+        android:contentDescription="@string/todo"
+        android:onClick="sendEmail"/>
+
     <ImageView
-        android:layout_width="70dp"
+        android:layout_width="50dp"
         android:layout_height="50dp"
-        app:layout_constraintBottom_toTopOf="@id/profilePart"
-        app:layout_constraintTop_toBottomOf="@id/profilePic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:background="@color/dark_blue"
-        android:contentDescription="@string/todo" />
+        android:contentDescription="TODO"
+        android:onClick="openMap"
+        app:layout_constraintBottom_toTopOf="@id/profilePart"
+        app:layout_constraintEnd_toEndOf="@id/guideline"
+        app:layout_constraintHorizontal_bias="0.82"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profilePic" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@color/dark_blue"
+        android:contentDescription="@string/todo"
+        android:onClick="callOrganization"
+        app:layout_constraintBottom_toTopOf="@id/profilePart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.645"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profilePic" />
+
     <ImageView
         android:id="@+id/visitWebsite"
         android:onClick="openWebsite"
-        android:layout_width="70dp"
+        android:layout_width="50dp"
         android:layout_height="50dp"
         app:layout_constraintBottom_toTopOf="@id/profilePart"
         app:layout_constraintTop_toBottomOf="@id/profilePic"
