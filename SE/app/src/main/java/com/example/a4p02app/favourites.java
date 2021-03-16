@@ -3,7 +3,7 @@ package com.example.a4p02app;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ListView;
+import android.widget.ArrayAdapter;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -30,7 +32,11 @@ public class favourites extends AppCompatActivity {
     private FirebaseFirestore db =  FirebaseFirestore.getInstance();
 
     String userID;
-    LinkedList<String> favID = new LinkedList<String>();
+    String [] favs;
+    int count;
+    ArrayList<String> favID = new ArrayList<String>();
+
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +47,9 @@ public class favourites extends AppCompatActivity {
 
         userID = String.valueOf(activeUser);
 
-
         setContentView(R.layout.activity_favourites);
+
+        listView = (ListView)findViewById(R.id.listview);
     }
 
     public void getPostsFromDatabase () {
@@ -63,8 +70,10 @@ public class favourites extends AppCompatActivity {
         });
         //Connect favourited documents with documents in database and print to screen
         //not finished
-        while(favID.getFirst() != null){
-            DocumentReference docRef = db.collection("posts").document(favID.removeFirst());
+        favs = new String[favID.size()];
+        count = 0;
+        while(favID.get(count) != null){
+            DocumentReference docRef = db.collection("posts").document(favID.remove(count));
             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -72,16 +81,22 @@ public class favourites extends AppCompatActivity {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
                             //print to screen
+                            favs[count] = document.getString("pTitle");
                             Log.d("TAG: ", "DocumentSnapshot data: " + document.getData());
                         } else {
+                            favs[count] = "Post not longer exists.";
                             Log.d("TAG: ", "No such document");
                         }
                     } else {
+                        favs[count] = "Error.";
                         Log.d("TAG: ", "get failed with ", task.getException());
                     }
                 }
             });
+            count++;
         }
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,favs);
+        listView.setAdapter(arrayAdapter);
     }
 
     public void goBack(View view) {
