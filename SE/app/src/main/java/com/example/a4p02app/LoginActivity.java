@@ -10,7 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-//import com.example.a4p02app.data.Firestore;
+import com.example.a4p02app.data.Firestore;
 import com.firebase.ui.auth.data.model.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -24,6 +24,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -31,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
 
     private FirebaseAuth mAuth;
+    private static FirebaseFirestore db;
 
     private Button btnLogin;
     private com.google.android.gms.common.SignInButton btnGoogleSignIn;
@@ -45,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         btnLogin = findViewById(R.id.btnLogIn);
         btnGoogleSignIn = findViewById(R.id.btnGoogleSignIn);
@@ -127,11 +130,11 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
         mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, (OnCompleteListener<AuthResult>) task -> {
+                .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "signInWithCredential:success");
                         FirebaseUser user = mAuth.getCurrentUser();
-                       // Firestore.addAccount(user.getEmail(), user, 0); //default to personal account
+                        Firestore.addAccount(db, user.getEmail(), user, 0); //default to personal account
 
                         Intent i = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(i);

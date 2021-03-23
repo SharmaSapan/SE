@@ -11,15 +11,19 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-//import com.example.a4p02app.data.Firestore;
+import com.example.a4p02app.data.Firestore;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SignUpActivity extends AppCompatActivity {
+
+    private FirebaseAuth mAuth;
+    private static FirebaseFirestore db;
 
     private static final String TAG = "SignupActivity";
     private TextView txtEmail;
@@ -28,8 +32,6 @@ public class SignUpActivity extends AppCompatActivity {
     private Button btnSignup;
     private String[] accountTypes = {"Personal", "Business"};
     private Spinner accountSpinner;
-
-    private FirebaseAuth mAuth;
 
 
     @Override
@@ -62,6 +64,8 @@ public class SignUpActivity extends AppCompatActivity {
      * Create an entry in firebase auth and in firestore for a new user
      */
     private void firebaseUserSignup() {
+        db = FirebaseFirestore.getInstance();
+
         String email = txtEmail.getText().toString();
         String pass = txtPassword.getText().toString();
         String confirm = txtConfirm.getText().toString();
@@ -74,7 +78,7 @@ public class SignUpActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Log.d(TAG, "createUserWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                //Firestore.addAccount(email, user, accountSpinner.getSelectedItemPosition());
+                                Firestore.addAccount(db, email, user, accountSpinner.getSelectedItemPosition());
 
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);

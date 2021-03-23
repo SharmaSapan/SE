@@ -14,7 +14,6 @@ import java.util.Map;
 public class Firestore {
 
     private static final String TAG = "Firestore";
-    private static FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     /**
      * Adds a user to the accounts document in firestore.
@@ -23,7 +22,7 @@ public class Firestore {
      * @param accountType
      * @return boolean to indicate success
      */
-    public static void addAccount(String email, FirebaseUser user, int accountType) {
+    public static boolean addAccount(FirebaseFirestore db, String email, FirebaseUser user, int accountType) {
         Date currentTime = Calendar.getInstance().getTime();
 
         Map<String, Object> newAccount = new HashMap<>();
@@ -46,6 +45,11 @@ public class Firestore {
                 .addOnFailureListener(e -> {
                     Log.w(TAG, "Error adding user to database", e);
                 });
+
+        if (z.isSuccessful()){
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -54,7 +58,7 @@ public class Firestore {
      * @param email
      * @return atomic integer (effectively a boolean) to indicate if remove was successful
      */
-    public static void removeAccount(String email, FirebaseUser user) {
+    public static boolean removeAccount(FirebaseFirestore db, String email, FirebaseUser user) {
         Map<String, Object> account = new HashMap<>();
         account.put("isActive", 0);
 
@@ -66,6 +70,10 @@ public class Firestore {
                 .addOnFailureListener(e -> {
                     Log.w(TAG, "removeAccount:failure", e);
                 });
+        if (z.isSuccessful()){
+            return true;
+        }
+        return false;
     }
 }
 
