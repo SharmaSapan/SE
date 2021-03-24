@@ -123,7 +123,7 @@ public class nonProfit extends AppCompatActivity {
     //this method allows the user to start a phone call with with the organization
     public void callOrganization(View view) {
         if(phoneNum.equals("")) {
-            Toast toast = Toast.makeText(getApplicationContext(), "This organization doe not have a phone number available.", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(getApplicationContext(), "This organization does not have a phone number available.", Toast.LENGTH_SHORT);
             toast.show();
         } else {
             Intent callInt = new Intent(Intent.ACTION_VIEW);
@@ -172,6 +172,11 @@ public class nonProfit extends AppCompatActivity {
 
     public void makePost(View view) {//will bring user to post writing page
         Intent intent = new Intent(this, makePost.class);
+        startActivity(intent);
+    }
+
+    public void openSettings(View view) {
+        Intent intent = new Intent(this, npPreferences.class);
         startActivity(intent);
     }
 
