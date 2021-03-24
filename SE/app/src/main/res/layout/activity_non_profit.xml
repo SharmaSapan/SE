@@ -38,6 +38,20 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/light_blue"
+        android:src="@drawable/ic_round_edit_page"
+        android:onClick="openSettings"
+        android:contentDescription="@string/todo"
+    />
+
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginStart="5dp"
         app:layout_constraintTop_toTopOf="parent"
