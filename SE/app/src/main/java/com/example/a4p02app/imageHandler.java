@@ -60,7 +60,7 @@ public class imageHandler extends AppCompatActivity {
         if (filepath != null) {
             StorageReference id_path = storageRef.child(UID + "." + getFileExtension(filepath));
             id_path.putFile(filepath);
-            url_location.update("image_path", filepath);
+            url_location.update("image_path", id_path);
         }
     }
 
