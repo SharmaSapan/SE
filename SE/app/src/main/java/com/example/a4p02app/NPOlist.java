@@ -1,7 +1,5 @@
 package com.example.a4p02app;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +7,9 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class donations extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class NPOlist extends AppCompatActivity {
 
     boolean searcherIsDown;
     View slidingSearch;
@@ -19,21 +19,24 @@ public class donations extends AppCompatActivity {
     View back;
     View sb;
     View searchbar;
-    ListView dList;
-    String[] donoList = {"$45.00", "$105.00", "$4.00", "$18.00",
-            "$36.36", "Clothing","Canned Foods"};
+    ListView mList;
+    String[] messageList = {"Message 1", "Message 2", "Message 3", "Message 4",
+            "Message 5", "Message 6","Message 7","Message 8","Message 9",
+            "Message 10"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //initialize messages page
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_donations);
+        setContentView(R.layout.activity_npo_list);
 
         slidingSearch = findViewById(R.id.searcher);
         slidingSearch.setVisibility(View.INVISIBLE);
         searcherIsDown = false;//starts the searcher off as not visible
-        dList = (ListView)findViewById(R.id.homeList); //sets up the array of announcements
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_home_list, R.id.postContent, donoList);
-        dList.setAdapter(arrayAdapter);
+        mList = (ListView)findViewById(R.id.homeList); //sets up the array of announcements
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_home_list, R.id.NPO_name, messageList);
+        mList.setAdapter(arrayAdapter);
     }
 
     private void slideUp() {

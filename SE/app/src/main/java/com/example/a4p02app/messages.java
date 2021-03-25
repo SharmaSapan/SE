@@ -35,7 +35,7 @@ public class messages extends AppCompatActivity {
         slidingSearch.setVisibility(View.INVISIBLE);
         searcherIsDown = false;//starts the searcher off as not visible
         mList = (ListView)findViewById(R.id.homeList); //sets up the array of announcements
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_home_list, R.id.textView_, messageList);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_home_list, R.id.postContent, messageList);
         mList.setAdapter(arrayAdapter);
     }
 
