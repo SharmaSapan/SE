@@ -105,6 +105,11 @@ public class donations extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goNPOList(View view) {//will bring user to the info page for selected non-profit
+        Intent intent = new Intent(this, NPOlist.class);
+        startActivity(intent);
+    }
+
     public void goFavs(View view) {//will go to Users favourited non-profits
         Intent intent = new Intent(this, favourites.class);
         startActivity(intent);

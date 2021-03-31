@@ -35,6 +35,10 @@
     <string name="search_npos">Search Non-Profits</string>
     <string name="content">post details</string>
     <string name="date">date</string>
+    <string name="search_app">Search Donation Machine</string>
+    <string name="listing">Listing</string>
+    <string name="NPOlisting">Non-Profit Listing</string>
+    <string name="blank"> </string>
 
     <string name="write_a_post">Post</string>
     <string name="sign_up">Sign Up</string>

@@ -15,6 +15,7 @@
         <activity android:name=".messages" />
         <activity android:name=".favourites" />
         <activity android:name=".profile" />
+        <activity android:name=".NPOlist" />
         <activity android:name="com.example.a4p02app.LoginActivity"/>
         <activity android:name="com.example.a4p02app.SignUpActivity"/>
         <activity android:name="com.example.a4p02app.MainActivity">

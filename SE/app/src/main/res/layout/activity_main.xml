@@ -94,7 +94,7 @@
             android:layout_alignParentTop="true"
             android:layout_margin="15dp"
             android:background="@color/light_orange"
-            android:queryHint="@string/search_non_profits"
+            android:queryHint="@string/search_app"
             android:iconifiedByDefault="false"
             android:searchIcon="@null"
             android:queryBackground="@color/light_orange"
@@ -182,9 +182,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="5dp"
         app:layout_constraintStart_toEndOf="@id/favs"
-        android:src="@drawable/ic_round_info_24"
+        android:src="@drawable/ic_round_import_contacts_24"
         android:background="@color/light_orange"
-        android:onClick="goInfo"
+        android:onClick="goNPOList"
         android:contentDescription="@string/todo"
         />
 

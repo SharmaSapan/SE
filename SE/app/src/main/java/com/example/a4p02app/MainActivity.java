@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseFirestore fsdb = FirebaseFirestore.getInstance();
 
-
+/*
         FirebaseAuth.getInstance().signOut();
 
         mAuth = FirebaseAuth.getInstance();
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         else {
             goHome(view);
         }
-
+*/
         setContentView(R.layout.activity_main);
 
         slidingSearch = findViewById(R.id.searcher);
@@ -171,6 +171,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void goInfo(View view) {//will bring user to the info page for selected non-profit
         Intent intent = new Intent(this, nonProfit.class);
+        startActivity(intent);
+    }
+
+    public void goNPOList(View view) {//will bring user to the info page for selected non-profit
+        Intent intent = new Intent(this, NPOlist.class);
         startActivity(intent);
     }
 

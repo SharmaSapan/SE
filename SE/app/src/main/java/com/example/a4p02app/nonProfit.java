@@ -32,6 +32,7 @@ public class nonProfit extends AppCompatActivity {
     String address;
     String emailAddress;
 
+
     //get an instance of Firebase so that the firestore database can be used
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -64,7 +65,8 @@ public class nonProfit extends AppCompatActivity {
     //for more info on this, go to https://firebase.google.com/docs/firestore/query-data/get-data
     public void getFromDatabase() {
         //should change testNP later
-        DocumentReference docRef = db.collection("nonprofits").document(documentID);
+        fromList();
+        DocumentReference docRef = db.collection("nonprofits").document(npName);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -73,7 +75,7 @@ public class nonProfit extends AppCompatActivity {
                     assert document != null;
                     if (document.exists()) {
                         Log.d("TAG: ", "DocumentSnapshot data: " + document.getData());
-                        npName = document.getString("npName");
+                        //npName = document.getString("npName");
                         npDesc = document.getString("npDescription");
                         profilePicName = document.getString("profilePic");
                         webURL = document.getString("webURL");
@@ -90,6 +92,12 @@ public class nonProfit extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void fromList(){
+        if(getIntent().hasExtra("npoName")){
+            npName = getIntent().getStringExtra("npoName");
+        }
     }
 
     //this method updates the page to match the non-profit's info
@@ -163,6 +171,11 @@ public class nonProfit extends AppCompatActivity {
 
     public void goInfo(View view) {//reloads the current page?
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void goNPOList(View view) {//will bring user to the info page for selected non-profit
+        Intent intent = new Intent(this, NPOlist.class);
         startActivity(intent);
     }
     public void goFavs(View view) {//will go to Users favourited non-profits
