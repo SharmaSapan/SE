@@ -194,7 +194,7 @@
         app:layout_constraintStart_toEndOf="@id/favs"
         android:src="@drawable/ic_round_import_contacts_24"
         android:background="@color/light_orange"
-        android:onClick="goInfo"
+        android:onClick="goNPOList"
         android:contentDescription="@string/todo"
         />
 

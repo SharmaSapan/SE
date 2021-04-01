@@ -20,9 +20,8 @@ public class NPOlist extends AppCompatActivity {
     View sb;
     View searchbar;
     ListView mList;
-    String[] messageList = {"Message 1", "Message 2", "Message 3", "Message 4",
-            "Message 5", "Message 6","Message 7","Message 8","Message 9",
-            "Message 10"};
+    String[] messageList = {"NPO 1", "NPO 2", "NPO 3", "NPO 4",
+            "NPO 5", "NPO 6"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

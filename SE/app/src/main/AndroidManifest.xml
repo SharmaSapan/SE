@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.4P02App">
+        <activity android:name=".npo_row"></activity>
         <activity android:name=".nonProfit" />
         <activity android:name=".makePost" />
         <activity android:name=".donations" />
@@ -16,9 +17,9 @@
         <activity android:name=".favourites" />
         <activity android:name=".profile" />
         <activity android:name=".NPOlist" />
-        <activity android:name="com.example.a4p02app.LoginActivity"/>
-        <activity android:name="com.example.a4p02app.SignUpActivity"/>
-        <activity android:name="com.example.a4p02app.MainActivity">
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
