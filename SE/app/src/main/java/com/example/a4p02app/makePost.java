@@ -6,7 +6,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class makePost extends AppCompatActivity {
+
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    final String UID = user.getUid();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    DocumentReference documentReference = db.collection("test").document(UID).collection("post").document();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
