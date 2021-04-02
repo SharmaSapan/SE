@@ -8,6 +8,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,12 +18,17 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class npPreferences extends Activity {
 
@@ -30,7 +38,11 @@ public class npPreferences extends Activity {
     String documentID;
     String webURL;
     String phoneNum;
-    String address;
+    String unitNum;
+    String sName;
+    String city;
+    String province;
+    String postalCode;
     String emailAddress;
 
     //get an instance of Firebase so that the firestore database can be used
@@ -40,6 +52,27 @@ public class npPreferences extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nonprofit_preferences);
+
+        //get the currently signed in user
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser activeUser = mAuth.getCurrentUser();
+        documentID = mAuth.getCurrentUser().getUid().toString();
+
+        //create the spinner for the provinces
+        Spinner provList = (Spinner) findViewById(R.id.prov);
+        String[] items = new String[]{"NL", "PE", "NS", "NB", "QC", "ON", "MB", "SK", "AB", "BC", "YT", "NT", "NU"};
+        ArrayAdapter<String> a = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
+        a.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        provList.setAdapter(a);
+
+        //get the currently selected province when the spinner is updated
+        provList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                province = (String) parent.getItemAtPosition(pos);
+            }
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
         //this page should be sent the id of the non-profit in the intent so that
         //the correct non-profit is displayed
@@ -51,13 +84,15 @@ public class npPreferences extends Activity {
             npDesc = "No description added.";
             webURL ="No website added.";
             phoneNum ="No phone number added.";
-            address = "No address added.";
+            unitNum = "No unit number added.";
+            sName = "No street name added.";
+            city = "No city added.";
+            postalCode = "No postal code added.";
             emailAddress = "No email address added.";
-            documentID = "cYHsj179NpLh2Hp6evoN";
             getInfo();
         } else {
             //get all info from the database here
-            documentID = extras.getString("NON_PROFIT_TO_DISPLAY");
+            //documentID = extras.getString("NON_PROFIT_TO_DISPLAY");
             getFromDatabase();
         }
     }
@@ -66,7 +101,7 @@ public class npPreferences extends Activity {
     //for more info on this, go to https://firebase.google.com/docs/firestore/query-data/get-data
     public void getFromDatabase() {
         //should change testNP later
-        DocumentReference docRef = db.collection("nonprofits").document(documentID);
+        DocumentReference docRef = db.collection("test").document(documentID);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -74,14 +109,21 @@ public class npPreferences extends Activity {
                     DocumentSnapshot document = task.getResult();
                     assert document != null;
                     if (document.exists()) {
-                        Log.d("TAG: ", "DocumentSnapshot data: " + document.getData());
-                        npName = document.getString("npName");
-                        npDesc = document.getString("npDescription");
+                        npName = document.getString("if_npo_name");
+                        npDesc = document.getString("if_npo_desc");
                         profilePicName = document.getString("profilePic");
-                        webURL = document.getString("webURL");
-                        address = document.getString("address");
-                        phoneNum = document.getString("phoneNumber");
-                        emailAddress = document.getString("email");
+                        webURL = document.getString("if_npo_url");
+
+                        //get the map for the address values
+                        Map<String, String> addMap = (Map<String, String>) document.get("address");
+                        unitNum = addMap.get("unit_number");
+                        sName = addMap.get("street_name");
+                        city = addMap.get("city");
+                        postalCode = addMap.get("postal_code");
+                        province = addMap.get("province");
+
+                        phoneNum = document.getString("if_npo_phone");
+                        emailAddress = document.getString("user_email");
 
                         //update the page
                         getInfo();
@@ -102,8 +144,18 @@ public class npPreferences extends Activity {
         nonProfitName.setText(npName);
 
         //update address
-        TextView addr = (TextView) findViewById(R.id.address);
-        addr.setText(address);
+        TextView unit = (TextView) findViewById(R.id.unitNumber);
+        unit.setText(unitNum);
+        TextView street = (TextView) findViewById(R.id.streetName);
+        street.setText(sName);
+        TextView cV = (TextView) findViewById(R.id.city);
+        cV.setText(city);
+        TextView pCode = (TextView) findViewById(R.id.postalCode);
+        pCode.setText(postalCode);
+
+        //update the spinner to use the saved province
+        Spinner p = (Spinner) findViewById(R.id.prov);
+        p.setSelection(getSpinnerIndex(p, province));
 
         //update email
         TextView emailAddr = (TextView) findViewById(R.id.email);
@@ -124,22 +176,33 @@ public class npPreferences extends Activity {
 
     //makes the changes to the databases
     public void makeChanges(View view) {
-        DocumentReference docRef = db.collection("nonprofits").document(documentID);
+        DocumentReference docRef = db.collection("test").document(documentID);
 
         TextView nonProfitName = (TextView) findViewById(R.id.npName);
-        TextView addr = (TextView) findViewById(R.id.address);
+
+        TextView unit = (TextView) findViewById(R.id.unitNumber);
+        TextView street = (TextView) findViewById(R.id.streetName);
+        TextView cV = (TextView) findViewById(R.id.city);
+        TextView pCode = (TextView) findViewById(R.id.postalCode);
+
         TextView emailAddr = (TextView) findViewById(R.id.email);
         TextView nonProfitDesc = (TextView) findViewById(R.id.description);
         TextView phoneNumber = (TextView) findViewById(R.id.phoneNum);
         TextView webView = (TextView) findViewById(R.id.website);
 
-        //update all of the fields to the new values
-        docRef.update("npName", nonProfitName.getText().toString());
-        docRef.update("address", addr.getText().toString());
-        docRef.update("email", emailAddr.getText().toString());
-        docRef.update("npDescription", nonProfitDesc.getText().toString());
-        docRef.update("phoneNumber", phoneNumber.getText().toString());
-        docRef.update("webURL", webView.getText().toString());
+        //update all of the values
+        docRef.update(
+                "npName", nonProfitName.getText().toString(),
+                "email", emailAddr.getText().toString(),
+                "npDescription", nonProfitDesc.getText().toString(),
+                "phoneNumber", phoneNumber.getText().toString(),
+                "webURL", webView.getText().toString(),
+                "address.city", cV.getText().toString(),
+                "address.unit_number", unit.getText().toString(),
+                "address.street_name", street.getText().toString(),
+                "address.postal_code", pCode.getText().toString(),
+                "address.province", province
+        );
 
         Toast toast = Toast.makeText(getApplicationContext(), "Your changes have been saved!", Toast.LENGTH_SHORT);
         toast.show();
@@ -154,6 +217,16 @@ public class npPreferences extends Activity {
         }catch(Exception e){
             Log.i("Error: ",e.toString());
         }
+    }
+
+    //returns the index of the spinner which should be selected when the settings page is loaded
+    private int getSpinnerIndex(Spinner s, String str) {
+        for (int i = 0; i < s.getCount(); i++) {
+            if(s.getItemAtPosition(i).toString().equalsIgnoreCase(str)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     @Override
