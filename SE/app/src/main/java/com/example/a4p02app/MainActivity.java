@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseFirestore fsdb = FirebaseFirestore.getInstance();
 
-/*
+
         FirebaseAuth.getInstance().signOut();
 
         mAuth = FirebaseAuth.getInstance();
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         else {
             goHome(view);
         }
-*/
+
         setContentView(R.layout.activity_main);
 
         slidingSearch = findViewById(R.id.searcher);

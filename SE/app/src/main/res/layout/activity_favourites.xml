@@ -7,6 +7,22 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
+    <LinearLayout
+        android:layout_width="412dp"
+        android:layout_height="448dp"
+        android:layout_marginTop="67dp"
+        android:layout_marginBottom="67dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/botBord"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/flist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
     <View
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -161,12 +177,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ListView
-        android:id="@+id/listview"
-        android:layout_width="417dp"
-        android:layout_height="578dp"
-        app:layout_constraintBottom_toTopOf="@+id/botBord"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header" />
 </androidx.constraintlayout.widget.ConstraintLayout>
