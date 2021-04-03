@@ -2,7 +2,7 @@ package com.example.a4p02app;
 /**
  * Custom object class using singleton pattern to get data of logged in user
  * Instead of calling same methods again and again. Setter and getter methods is used to update and read data
- * Data that can be used: UID, address, email, phone, user_first, user_last, user_privilege,
+ * Data that can be used: UID, documentReference of logged in user, address, email, phone, user_first, user_last, user_privilege,
  * npo_desc, npo_name, npo_url
  * UID cannot be changed
  * to get something use: userData.getInstance().getPhone();
@@ -21,8 +21,8 @@ public class userData {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    final String UID = user.getUid();
-    DocumentReference userProfile = db.collection("test").document(UID);
+    private final String UID = user.getUid();
+    DocumentReference userDocument = db.collection("test").document(UID);
 
     private Object address;
     private String email;
@@ -43,7 +43,7 @@ public class userData {
     }
 
     private userData(){
-        userProfile.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        userDocument.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot snapshot) {
                 if (snapshot.exists()) {
@@ -66,12 +66,20 @@ public class userData {
         return UID;
     }
 
+    public void addField(String field, Object value){
+        userDocument.update(field, value);
+    }
+
+    public DocumentReference getDocRef() {
+        return userDocument;
+    }
+
     public Object getAddress() {
         return address;
     }
 
     public void setAddress(Object address) {
-        this.address = address;
+        userDocument.update("address", address);
     }
 
     public String getEmail() {
@@ -79,7 +87,7 @@ public class userData {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        userDocument.update("email", email);
     }
 
     public String getPhone() {
@@ -87,7 +95,7 @@ public class userData {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        userDocument.update("phone", phone);
     }
 
     public String getUser_first() {
@@ -95,7 +103,7 @@ public class userData {
     }
 
     public void setUser_first(String user_first) {
-        this.user_first = user_first;
+        userDocument.update("user_first", user_first);
     }
 
     public String getUser_last() {
@@ -103,7 +111,7 @@ public class userData {
     }
 
     public void setUser_last(String user_last) {
-        this.user_last = user_last;
+        userDocument.update("user_last", user_last);
     }
 
     public String getUser_privilege() {
@@ -111,7 +119,7 @@ public class userData {
     }
 
     public void setUser_privilege(String user_privilege) {
-        this.user_privilege = user_privilege;
+        userDocument.update("user_privilege", user_privilege);
     }
 
     public String getNpo_desc() {
@@ -119,7 +127,7 @@ public class userData {
     }
 
     public void setNpo_desc(String npo_desc) {
-        this.npo_desc = npo_desc;
+        userDocument.update("npo_desc", npo_desc);
     }
 
     public String getNpo_name() {
@@ -127,7 +135,7 @@ public class userData {
     }
 
     public void setNpo_name(String npo_name) {
-        this.npo_name = npo_name;
+        userDocument.update("npo_name", npo_name);
     }
 
     public String getNpo_url() {
@@ -135,6 +143,6 @@ public class userData {
     }
 
     public void setNpo_url(String npo_url) {
-        this.npo_url = npo_url;
+        userDocument.update("npo_url", npo_url);
     }
 }
