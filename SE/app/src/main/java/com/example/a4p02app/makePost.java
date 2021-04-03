@@ -1,38 +1,29 @@
 package com.example.a4p02app;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.widget.TextView;
-import android.graphics.Color;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class makePost extends AppCompatActivity {
 
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageRef = storage.getReference();
-    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); //gets current user
-    final String UID = user.getUid(); //gets current users' id
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    final String UID = userData.getInstance().getUID();; //gets current users' id
+
 
     Button Post;
     EditText author_id;
@@ -49,48 +40,51 @@ public class makePost extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_post);
-
-        author_id = (EditText) findViewById(R.id.Author_id);
-        description = (EditText) findViewById(R.id.Description);
-        dropoff_location = (EditText) findViewById(R.id.DropoffLocation);
-        item = (EditText) findViewById(R.id.Item);
-        location_geostamp = (EditText) findViewById(R.id.LocationGeoStamp);
-        post_type = (EditText) findViewById(R.id.PostType);
-        post_date = (EditText) findViewById(R.id.PostDate);
-        tags = (EditText) findViewById(R.id.Tags);
         title = (EditText) findViewById(R.id.Title);
+        description = (EditText) findViewById(R.id.Description);
+        item = (EditText) findViewById(R.id.Item);
+        dropoff_location = (EditText) findViewById(R.id.DropoffLocation); // fill user location
+        // generate geo stamp from the user provided location
+        // get time from system post_date
+        tags = (EditText) findViewById(R.id.Tags);
         Post = (Button) findViewById(R.id.Post);
 
-    Post.setOnClickListener(new View.OnClickListener() {
+        Post.setOnClickListener(new View.OnClickListener() {
 
 
-        @Override
-        public void onClick(View v) {
-            //if statement to ensure none of the fields are empty
-            if (author_id.getText().toString().isEmpty() || description.getText().toString().isEmpty() || dropoff_location.getText().toString().isEmpty()
-                    || item.getText().toString().isEmpty() || location_geostamp.getText().toString().isEmpty() || post_type.getText().toString().isEmpty() ||
-                    post_date.getText().toString().isEmpty() || tags.getText().toString().isEmpty() || title.getText().toString().isEmpty()) {
+            @Override
+            public void onClick(View v) {
+                //if statement to ensure none of the fields are empty
+                if (author_id.getText().toString().isEmpty() || description.getText().toString().isEmpty() || dropoff_location.getText().toString().isEmpty()
+                        || item.getText().toString().isEmpty() || location_geostamp.getText().toString().isEmpty() || post_type.getText().toString().isEmpty() ||
+                        post_date.getText().toString().isEmpty() || tags.getText().toString().isEmpty() || title.getText().toString().isEmpty()) {
 
-                Toast.makeText(getApplicationContext(), "Data Missing", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Data Missing", Toast.LENGTH_SHORT).show();
 
-            } else {
+                } else {
 
-                DocumentReference post_reference = db.collection("test").document(UID).collection("post").document(); //when user clicks on post button
-                //tries to access the documents in the post collection
-                post_reference.update("Author id", author_id.getText().toString());
-                post_reference.update("Description", description.getText().toString());
-                post_reference.update("Dropoff Location", dropoff_location.getText().toString());
-                post_reference.update("Item", item.getText().toString());
-                post_reference.update("Location Geo Stamp", location_geostamp.getText().toString());
-                post_reference.update("Post Date", post_date.getText().toString());
-                post_reference.update("Post Type", post_type.getText().toString());
-                post_reference.update("Title", title.getText().toString());
-                post_reference.update("Tags", tags.getText().toString());
+                    //when user clicks on post button it creates a new document and add data to it
+                    DocumentReference post_reference = userData.getInstance().getDocRef().collection("post").document();//tries to access the documents in the post collection
+                    Map<String, Object> post_data = new HashMap<>();
 
+                    post_data.put("author_id", userData.getInstance().getUID());
+                    post_data.put("description", description.getText().toString());
+                    post_data.put("dropoff_location", dropoff_location.getText().toString()); //
+                    post_data.put("item", item.getText().toString());
+                    post_data.put("location_geostamp", location_geostamp.getText().toString()); //
+                    post_data.put("post_date", post_date.getText().toString()); //
+                    post_data.put("post_type", userData.getInstance().getUser_privilege());
+                    post_data.put("title", title.getText().toString());
+                    post_data.put("tags", tags.getText().toString());
+                    if (userData.getInstance().getUser_privilege() == "npo") {
+                        post_data.put("if_npo_phone", userData.getInstance().getPhone());
+                        post_data.put("if_npo_url", userData.getInstance().getNpo_url());
+                    }
+                    post_reference.set(post_data);
+
+                }
             }
-        }
-    });
-
+        });
     }
 
     public void writePost(View view) {
