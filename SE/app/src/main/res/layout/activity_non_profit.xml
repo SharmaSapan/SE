@@ -28,6 +28,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="55dp"
         android:fontFamily="@font/raleway_bold"
+        android:text="@string/non_profit_name"
         android:textColor="@color/dark_blue"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -105,7 +106,8 @@
         app:layout_constraintStart_toStartOf="parent"
         android:background="@color/dark_blue"
         android:contentDescription="@string/todo"
-        android:onClick="sendEmail"/>
+        android:onClick="sendEmail"
+         android:src="@drawable/email_icon"/>
 
     <ImageView
         android:layout_width="50dp"
@@ -117,6 +119,7 @@
         app:layout_constraintEnd_toEndOf="@id/guideline"
         app:layout_constraintHorizontal_bias="0.82"
         app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/map_icon"
         app:layout_constraintTop_toBottomOf="@id/profilePic" />
 
     <ImageView
@@ -129,7 +132,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.645"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profilePic" />
+        app:layout_constraintTop_toBottomOf="@id/profilePic"
+        android:src="@drawable/phone_icon"/>
 
     <ImageView
         android:id="@+id/visitWebsite"
