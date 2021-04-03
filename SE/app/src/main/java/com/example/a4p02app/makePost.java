@@ -61,8 +61,6 @@ public class makePost extends AppCompatActivity {
         title = (EditText) findViewById(R.id.Title);
         Post = (Button) findViewById(R.id.Post);
 
-
-
     Post.setOnClickListener(new View.OnClickListener() {
 
 
@@ -71,7 +69,7 @@ public class makePost extends AppCompatActivity {
             //if statement to ensure none of the fields are empty
             if (author_id.getText().toString().isEmpty() || description.getText().toString().isEmpty() || dropoff_location.getText().toString().isEmpty()
                     || item.getText().toString().isEmpty() || location_geostamp.getText().toString().isEmpty() || post_type.getText().toString().isEmpty() ||
-                    post_date.getText().toString().isEmpty() || tags.getText().toString().isEmpty() || title.getText().toString().isEmpty() || Post.getText().toString().isEmpty()) {
+                    post_date.getText().toString().isEmpty() || tags.getText().toString().isEmpty() || title.getText().toString().isEmpty()) {
 
                 Toast.makeText(getApplicationContext(), "Data Missing", Toast.LENGTH_SHORT).show();
 
@@ -79,15 +77,16 @@ public class makePost extends AppCompatActivity {
 
                 DocumentReference post_reference = db.collection("test").document(UID).collection("post").document(); //when user clicks on post button
                 //tries to access the documents in the post collection
-                post_reference.update("Author_id", author_id.getText().toString());
+                post_reference.update("Author id", author_id.getText().toString());
                 post_reference.update("Description", description.getText().toString());
                 post_reference.update("Dropoff Location", dropoff_location.getText().toString());
                 post_reference.update("Item", item.getText().toString());
                 post_reference.update("Location Geo Stamp", location_geostamp.getText().toString());
                 post_reference.update("Post Date", post_date.getText().toString());
                 post_reference.update("Post Type", post_type.getText().toString());
-                post_reference.update("Tags", tags.getText().toString());
                 post_reference.update("Title", title.getText().toString());
+                post_reference.update("Tags", tags.getText().toString());
+
             }
         }
     });
@@ -131,3 +130,4 @@ public class makePost extends AppCompatActivity {
         startActivity(intent);
     }
 }
+
