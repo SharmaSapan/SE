@@ -65,7 +65,7 @@ public class imageHandler extends AppCompatActivity {
 }
 /*
 // to get logged in user photo
-StorageReference storageReference = FirebaseStorage.getInstance().getReference().getChild(UID);
+StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(userData.getInstance().getUID());
 // ImageView in your Activity
 ImageView imageView = findViewById(R.id.imageView);
 // Download directly from StorageReference using Glide

@@ -14,28 +14,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
+
 
 public class npPreferences extends Activity {
 
     String npName;
     String npDesc;
-    String profilePicName;
-    String documentID;
     String webURL;
     String phoneNum;
     String unitNum;
@@ -45,18 +31,10 @@ public class npPreferences extends Activity {
     String postalCode;
     String emailAddress;
 
-    //get an instance of Firebase so that the firestore database can be used
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nonprofit_preferences);
-
-        //get the currently signed in user
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser activeUser = mAuth.getCurrentUser();
-        documentID = mAuth.getCurrentUser().getUid().toString();
 
         //create the spinner for the provinces
         Spinner provList = (Spinner) findViewById(R.id.prov);
@@ -76,65 +54,25 @@ public class npPreferences extends Activity {
 
         //this page should be sent the id of the non-profit in the intent so that
         //the correct non-profit is displayed
-        Bundle extras = getIntent().getExtras();
-        if (extras == null) {
-            //if there is no nonprofit name given in the intent get a default one
-            npName = "No Non-Profit Name added.";
-            profilePicName = "blank_profile_picture";
-            npDesc = "No description added.";
-            webURL ="No website added.";
-            phoneNum ="No phone number added.";
-            unitNum = "No unit number added.";
-            sName = "No street name added.";
-            city = "No city added.";
-            postalCode = "No postal code added.";
-            emailAddress = "No email address added.";
-            getInfo();
-        } else {
-            //get all info from the database here
-            //documentID = extras.getString("NON_PROFIT_TO_DISPLAY");
-            getFromDatabase();
-        }
+        getFromDatabase();
+
     }
 
     //this method gets the info from the database
     //for more info on this, go to https://firebase.google.com/docs/firestore/query-data/get-data
     public void getFromDatabase() {
-        //should change testNP later
-        DocumentReference docRef = db.collection("test").document(documentID);
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    assert document != null;
-                    if (document.exists()) {
-                        npName = document.getString("if_npo_name");
-                        npDesc = document.getString("if_npo_desc");
-                        profilePicName = document.getString("profilePic");
-                        webURL = document.getString("if_npo_url");
-
-                        //get the map for the address values
-                        Map<String, String> addMap = (Map<String, String>) document.get("address");
-                        unitNum = addMap.get("unit_number");
-                        sName = addMap.get("street_name");
-                        city = addMap.get("city");
-                        postalCode = addMap.get("postal_code");
-                        province = addMap.get("province");
-
-                        phoneNum = document.getString("if_npo_phone");
-                        emailAddress = document.getString("user_email");
-
-                        //update the page
-                        getInfo();
-                    } else {
-                        Log.d("TAG: ", "No such document");
-                    }
-                } else {
-                    Log.d("TAG: ", "get failed with ", task.getException());
-                }
-            }
-        });
+        npName = userData.getInstance().getNpo_name();
+        npDesc = userData.getInstance().getNpo_desc();
+        //profilePicName = userData.;
+        webURL = userData.getInstance().getNpo_url();
+        phoneNum = userData.getInstance().getPhone();
+        unitNum = userData.getInstance().getAddress_unit();
+        sName = userData.getInstance().getAddress_street();
+        city = userData.getInstance().getAddress_city();
+        province = userData.getInstance().getAddress_province();
+        postalCode = userData.getInstance().getAddress_postal();
+        emailAddress = userData.getInstance().getEmail();
+        getInfo();
     }
 
     //this method updates the page to match the non-profit's info
@@ -176,33 +114,27 @@ public class npPreferences extends Activity {
 
     //makes the changes to the databases
     public void makeChanges(View view) {
-        DocumentReference docRef = db.collection("test").document(documentID);
-
         TextView nonProfitName = (TextView) findViewById(R.id.npName);
-
         TextView unit = (TextView) findViewById(R.id.unitNumber);
         TextView street = (TextView) findViewById(R.id.streetName);
         TextView cV = (TextView) findViewById(R.id.city);
         TextView pCode = (TextView) findViewById(R.id.postalCode);
-
         TextView emailAddr = (TextView) findViewById(R.id.email);
         TextView nonProfitDesc = (TextView) findViewById(R.id.description);
         TextView phoneNumber = (TextView) findViewById(R.id.phoneNum);
         TextView webView = (TextView) findViewById(R.id.website);
 
         //update all of the values
-        docRef.update(
-                "npName", nonProfitName.getText().toString(),
-                "email", emailAddr.getText().toString(),
-                "npDescription", nonProfitDesc.getText().toString(),
-                "phoneNumber", phoneNumber.getText().toString(),
-                "webURL", webView.getText().toString(),
-                "address.city", cV.getText().toString(),
-                "address.unit_number", unit.getText().toString(),
-                "address.street_name", street.getText().toString(),
-                "address.postal_code", pCode.getText().toString(),
-                "address.province", province
-        );
+        userData.getInstance().setNpo_name(nonProfitName.getText().toString());
+        userData.getInstance().setNpo_desc(nonProfitDesc.getText().toString());
+        userData.getInstance().setNpo_url(webView.getText().toString());
+        userData.getInstance().setPhone(phoneNumber.getText().toString());
+        userData.getInstance().setAddress_unit(unit.getText().toString());
+        userData.getInstance().setAddress_street(street.getText().toString());
+        userData.getInstance().setAddress_city(cV.getText().toString());
+        userData.getInstance().setAddress_province(province);
+        userData.getInstance().setAddress_postal(pCode.getText().toString());
+        userData.getInstance().setEmail(emailAddr.getText().toString());
 
         Toast toast = Toast.makeText(getApplicationContext(), "Your changes have been saved!", Toast.LENGTH_SHORT);
         toast.show();

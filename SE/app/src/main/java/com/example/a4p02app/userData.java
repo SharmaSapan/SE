@@ -24,7 +24,11 @@ public class userData {
     private final String UID = user.getUid();
     DocumentReference userDocument = db.collection("test").document(UID);
 
-    private Object address;
+    private String address_city;
+    private String address_postal;
+    private String address_province;
+    private String address_street;
+    private String address_unit;
     private String email;
     private String phone;
     private String user_first;
@@ -47,7 +51,11 @@ public class userData {
             @Override
             public void onSuccess(DocumentSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    address = snapshot.get("address");
+                    address_city = snapshot.getString("address_city");
+                    address_postal = snapshot.getString("address_postal");
+                    address_province = snapshot.getString("address_province");
+                    address_street = snapshot.getString("address_street");
+                    address_unit = snapshot.getString("address_unit");
                     email = snapshot.getString("user_email");
                     phone = snapshot.getString("user_phone");
                     user_first = snapshot.getString("user_first");
@@ -74,12 +82,44 @@ public class userData {
         return userDocument;
     }
 
-    public Object getAddress() {
-        return address;
+    public String getAddress_city() {
+        return address_city;
     }
 
-    public void setAddress(Object address) {
-        userDocument.update("address", address);
+    public void setAddress_city(String address_city) {
+        userDocument.update("address_city", address_city);
+    }
+
+    public String getAddress_postal() {
+        return address_postal;
+    }
+
+    public void setAddress_postal(String address_postal) {
+        userDocument.update("address_postal", address_postal);
+    }
+
+    public String getAddress_province() {
+        return address_province;
+    }
+
+    public void setAddress_province(String address_province) {
+        userDocument.update("address_province", address_province);
+    }
+
+    public String getAddress_street() {
+        return address_street;
+    }
+
+    public void setAddress_street(String address_street) {
+        userDocument.update("address_street", address_street);
+    }
+
+    public String getAddress_unit() {
+        return address_unit;
+    }
+
+    public void setAddress_unit(String address_unit) {
+        userDocument.update("address_unit", address_unit);
     }
 
     public String getEmail() {
