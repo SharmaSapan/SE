@@ -4,15 +4,20 @@ package com.example.a4p02app;
  * Instead of calling same methods again and again. Setter and getter methods is used to update and read data
  * Data that can be used: UID, documentReference of logged in user, address, email, phone, user_first, user_last, user_privilege,
  * npo_desc, npo_name, npo_url
+ * to access properties of document use: userData.getInstance().getDocRef().
  * UID cannot be changed
  * to get something use: userData.getInstance().getPhone();
+ * If you need to update and get data somewhere use updateData() method
  */
-//TODO: update setters if needed or else delete
+
+import androidx.annotation.Nullable;
+
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
@@ -47,6 +52,30 @@ public class userData {
     }
 
     private userData(){
+        userDocument.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    address_city = snapshot.getString("address_city");
+                    address_postal = snapshot.getString("address_postal");
+                    address_province = snapshot.getString("address_province");
+                    address_street = snapshot.getString("address_street");
+                    address_unit = snapshot.getString("address_unit");
+                    email = snapshot.getString("user_email");
+                    phone = snapshot.getString("user_phone");
+                    user_first = snapshot.getString("user_first");
+                    user_last = snapshot.getString("user_last");
+                    user_privilege = snapshot.getString("user_privilege");
+                    npo_desc = snapshot.getString("npo_desc");
+                    npo_name = snapshot.getString("npo_name");
+                    npo_url = snapshot.getString("npo_url");
+                }
+                else System.out.println("No document at user data fetch");
+            }
+        });
+    }
+
+    public void updateData(){
         userDocument.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot snapshot) {

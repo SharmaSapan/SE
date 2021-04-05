@@ -114,6 +114,7 @@ public class npPreferences extends Activity {
 
     //makes the changes to the databases
     public void makeChanges(View view) {
+
         TextView nonProfitName = (TextView) findViewById(R.id.npName);
         TextView unit = (TextView) findViewById(R.id.unitNumber);
         TextView street = (TextView) findViewById(R.id.streetName);
@@ -138,6 +139,8 @@ public class npPreferences extends Activity {
 
         Toast toast = Toast.makeText(getApplicationContext(), "Your changes have been saved!", Toast.LENGTH_SHORT);
         toast.show();
+        // update data app wide
+        userData.getInstance().updateData();
     }
 
     //changes the profile picture of the non-profit
