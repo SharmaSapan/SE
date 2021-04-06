@@ -16,20 +16,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.VHolder> implements Filterable {
+public class NPOAdapter extends RecyclerView.Adapter<NPOAdapter.VHolder> implements Filterable {
     //initialize all parts of the card to display, and context
     List<String> name;
-    List<String> content;
-    List<String> date;
     List<Integer> profilePic;
     Context context;
 
-    public PostAdapter(Context context, List<String> name, List<String> content, List<String> date, List<Integer> profilepic){
+    public NPOAdapter(Context context, List<String> name, List<Integer> profilepic){
         //initialize all parts of the card to display, and context
         this.context = context;
         this.name = name;
-        this.content = content;
-        this.date=date;
         this.profilePic=profilepic;
     }
 
@@ -38,8 +34,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.VHolder> imple
     @NonNull
     @Override
     public VHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.list_row, parent, false);
+        View view = inflater.inflate(R.layout.activity_npo_row, parent, false);
         return new VHolder(view);
     }
 
@@ -47,8 +44,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.VHolder> imple
     public void onBindViewHolder(@NonNull VHolder holder, int position) {
 
         holder.npoName.setText(name.get(position));
-        holder.postContent.setText(content.get(position));
-        holder.postDate.setText(date.get(position));
         holder.npoPic.setImageResource(profilePic.get(position));
 
         holder.cLayout.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +58,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.VHolder> imple
 
     @Override
     public int getItemCount() {
-        return content.size();
+        return name.size();
     }
 
     @Override
@@ -73,7 +68,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.VHolder> imple
 
     public class VHolder extends RecyclerView.ViewHolder {
 
-        TextView npoName, postContent, postDate;
+        TextView npoName;
         ImageView npoPic;
         ConstraintLayout cLayout;
 
@@ -81,10 +76,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.VHolder> imple
             super(itemView);
 
             npoName = itemView.findViewById(R.id.NPO_name);
-            postContent = itemView.findViewById(R.id.postContent);
             npoPic = itemView.findViewById(R.id.NPO_pic);
-            postDate = itemView.findViewById(R.id.postDate);
-            cLayout = itemView.findViewById(R.id.row);
+            cLayout = itemView.findViewById(R.id.npo_row);
         }
     }
 }

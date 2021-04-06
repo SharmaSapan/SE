@@ -12,7 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/headerline"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/botBord">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/plist"
@@ -26,82 +26,6 @@
 
 
 
-
-    <View
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:background="@color/light_blue"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
-        android:id="@+id/headerline"
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="@color/dark_blue"
-        app:layout_constraintBottom_toBottomOf="@id/header" />
-
-    <ImageButton
-        android:id="@+id/search_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@color/light_blue"
-        android:contentDescription="@string/todo"
-        android:onClick="reveal"
-        android:src="@drawable/ic_round_search_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:fontFamily="@font/raleway_bold"
-        android:text="@string/donate_title"
-        android:textColor="@color/dark_blue"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <RelativeLayout
-        android:id="@+id/searcher"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/light_blue"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/headerline"
-        >
-
-        <ImageButton
-            android:id="@+id/closerArrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="10dp"
-            android:background="@color/light_blue"
-            android:contentDescription="@string/todo"
-            android:onClick="reveal"
-            android:src="@drawable/ic_round_keyboard_arrow_up_24"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <SearchView
-            android:id="@+id/searchbar"
-            android:layout_width="250dp"
-            android:layout_height="40dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_margin="15dp"
-            android:background="@color/light_orange"
-            android:queryHint="@string/search_app"
-            android:iconifiedByDefault="false"
-            android:searchIcon="@null"
-            android:queryBackground="@color/light_orange"
-            android:textAlignment="textStart"
-            android:fontFamily="@font/raleway_bold"
-            />
-    </RelativeLayout>
 
     <View
         android:id="@+id/botBord"

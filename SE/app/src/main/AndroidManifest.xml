@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.4P02App">
-        <activity android:name=".npo_row"></activity>
         <activity android:name=".nonProfit" />
         <activity android:name=".makePost" />
         <activity android:name=".donations" />

@@ -2,6 +2,7 @@ package com.example.a4p02app;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
@@ -38,14 +41,10 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser activeUser;
     private FirebaseAuth mAuth;
 
-    private boolean searcherIsDown;
-    private View slidingSearch;
-    private View searcher;
-    private View closerArrow;
-    private View header;
-    private View sb;
-    private View searchbar;
+    //private boolean searcherIsDown;
+    //private View slidingSearch,searcher,closerArrow,header,sb,searchbar,view;
     private View view;
+
     List<String> postList = new ArrayList<String>();
     List<String> nameList = new ArrayList<String>();
     List<Integer> postPic = Arrays.asList(R.drawable.app_icon,R.drawable.blank_profile_picture,
@@ -75,10 +74,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_main);
-
-        slidingSearch = findViewById(R.id.searcher);
-        slidingSearch.setVisibility(View.INVISIBLE);
-        searcherIsDown = false;//starts the searcher off as not visible
+        pList = findViewById(R.id.plist);
+        //slidingSearch = findViewById(R.id.searcher);
+        //slidingSearch.setVisibility(View.INVISIBLE);
+        //searcherIsDown = false;//starts the searcher off as not visible
 
         fsdb.collection("posts").addSnapshotListener(new EventListener<QuerySnapshot>() {
             //adds all current field in firestore to the lists
@@ -107,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         pList.setLayoutManager(new LinearLayoutManager(this));
         pList.setAdapter(myAdapter);
     }
-    private void slideUp() {
+    /*private void slideUp() {
         //method to bring up the searchbar
 
         header = findViewById(R.id.header); //sets the header to be visible
@@ -152,14 +151,37 @@ public class MainActivity extends AppCompatActivity {
 
             searcherIsDown = true;
         }
+    }*/
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {//searchbar implementation
+
+        getMenuInflater().inflate(R.menu.search, menu);
+        MenuItem item = menu.findItem(R.id.search_action);
+        SearchView sv = (SearchView) item.getActionView();
+        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
     }
+
+
+
 
     public void goHome(View view) {//reloads Home page since user is at home page already
         setContentView(R.layout.activity_main);
 
-        slidingSearch = findViewById(R.id.searcher);
-        slidingSearch.setVisibility(View.INVISIBLE);
-        searcherIsDown = false;
+        //slidingSearch = findViewById(R.id.searcher);
+        //slidingSearch.setVisibility(View.INVISIBLE);
+        //searcherIsDown = false;
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
