@@ -8,64 +8,19 @@
     android:background="@color/white">
 
     <LinearLayout
-        android:layout_width="412dp"
-        android:layout_height="448dp"
-        android:layout_marginTop="67dp"
-        android:layout_marginBottom="67dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/botBord"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header">
-
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/botBord">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/flist"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="425dp"
+            android:layout_margin="5dp"
+
+            />
+
     </LinearLayout>
-
-    <View
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:background="@color/light_blue"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <View
-        android:id="@+id/headerline"
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="@color/dark_blue"
-        app:layout_constraintBottom_toBottomOf="@id/header"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/raleway_bold"
-        android:text="@string/favourites"
-        android:textColor="@color/dark_blue"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/light_blue"
-        android:contentDescription="@string/todo"
-        android:onClick="goBack"
-        android:src="@drawable/ic_round_arrow_back_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
     <View

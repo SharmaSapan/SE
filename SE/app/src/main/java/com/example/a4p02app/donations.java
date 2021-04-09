@@ -1,89 +1,88 @@
 package com.example.a4p02app;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+
 public class donations extends AppCompatActivity {
 
-    boolean searcherIsDown;
-    View slidingSearch;
-    View searcher;
-    View closerArrow;
-    View header;
-    View back;
-    View sb;
-    View searchbar;
-    ListView dList;
-    String[] donoList = {"$45.00", "$105.00", "$4.00", "$18.00",
-            "$36.36", "Clothing","Canned Foods"};
+    List<String> amountList = new ArrayList<String>();
+    List<String> nameList = new ArrayList<String>();
+    List<Integer> postPic = Arrays.asList(R.drawable.app_icon,R.drawable.blank_profile_picture,
+            R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon);
+    List<String> dateList = new ArrayList<String>();
+
+    RecyclerView donoList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donations);
+        String uid = userData.getInstance().getUID();
+        FirebaseFirestore fsdb = FirebaseFirestore.getInstance();
+        setContentView(R.layout.activity_donations);
+        donoList = findViewById(R.id.donationlist);
 
-        slidingSearch = findViewById(R.id.searcher);
-        slidingSearch.setVisibility(View.INVISIBLE);
-        searcherIsDown = false;//starts the searcher off as not visible
-        dList = (ListView)findViewById(R.id.homeList); //sets up the array of announcements
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_home_list, R.id.postContent, donoList);
-        dList.setAdapter(arrayAdapter);
+        fsdb.collection("posts").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            //adds all current field in firestore to the lists
+            @Override
+            public void onEvent( QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                amountList.clear();
+                for(DocumentSnapshot val: value){
+                    amountList.add(val.getString("pContent"));
+                }
+                nameList.clear();
+                for(DocumentSnapshot snapshot: value) {
+                    nameList.add(snapshot.getString("pWriter"));
+                }
+                dateList.clear();
+                for(DocumentSnapshot snapshot: value){
+                    dateList.add(Objects.requireNonNull(snapshot.getTimestamp("pDate")).toDate().toString());
+                }
+
+            }
+        });
     }
 
-    private void slideUp() {
-        //method to bring up the searchbar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {//searchbar implementation
 
-        header = findViewById(R.id.header); //sets the header to be visible
-        header.setVisibility(View.VISIBLE);
-        searcher = findViewById(R.id.searcher);//sets the entire search area to be visible
-        searcher.setVisibility(View.VISIBLE);
-        TranslateAnimation animate = new TranslateAnimation(0, 0, 0, slidingSearch.getHeight()*-1);
-        animate.setDuration(500);
-        animate.setFillAfter(true);
-        sb = findViewById(R.id.search_button); //sets the search button to be visible
-        sb.setVisibility(View.VISIBLE);
-        slidingSearch.startAnimation(animate);
-        slidingSearch.postDelayed(() -> searchbar.setVisibility(View.INVISIBLE), 300);
-        slidingSearch.setVisibility(View.GONE); //sets the search area to be gone
-        //standin = findViewById(R.id.searchbar); //to be replaced by search bar
-        //standin.setVisibility(View.GONE);
-        closerArrow = findViewById(R.id.closerArrow); //sets the closer arrow to be gone
-        closerArrow.setVisibility(View.INVISIBLE);
+        getMenuInflater().inflate(R.menu.search, menu);
+        MenuItem item = menu.findItem(R.id.search_action);
+        SearchView sv = (SearchView) item.getActionView();
+        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
-        searcherIsDown = false;
-    }
-
-    public void reveal(View view) {
-        if (searcherIsDown) {
-            slideUp();
-
-        }
-        else {
-            header = findViewById(R.id.header); //sets the header to be visible
-            header.setVisibility(View.VISIBLE);
-            searchbar = findViewById(R.id.searchbar); //to be replaced with search bar
-            searchbar.setVisibility(View.INVISIBLE);
-            TranslateAnimation animate = new TranslateAnimation(0,0, slidingSearch.getHeight()*-1,0);
-            animate.setDuration(500);
-            animate.setFillAfter(true);
-            slidingSearch.startAnimation(animate);
-            slidingSearch.postDelayed(() -> searchbar.setVisibility(View.VISIBLE), 300);
-            //delays start of Visibility of standin/searchbar
-            sb = findViewById(R.id.search_button); //sets the search button to be gone
-            sb.setVisibility(View.INVISIBLE);
-            closerArrow = findViewById(R.id.closerArrow); //sets the closer arrow to be visible
-            closerArrow.setVisibility(View.VISIBLE);
-            back = findViewById(R.id.back);
-            back.setVisibility(View.VISIBLE);
-
-            searcherIsDown = true;
-        }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
     }
 
     public void goBack(View view) {

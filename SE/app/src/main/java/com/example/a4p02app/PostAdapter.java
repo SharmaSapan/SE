@@ -15,7 +15,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-
+//this adapter works for posts on the homepage
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.VHolder> implements Filterable {
     //initialize all parts of the card to display, and context
     List<String> name;

@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 //import com.example.a4p02app.data.Firestore;
+import com.example.a4p02app.data.Firestore;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -74,7 +75,7 @@ public class SignUpActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Log.d(TAG, "createUserWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                //Firestore.addAccount(email, user, accountSpinner.getSelectedItemPosition());
+                                Firestore.addAccount(email, user, accountSpinner.getSelectedItemPosition());
 
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);

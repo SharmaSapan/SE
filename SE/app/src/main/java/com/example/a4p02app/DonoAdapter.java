@@ -15,28 +15,29 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-//this adapter works for both favs list and NPO list
-public class NPOAdapter extends RecyclerView.Adapter<NPOAdapter.VHolder> implements Filterable {
+//this adapter works for donations list for the user
+public class DonoAdapter extends RecyclerView.Adapter<DonoAdapter.VHolder> implements Filterable {
     //initialize all parts of the card to display, and context
     List<String> name;
+    List<String> amount;
+    List<String> date;
     List<Integer> profilePic;
     Context context;
 
-    public NPOAdapter(Context context, List<String> name, List<Integer> profilepic){
+    public DonoAdapter(Context context, List<String> name, List<String> amount, List<String> date, List<Integer> profilepic){
         //initialize all parts of the card to display, and context
         this.context = context;
         this.name = name;
+        this.amount = amount;
+        this.date=date;
         this.profilePic=profilepic;
     }
-
-
 
     @NonNull
     @Override
     public VHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.activity_npo_row, parent, false);
+        View view = inflater.inflate(R.layout.list_row, parent, false);
         return new VHolder(view);
     }
 
@@ -44,8 +45,10 @@ public class NPOAdapter extends RecyclerView.Adapter<NPOAdapter.VHolder> impleme
     public void onBindViewHolder(@NonNull VHolder holder, int position) {
 
         holder.npoName.setText(name.get(position));
+        holder.donoAmount.setText(amount.get(position));
+        holder.donoDate.setText(date.get(position));
         holder.npoPic.setImageResource(profilePic.get(position));
-
+/*
         holder.cLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,12 +56,12 @@ public class NPOAdapter extends RecyclerView.Adapter<NPOAdapter.VHolder> impleme
                 in.putExtra("npoName", name.get(position));
                 context.startActivity(in);
             }
-        });
+        });*/
     }
 
     @Override
     public int getItemCount() {
-        return name.size();
+        return amount.size();
     }
 
     @Override
@@ -68,7 +71,7 @@ public class NPOAdapter extends RecyclerView.Adapter<NPOAdapter.VHolder> impleme
 
     public class VHolder extends RecyclerView.ViewHolder {
 
-        TextView npoName;
+        TextView npoName, donoAmount, donoDate;
         ImageView npoPic;
         ConstraintLayout cLayout;
 
@@ -76,8 +79,10 @@ public class NPOAdapter extends RecyclerView.Adapter<NPOAdapter.VHolder> impleme
             super(itemView);
 
             npoName = itemView.findViewById(R.id.NPO_name);
+            donoAmount = itemView.findViewById(R.id.postContent);
             npoPic = itemView.findViewById(R.id.NPO_pic);
-            cLayout = itemView.findViewById(R.id.npo_row);
+            donoDate = itemView.findViewById(R.id.postDate);
+            cLayout = itemView.findViewById(R.id.row);
         }
     }
 }

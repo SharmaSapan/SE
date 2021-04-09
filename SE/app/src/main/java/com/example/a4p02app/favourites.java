@@ -3,6 +3,7 @@ package com.example.a4p02app;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +16,8 @@ import java.util.Objects;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -85,11 +88,31 @@ public class favourites extends AppCompatActivity {
             }
         });
         fList = findViewById(R.id.flist);
-        PostAdapter myAdapter = new PostAdapter(this, nameList, postList, dateList, postPic);
+        NPOAdapter myAdapter = new NPOAdapter(this, nameList, postPic);
 
         fList.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
         fList.setLayoutManager(new LinearLayoutManager(this));
         fList.setAdapter(myAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {//searchbar implementation
+
+        getMenuInflater().inflate(R.menu.search, menu);
+        MenuItem item = menu.findItem(R.id.search_action);
+        SearchView sv = (SearchView) item.getActionView();
+        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
     }
 
     public void goBack(View view) {
