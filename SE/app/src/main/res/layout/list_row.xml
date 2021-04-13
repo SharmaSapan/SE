@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:id="@+id/row">
+    android:id="@+id/row"
+    android:background="?attr/selectableItemBackground">
 
     <androidx.cardview.widget.CardView
         app:layout_constraintStart_toStartOf="parent"

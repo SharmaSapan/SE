@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -41,18 +42,20 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser activeUser;
     private FirebaseAuth mAuth;
 
-    //private boolean searcherIsDown;
-    //private View slidingSearch,searcher,closerArrow,header,sb,searchbar,view;
     private View view;
 
-    List<String> postList = new ArrayList<String>();
-    List<String> nameList = new ArrayList<String>();
-    List<Integer> postPic = Arrays.asList(R.drawable.app_icon,R.drawable.blank_profile_picture,
-            R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon);
-    List<String> dateList = new ArrayList<String>();
+    //List<String> postList;
+    //List<String> nameList;
+    //List<Integer> postPic;
+    //List<String> dateList;
 
     RecyclerView pList;
-
+    PostAdapter myAdapter;
+    List<String> postList = new ArrayList<>();
+    List<String> nameList = new ArrayList<>();
+    List<Integer> postPic = Arrays.asList(R.drawable.app_icon,R.drawable.blank_profile_picture,
+    R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon);
+    List<String> dateList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,10 +77,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_main);
-        pList = findViewById(R.id.plist);
-        //slidingSearch = findViewById(R.id.searcher);
-        //slidingSearch.setVisibility(View.INVISIBLE);
-        //searcherIsDown = false;//starts the searcher off as not visible
+
 
         fsdb.collection("posts").addSnapshotListener(new EventListener<QuerySnapshot>() {
             //adds all current field in firestore to the lists
@@ -100,58 +100,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
         pList = findViewById(R.id.plist);
-        PostAdapter myAdapter = new PostAdapter(this, nameList, postList, dateList, postPic);
+        myAdapter = new PostAdapter(this, nameList, postList, dateList, postPic);
 
         pList.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         pList.setLayoutManager(new LinearLayoutManager(this));
         pList.setAdapter(myAdapter);
     }
-    /*private void slideUp() {
-        //method to bring up the searchbar
 
-        header = findViewById(R.id.header); //sets the header to be visible
-        header.setVisibility(View.VISIBLE);
-        searcher = findViewById(R.id.searcher);//sets the entire search area to be visible
-        searcher.setVisibility(View.VISIBLE);
-        TranslateAnimation animate = new TranslateAnimation(0, 0, 0, slidingSearch.getHeight()*-1);
-        animate.setDuration(500);
-        animate.setFillAfter(true);
-        sb = findViewById(R.id.search_button); //sets the search button to be visible
-        sb.setVisibility(View.VISIBLE);
-        slidingSearch.startAnimation(animate);
-        slidingSearch.postDelayed(() -> searchbar.setVisibility(View.INVISIBLE), 300);
-        slidingSearch.setVisibility(View.GONE); //sets the search area to be gone
-        closerArrow = findViewById(R.id.closerArrow); //sets the closer arrow to be gone
-        closerArrow.setVisibility(View.INVISIBLE);
-
-        searcherIsDown = false;
-    }
-
-    public void reveal(View view) {
-        //method to slide down the searchbar
-        if (searcherIsDown) {
-            slideUp();
-
-        }
-        else {
-            header = findViewById(R.id.header); //sets the header to be visible
-            header.setVisibility(View.VISIBLE);
-            searchbar = findViewById(R.id.searchbar); //to be replaced with search bar
-            searchbar.setVisibility(View.INVISIBLE);
-            TranslateAnimation animate = new TranslateAnimation(0,0, slidingSearch.getHeight()*-1,0);
-            animate.setDuration(500);
-            animate.setFillAfter(true);
-            slidingSearch.startAnimation(animate);
-            slidingSearch.postDelayed(() -> searchbar.setVisibility(View.VISIBLE), 300);//delays start of Visibility of standin/searchbar
-            sb = findViewById(R.id.search_button); //sets the search button to be gone
-            sb.setVisibility(View.INVISIBLE);
-            closerArrow = findViewById(R.id.closerArrow); //sets the closer arrow to be visible
-            closerArrow.setVisibility(View.VISIBLE);
-
-
-            searcherIsDown = true;
-        }
-    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {//searchbar implementation
@@ -159,18 +114,23 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.search, menu);
         MenuItem item = menu.findItem(R.id.search_action);
         SearchView sv = (SearchView) item.getActionView();
+
+        sv. setImeOptions(EditorInfo.IME_ACTION_DONE);
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                //searchThrough(query);
+
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                myAdapter.getFilter().filter(newText);
                 return false;
             }
         });
-        return super.onCreateOptionsMenu(menu);
+        return true;//super.onCreateOptionsMenu(menu);
     }
 
 
@@ -179,9 +139,6 @@ public class MainActivity extends AppCompatActivity {
     public void goHome(View view) {//reloads Home page since user is at home page already
         setContentView(R.layout.activity_main);
 
-        //slidingSearch = findViewById(R.id.searcher);
-        //slidingSearch.setVisibility(View.INVISIBLE);
-        //searcherIsDown = false;
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
