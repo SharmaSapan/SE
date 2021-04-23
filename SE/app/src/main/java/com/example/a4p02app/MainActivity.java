@@ -71,20 +71,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //FirebaseAuth.getInstance().signOut();
-        mAuth = FirebaseAuth.getInstance();
-        activeUser = mAuth.getCurrentUser();
+        //mAuth = FirebaseAuth.getInstance();
+        //activeUser = mAuth.getCurrentUser();
 
-        if (activeUser == null) {
-            goLogin();
-        }
-        else {
-            startMainActivity();
-        }
+        //if (activeUser == null) {
+        //    goLogin();
+        //}
+        // else {
+        startMainActivity();
+        // }
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.home_nav_menu, menu);
+        //getMenuInflater().inflate(R.menu.home_nav_menu, menu);
         return true;
     }
 
@@ -173,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (id) {
             case 1:
-                topAppBar.setTitle("Donation Machine");
+                //topAppBar.setTitle("Donation Machine");
                 fragmentTransaction
                         .replace(R.id.fragment_container, homeFrag)
                         .addToBackStack(null)
@@ -181,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case 2:
-                topAppBar.setTitle("Profile");
+                //topAppBar.setTitle("Profile");
                 fragmentTransaction.
                         replace(R.id.fragment_container, nonprofitFrag)
                         .addToBackStack(null)
@@ -189,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case 3:
-                topAppBar.setTitle("Info");
+                //topAppBar.setTitle("Info");
                 fragmentTransaction
                         .replace(R.id.fragment_container, infoFrag)
                         .addToBackStack(null)
@@ -197,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case 4:
-                topAppBar.setTitle("Favorites");
+                //topAppBar.setTitle("Favorites");
                 fragmentTransaction
                         .replace(R.id.fragment_container, favFrag)
                         .addToBackStack(null)
@@ -205,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case 5:
-                topAppBar.setTitle("Settings");
+                //topAppBar.setTitle("Settings");
                 fragmentTransaction
                         .replace(R.id.fragment_container, postFrag)
                         .addToBackStack(null)
