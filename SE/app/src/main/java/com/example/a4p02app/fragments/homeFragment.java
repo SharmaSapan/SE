@@ -62,7 +62,7 @@ public class homeFragment extends Fragment {
         manualPostList.add("Community Living");
         manualPostList.add("Autism Society Ontario Niagara Region");
 
-        int random =0;
+
         nameList = new ArrayList<>();
         postList = new ArrayList<>();
         dateList = new ArrayList<>();
@@ -87,7 +87,7 @@ public class homeFragment extends Fragment {
             }
         });
         plist = homeview.findViewById(R.id.plist);
-        pAdapter = new PostAdapter(manualPostList); //change to nameList <--> manualPostList
+        pAdapter = new PostAdapter(nameList,postList,dateList,postPic); //change to nameList <--> manualPostList
         plist.setAdapter(pAdapter);
 
         // DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(con, DividerItemDecoration.VERTICAL);
