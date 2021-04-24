@@ -13,6 +13,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -32,6 +33,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
+
 public class MainActivity extends AppCompatActivity {
 
     //Firebase
@@ -47,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private profileFragment profileFrag;
     private favouriteFragment favFrag;
     private homeFragment homeFrag;
-    private nonprofitFragment nonprofitFrag ;
+    private nonprofitFragment nonprofitFrag;
     private postFragment postFrag;
     private infoFragment infoFrag;
     private NPO_ListFragment npoListFrag;
@@ -67,6 +71,23 @@ public class MainActivity extends AppCompatActivity {
         // else {
         startMainActivity();
         // }
+        KeyboardVisibilityEvent.setEventListener(
+                this,
+                new KeyboardVisibilityEventListener() {
+                    @Override
+                    public void onVisibilityChanged(boolean isOpen) {
+                        //Log.d(TAG,"onVisibilityChanged: Keyboard visibility changed");
+                        if(isOpen){
+                            //Log.d(TAG, "onVisibilityChanged: Keyboard is open");
+                            bottomAppBar.setVisibility(View.INVISIBLE);
+                            //Log.d(TAG, "onVisibilityChanged: NavBar got Invisible");
+                        }else{
+                            //Log.d(TAG, "onVisibilityChanged: Keyboard is closed");
+                            bottomAppBar.setVisibility(View.VISIBLE);
+                            //Log.d(TAG, "onVisibilityChanged: NavBar got Visible");
+                        }
+                    }
+                });
     }
 
 
@@ -94,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.favs:
                 changeFragment(4);
                 return true;
-            case R.id.settings:
+            case R.id.post:
                 changeFragment(5);
                 return true;
             default:
@@ -140,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.favs:
                     changeFragment(4);
                     return true;
-                case R.id.settings:
+                case R.id.post:
                     changeFragment(5);
                     return true;
             }

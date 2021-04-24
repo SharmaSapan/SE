@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
+    android:layout_margin="6dp"
     android:id="@+id/row"
     android:background="?attr/selectableItemBackground">
 
@@ -23,6 +23,7 @@
                 android:id="@+id/NPO_pic"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
+                android:padding="5dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/blank_profile_picture" />
@@ -42,11 +43,12 @@
             <TextView
                 android:id="@+id/NPO_name"
                 android:layout_width="275dp"
-                android:layout_height="25dp"
+                android:layout_height="28dp"
                 android:layout_marginStart="40dp"
                 android:fontFamily="@font/raleway_bold"
                 android:textColor="@color/black"
                 android:textSize="20sp"
+                android:paddingTop="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/NPO_pic"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -55,7 +57,8 @@
                 android:layout_width="80dp"
                 android:layout_height="25dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
                 android:hint="@string/date"
                 android:fontFamily="@font/raleway_bold"
                 android:textColor="@color/black"

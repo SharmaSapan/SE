@@ -1,5 +1,7 @@
 package com.example.a4p02app;
 
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +13,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.a4p02app.fragments.nonprofitFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +25,10 @@ import java.util.List;
 public class NPOdapter extends RecyclerView.Adapter<NPOdapter.ViewHolder> implements Filterable {
 
     private static final String TAG = "NPOdapter";
+
+    private android.app.FragmentManager fragmentManager;
+    private nonprofitFragment nonprofitFrag;
+
     List<String> nameListFilt;
     List<String> nameListAll;
     List<String> contentListFilt;
@@ -38,7 +48,7 @@ public class NPOdapter extends RecyclerView.Adapter<NPOdapter.ViewHolder> implem
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.post_row, parent, false);
+        View view = layoutInflater.inflate(R.layout.npo_row, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -118,6 +128,15 @@ public class NPOdapter extends RecyclerView.Adapter<NPOdapter.ViewHolder> implem
 
         @Override
         public void onClick(View view) {
+           /* nonprofitFrag = new nonprofitFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction
+                    .replace(R.id.fragment_container, nonprofitFrag)
+                    .addToBackStack(null)
+                    .commit();
+
+            */
             Toast.makeText(view.getContext(), nameListFilt.get(getAdapterPosition()), Toast.LENGTH_SHORT).show();
         }
     }

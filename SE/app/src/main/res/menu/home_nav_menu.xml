@@ -15,7 +15,7 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/info"
+        android:id="@+id/npolist"
         android:icon="@drawable/ic_baseline_menu_book_24"
         android:title="@string/NPOlisting"
         app:showAsAction="always" />
@@ -27,7 +27,7 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/settings"
+        android:id="@+id/post"
         android:icon="@drawable/ic_round_edit_24"
         android:title="@string/write_a_post"
         app:showAsAction="always" />
