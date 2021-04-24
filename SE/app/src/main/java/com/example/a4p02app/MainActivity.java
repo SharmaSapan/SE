@@ -38,22 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser activeUser;
     private FirebaseAuth mAuth;
 
-    //UI Components
-    private boolean searcherIsDown;
-    private View slidingSearch;
-    private View searcher;
-    private View closerArrow;
-    private View header;
-    private View sb;
-    private View searchbar;
-    private View view;
-    ListView aList;
-    String[] theList = {"Donate Message 1", "Donate Message 2", "Donate Message 3", "Donate Message 4",
-            "Donate Message 5", "Donate Message 6","Donate Message 7","Donate Message 8","Donate Message 9",
-            "Donate Message 10"};
-
+    //UI Component
     private BottomNavigationView bottomAppBar;
-    private Toolbar topAppBar;
 
     //Window Fragments
     private FragmentManager fragmentManager;
@@ -64,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private nonprofitFragment nonprofitFrag ;
     private postFragment postFrag;
     private infoFragment infoFrag;
+    private NPO_ListFragment npoListFrag;
 
 
     @Override
@@ -101,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.profile:
                 changeFragment(2);
                 return true;
-            case R.id.info:
+            case R.id.npolist:
                 changeFragment(3);
                 return true;
             case R.id.favs:
@@ -115,16 +102,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void start_activity(){
-        setContentView(R.layout.activity_main);
-
-        slidingSearch = findViewById(R.id.searcher);
-        slidingSearch.setVisibility(View.INVISIBLE);
-        searcherIsDown = false;//starts the searcher off as not visible
-        aList = (ListView)findViewById(R.id.homeList); //sets up the array of announcements
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_home_list, R.id.textView_, theList);
-        aList.setAdapter(arrayAdapter);
-    }
 
 
     private void startMainActivity(){
@@ -132,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Components
         bottomAppBar = findViewById(R.id.bottomAppBar);
-        topAppBar = findViewById(R.id.topAppBar);
+        //topAppBar = findViewById(R.id.topAppBar);
 
         //Fragments
         donationFrag = new donationFragment();
@@ -142,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
         nonprofitFrag = new nonprofitFragment();
         postFrag = new postFragment();
         infoFrag = new infoFragment();
+        npoListFrag = new NPO_ListFragment();
 
         fragmentManager = getFragmentManager();
         changeFragment(1);
@@ -156,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.profile:
                     changeFragment(2);
                     return true;
-                case R.id.info:
+                case R.id.npolist:
                     changeFragment(3);
                     return true;
                 case R.id.favs:
@@ -185,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
             case 2:
                 //topAppBar.setTitle("Profile");
                 fragmentTransaction.
-                        replace(R.id.fragment_container, nonprofitFrag)
+                        replace(R.id.fragment_container, profileFrag)
                         .addToBackStack(null)
                         .commit();
                 break;
@@ -193,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
             case 3:
                 //topAppBar.setTitle("Info");
                 fragmentTransaction
-                        .replace(R.id.fragment_container, infoFrag)
+                        .replace(R.id.fragment_container, npoListFrag)
                         .addToBackStack(null)
                         .commit();
                 break;
@@ -218,56 +196,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
-
-    private void slideUp() {
-        //method to bring up the searchbar
-
-        header = findViewById(R.id.header); //sets the header to be visible
-        header.setVisibility(View.VISIBLE);
-        searcher = findViewById(R.id.searcher);//sets the entire search area to be visible
-        searcher.setVisibility(View.VISIBLE);
-        TranslateAnimation animate = new TranslateAnimation(0, 0, 0, slidingSearch.getHeight()*-1);
-        animate.setDuration(500);
-        animate.setFillAfter(true);
-        sb = findViewById(R.id.search_button); //sets the search button to be visible
-        sb.setVisibility(View.VISIBLE);
-        slidingSearch.startAnimation(animate);
-        slidingSearch.postDelayed(() -> searchbar.setVisibility(View.INVISIBLE), 300);
-        slidingSearch.setVisibility(View.GONE); //sets the search area to be gone
-        closerArrow = findViewById(R.id.closerArrow); //sets the closer arrow to be gone
-        closerArrow.setVisibility(View.INVISIBLE);
-
-        searcherIsDown = false;
-    }
-
-    public void reveal(View view) {
-        //method to slide down the searchbar
-        if (searcherIsDown) {
-            slideUp();
-
-        }
-        else {
-            header = findViewById(R.id.header); //sets the header to be visible
-            header.setVisibility(View.VISIBLE);
-            searchbar = findViewById(R.id.searchbar); //to be replaced with search bar
-            searchbar.setVisibility(View.INVISIBLE);
-            TranslateAnimation animate = new TranslateAnimation(0,0, slidingSearch.getHeight()*-1,0);
-            animate.setDuration(500);
-            animate.setFillAfter(true);
-            slidingSearch.startAnimation(animate);
-            slidingSearch.postDelayed(() -> searchbar.setVisibility(View.VISIBLE), 300);//delays start of Visibility of standin/searchbar
-            sb = findViewById(R.id.search_button); //sets the search button to be gone
-            sb.setVisibility(View.INVISIBLE);
-            closerArrow = findViewById(R.id.closerArrow); //sets the closer arrow to be visible
-            closerArrow.setVisibility(View.VISIBLE);
-
-
-            searcherIsDown = true;
-        }
-    }
-
 
     /*
     public void goHome(View view) {//reloads Home page since user is at home page already

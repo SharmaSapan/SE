@@ -16,35 +16,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> implements Filterable {
+public class NPOdapter extends RecyclerView.Adapter<NPOdapter.ViewHolder> implements Filterable {
 
-    private static final String TAG = "PostAdapter";
-    //List<String> nameListFilt;
-    //List<String> nameListAll;
-    //List<String> contentListFilt;
-    //List<String> contentListAll;
-    //List<String> dateListFilt;
-    //List<String> dateListAll;
+    private static final String TAG = "NPOdapter";
+    List<String> nameListFilt;
+    List<String> nameListAll;
+    List<String> contentListFilt;
+    List<String> contentListAll;
+    List<String> dateListFilt;
+    List<String> dateListAll;
     List<Integer> profPic;
-    List<Post> postListFilt;
-    List<Post> postListAll;
+    //List<Integer> counter = new ArrayList<>();
 
-    public PostAdapter(List<Post> postListFilt, List<Integer> pics) {
-        this.postListFilt = postListFilt;
-        postListAll = postListFilt;
-        //this.contentListFilt = content;
-        //contentListAll = contentListFilt;
-        //this.dateListFilt = dates;
-        //dateListAll = dateListFilt;
+    public NPOdapter(List<String> nameListFilt, List<Integer> pics) {
+        this.nameListFilt = nameListFilt;
+        nameListAll = nameListFilt;
         this.profPic = pics;
-        System.out.println(postListAll.get(0).getName());
-        /*System.out.println(postListFilt.get(1));
-        System.out.println(postListFilt.get(2));
-        System.out.println(postListFilt.get(3));
-        System.out.println(postListFilt.get(4));
-    */
     }
-
 
     @NonNull
     @Override
@@ -58,15 +46,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //holder.rowCountTextView.setText(String.valueOf(position));
-        holder.npoName.setText(postListFilt.get(position).getName());
-        holder.postContent.setText(postListFilt.get(position).getContent());
-        holder.postDate.setText(postListFilt.get(position).getDate());
+        holder.npoName.setText(nameListFilt.get(position));
         holder.npoPic.setImageResource(profPic.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return postListFilt.size();
+        return nameListFilt.size();
     }
 
     @Override
@@ -86,23 +72,20 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
 
             if (search.isEmpty()) {
 
-                postListFilt = postListAll;
+                nameListFilt = nameListAll;
             } else {
-                List<Post> filteredNameList = new ArrayList<>();
-                for (Post postsearch: postListAll) {
-                    if (postsearch.getName().toLowerCase().contains(search.toLowerCase())||
-                            postsearch.getContent().toLowerCase().contains(search.toLowerCase())||
-                            postsearch.getDate().toLowerCase().contains(search.toLowerCase()))
-                    {
-                        filteredNameList.add(postsearch);
+                List<String> filteredNameList = new ArrayList<>();
+                for (String nposearch: nameListAll) {
+                    if (nposearch.toLowerCase().contains(search.toLowerCase())) {
+                        filteredNameList.add(nposearch);
                     }
-            }
-                postListFilt = filteredNameList;
-            }
+                }
+                nameListFilt = filteredNameList;
 
+            }
             FilterResults filterResults = new FilterResults();
 
-            filterResults.values = postListFilt;
+            filterResults.values = nameListFilt;
             return filterResults;
         }
 
@@ -110,7 +93,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
 
-            postListFilt = (ArrayList<Post>) filterResults.values;
+            nameListFilt = (ArrayList<String>) filterResults.values;
             notifyDataSetChanged();
         }
     };
@@ -119,16 +102,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView npoName, postContent, postDate;
+        TextView npoName;
         ImageView npoPic;
         ConstraintLayout cLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             npoName = itemView.findViewById(R.id.NPO_name);
-            postContent = itemView.findViewById(R.id.postContent);
             npoPic = itemView.findViewById(R.id.NPO_pic);
-            postDate = itemView.findViewById(R.id.postDate);
             cLayout = itemView.findViewById(R.id.row);
 
             itemView.setOnClickListener(this);
@@ -137,7 +118,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
 
         @Override
         public void onClick(View view) {
-            //Toast.makeText(view.getContext(), postListFilt.get(getAdapterPosition()), Toast.LENGTH_SHORT).show();
+            Toast.makeText(view.getContext(), nameListFilt.get(getAdapterPosition()), Toast.LENGTH_SHORT).show();
         }
     }
 }
