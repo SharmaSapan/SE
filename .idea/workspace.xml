@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:main" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7c1d3607-9790-4a80-9e1f-77ccef2fe889" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/SE/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SE/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SE/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SE/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SE/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SE/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SE/app/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SE/app/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SE/app/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SE/app/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SE/app/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SE/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/SE/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SE/app/src/main/java/com/example/a4p02app/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/SE/app/src/main/java/com/example/a4p02app/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SE/app/src/main/java/com/example/a4p02app/nonProfit.java" beforeDir="false" afterPath="$PROJECT_DIR$/SE/app/src/main/java/com/example/a4p02app/nonProfit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SE/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/SE/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[Pixel_4_API_30]" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1pAo3tYILyuSZuH05NcJ5O8Eetw" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/SE/app" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RunManager" selected="Gradle./home/cold/AndroidStudioProjects/SE/SE/app/build.gradle (2)">
+    <configuration name="/home/cold/AndroidStudioProjects/SE/SE/app/build.gradle (1)" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/SE/app/build.gradle" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="/home/cold/AndroidStudioProjects/SE/SE/app/build.gradle (2)" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/SE/app/build.gradle" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="/home/cold/AndroidStudioProjects/SE/SE/app/build.gradle" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/SE/app/build.gradle" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="/home/cold/AndroidStudioProjects/SE/SE/build.gradle" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/SE/build.gradle" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle./home/cold/AndroidStudioProjects/SE/SE/app/build.gradle (2)" />
+        <item itemvalue="Gradle./home/cold/AndroidStudioProjects/SE/SE/app/build.gradle (1)" />
+        <item itemvalue="Gradle./home/cold/AndroidStudioProjects/SE/SE/app/build.gradle" />
+        <item itemvalue="Gradle./home/cold/AndroidStudioProjects/SE/SE/build.gradle" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7c1d3607-9790-4a80-9e1f-77ccef2fe889" name="Default Changelist" comment="" />
+      <created>1614635059367</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1614635059367</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="763" y="309" width="1024" height="844" key="#Project_Structure" timestamp="1614861045751">
+      <screen x="0" y="24" width="2560" height="1416" />
+    </state>
+    <state x="763" y="309" width="1024" height="844" key="#Project_Structure/0.24.2560.1416/2560.0.1920.1080@0.24.2560.1416" timestamp="1614861045751" />
+    <state x="773" y="564" width="839" height="569" key="FileChooserDialogImpl" timestamp="1614861600671">
+      <screen x="0" y="24" width="2560" height="1416" />
+    </state>
+    <state x="773" y="564" width="839" height="569" key="FileChooserDialogImpl/0.24.2560.1416/2560.0.1920.1080@0.24.2560.1416" timestamp="1614861600671" />
+    <state width="2249" height="349" key="GridCell.Tab.0.bottom" timestamp="1614861970900">
+      <screen x="0" y="24" width="2560" height="1416" />
+    </state>
+    <state width="2249" height="349" key="GridCell.Tab.0.bottom/0.24.2560.1416/2560.0.1920.1080@0.24.2560.1416" timestamp="1614861970900" />
+    <state width="2249" height="349" key="GridCell.Tab.0.center" timestamp="1614861970900">
+      <screen x="0" y="24" width="2560" height="1416" />
+    </state>
+    <state width="2249" height="349" key="GridCell.Tab.0.center/0.24.2560.1416/2560.0.1920.1080@0.24.2560.1416" timestamp="1614861970900" />
+    <state width="2249" height="349" key="GridCell.Tab.0.left" timestamp="1614861970899">
+      <screen x="0" y="24" width="2560" height="1416" />
+    </state>
+    <state width="2249" height="349" key="GridCell.Tab.0.left/0.24.2560.1416/2560.0.1920.1080@0.24.2560.1416" timestamp="1614861970899" />
+    <state width="2249" height="349" key="GridCell.Tab.0.right" timestamp="1614861970900">
+      <screen x="0" y="24" width="2560" height="1416" />
+    </state>
+    <state width="2249" height="349" key="GridCell.Tab.0.right/0.24.2560.1416/2560.0.1920.1080@0.24.2560.1416" timestamp="1614861970900" />
+    <state width="2540" height="400" key="GridCell.Tab.1.bottom" timestamp="1614636483303">
+      <screen x="0" y="24" width="2560" height="1416" />
+    </state>
+    <state width="2540" height="400" key="GridCell.Tab.1.bottom/0.24.2560.1416/2560.0.1920.1080@0.24.2560.1416" timestamp="1614636483303" />
+    <state width="2540" height="400" key="GridCell.Tab.1.center" timestamp="1614636483303">
+      <screen x="0" y="24" width="2560" height="1416" />
+    </state>
+    <state width="2540" height="400" key="GridCell.Tab.1.center/0.24.2560.1416/2560.0.1920.1080@0.24.2560.1416" timestamp="1614636483303" />
+    <state width="2540" height="400" key="GridCell.Tab.1.left" timestamp="1614636483303">
+      <screen x="0" y="24" width="2560" height="1416" />
+    </state>
+    <state width="2540" height="400" key="GridCell.Tab.1.left/0.24.2560.1416/2560.0.1920.1080@0.24.2560.1416" timestamp="1614636483303" />
+    <state width="2540" height="400" key="GridCell.Tab.1.right" timestamp="1614636483303">
+      <screen x="0" y="24" width="2560" height="1416" />
+    </state>
+    <state width="2540" height="400" key="GridCell.Tab.1.right/0.24.2560.1416/2560.0.1920.1080@0.24.2560.1416" timestamp="1614636483303" />
+    <state x="814" y="367" width="1024" height="844" key="SettingsEditor" timestamp="1614861338020">
+      <screen x="0" y="24" width="2560" height="1416" />
+    </state>
+    <state x="814" y="367" width="1024" height="844" key="SettingsEditor/0.24.2560.1416/2560.0.1920.1080@0.24.2560.1416" timestamp="1614861338020" />
+    <state x="1049" y="641" width="439" height="163" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1614860152893">
+      <screen x="0" y="24" width="2560" height="1416" />
+    </state>
+    <state x="1049" y="641" width="439" height="163" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.24.2560.1416/2560.0.1920.1080@0.24.2560.1416" timestamp="1614860152893" />
+  </component>
+</project>
