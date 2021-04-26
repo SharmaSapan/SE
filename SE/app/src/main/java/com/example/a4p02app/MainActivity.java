@@ -26,6 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+
 import com.example.a4p02app.R;
 import com.example.a4p02app.fragments.*;
 import com.google.android.material.bottomappbar.BottomAppBar;
@@ -61,68 +62,36 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //FirebaseAuth.getInstance().signOut();
-        //mAuth = FirebaseAuth.getInstance();
-        //activeUser = mAuth.getCurrentUser();
+        mAuth = FirebaseAuth.getInstance();
+        activeUser = mAuth.getCurrentUser();
 
-        //if (activeUser == null) {
-        //    goLogin();
-        //}
-        // else {
-        startMainActivity();
-        // }
-        KeyboardVisibilityEvent.setEventListener(
-                this,
-                new KeyboardVisibilityEventListener() {
-                    @Override
-                    public void onVisibilityChanged(boolean isOpen) {
-                        //Log.d(TAG,"onVisibilityChanged: Keyboard visibility changed");
-                        if(isOpen){
-                            //Log.d(TAG, "onVisibilityChanged: Keyboard is open");
-                            bottomAppBar.setVisibility(View.INVISIBLE);
-                            //Log.d(TAG, "onVisibilityChanged: NavBar got Invisible");
-                        }else{
-                            //Log.d(TAG, "onVisibilityChanged: Keyboard is closed");
-                            bottomAppBar.setVisibility(View.VISIBLE);
-                            //Log.d(TAG, "onVisibilityChanged: NavBar got Visible");
-                        }
-                    }
-                });
-    }
-
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //getMenuInflater().inflate(R.menu.home_nav_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        System.out.println("hi!!!!!!");
-
-        switch (item.getItemId()) {
-            case R.id.home:
-                changeFragment(1);
-                return true;
-            case R.id.profile:
-                changeFragment(2);
-                return true;
-            case R.id.npolist:
-                changeFragment(3);
-                return true;
-            case R.id.favs:
-                changeFragment(4);
-                return true;
-            case R.id.post:
-                changeFragment(5);
-                return true;
-            default:
-                return super.onContextItemSelected(item);
+        if (activeUser == null) {
+            goLogin();
         }
-    }
+         else {
+        startMainActivity();
+         }
 
+
+//        KeyboardVisibilityEvent.setEventListener(
+//                this,
+//                new KeyboardVisibilityEventListener() { //DO NOT SIMPLIFY (lambda) (WILL BREAK) -brian
+//                    @Override
+//                    public void onVisibilityChanged(boolean isOpen) {
+//                        //Log.d(TAG,"onVisibilityChanged: Keyboard visibility changed");
+//                        if(isOpen){
+//                            //Log.d(TAG, "onVisibilityChanged: Keyboard is open");
+//                            bottomAppBar.setVisibility(View.INVISIBLE);
+//                            //Log.d(TAG, "onVisibilityChanged: NavBar got Invisible");
+//                        }else{
+//                            //Log.d(TAG, "onVisibilityChanged: Keyboard is closed");
+//                            bottomAppBar.setVisibility(View.VISIBLE);
+//                            //Log.d(TAG, "onVisibilityChanged: NavBar got Visible");
+//                        }
+//                    }
+//                });
+//        bottomAppBar.setVisibility(View.INVISIBLE);
+    }
 
 
     private void startMainActivity(){
@@ -145,7 +114,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager = getFragmentManager();
         changeFragment(1);
 
-
         //Listeners
         bottomAppBar.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()){
@@ -167,87 +135,47 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         });
-    }
+   }
 
     public void changeFragment(int id){
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         switch (id) {
             case 1:
-                //topAppBar.setTitle("Donation Machine");
                 fragmentTransaction
                         .replace(R.id.fragment_container, homeFrag)
-                        .addToBackStack(null)
+                        .addToBackStack("home")
                         .commit();
                 break;
 
             case 2:
-                //topAppBar.setTitle("Profile");
                 fragmentTransaction.
                         replace(R.id.fragment_container, profileFrag)
-                        .addToBackStack(null)
+                        .addToBackStack("profile")
                         .commit();
                 break;
 
             case 3:
-                //topAppBar.setTitle("Info");
                 fragmentTransaction
                         .replace(R.id.fragment_container, npoListFrag)
-                        .addToBackStack(null)
+                        .addToBackStack("npo")
                         .commit();
                 break;
 
             case 4:
-                //topAppBar.setTitle("Favorites");
                 fragmentTransaction
                         .replace(R.id.fragment_container, favFrag)
-                        .addToBackStack(null)
+                        .addToBackStack("fav")
                         .commit();
                 break;
 
             case 5:
-                //topAppBar.setTitle("Settings");
                 fragmentTransaction
                         .replace(R.id.fragment_container, postFrag)
-                        .addToBackStack(null)
+                        .addToBackStack("post")
                         .commit();
                 break;
         }
-        fragmentTransaction.addToBackStack(null);
-
-
-    }
-
-    /*
-    public void goHome(View view) {//reloads Home page since user is at home page already
-        setContentView(R.layout.activity_main);
-
-        slidingSearch = findViewById(R.id.searcher);
-        slidingSearch.setVisibility(View.INVISIBLE);
-        searcherIsDown = false;
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-    */
-
-    public void goProfile(View view) {//will go to User profile
-        Intent intent = new Intent(this, profile.class);
-        startActivity(intent);
-    }
-
-    public void goInfo(View view) {//will bring user to the info page for selected non-profit
-        Intent intent = new Intent(this, nonProfit.class);
-        startActivity(intent);
-    }
-
-    public void goFavs(View view) {//will go to Users favourited non-profits
-        Intent intent = new Intent(this, favourites.class);
-        startActivity(intent);
-    }
-
-    public void makePost(View view) {//will bring user to post writing page
-        Intent intent = new Intent(this, makePost.class);
-        startActivity(intent);
     }
 
     public void goLogin() {//brings user to the login page
@@ -255,6 +183,25 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    @Override
+    public void onBackPressed() {
+
+        if (fragmentManager.getBackStackEntryCount() > 1) {
+            super.onBackPressed();
+            Fragment f = fragmentManager.findFragmentById(R.id.fragment_container);
+            if (f instanceof homeFragment) {
+                bottomAppBar.getMenu().getItem(0).setChecked(true);
+            } else if (f instanceof profileFragment) {
+                bottomAppBar.getMenu().getItem(1).setChecked(true);
+            } else if (f instanceof NPO_ListFragment) {
+                bottomAppBar.getMenu().getItem(2).setChecked(true);
+            } else if (f instanceof favouriteFragment) {
+                bottomAppBar.getMenu().getItem(3).setChecked(true);
+            } else if (f instanceof postFragment) {
+                bottomAppBar.getMenu().getItem(4).setChecked(true);
+            }
+        }
+    }
 
     public void updateUser(FirebaseUser activeUser){
         this.activeUser = activeUser;

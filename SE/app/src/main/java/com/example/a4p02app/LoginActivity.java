@@ -145,4 +145,11 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
         }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(LoginActivity.this, "Please Log In", Toast.LENGTH_SHORT).show();
+    }
+
 }
+

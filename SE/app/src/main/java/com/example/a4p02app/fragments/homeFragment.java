@@ -2,6 +2,7 @@ package com.example.a4p02app.fragments;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,9 +17,13 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.a4p02app.ChatActivity;
+import com.example.a4p02app.LoginActivity;
+import com.example.a4p02app.MainActivity;
 import com.example.a4p02app.Post;
 import com.example.a4p02app.PostAdapter;
 import com.example.a4p02app.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -113,7 +118,6 @@ public class homeFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-
         super.onCreate(savedInstanceState);
 
     }
@@ -123,6 +127,8 @@ public class homeFragment extends Fragment {
 
         inflater.inflate(R.menu.search, menu);
         super.onCreateOptionsMenu(menu, inflater);
+
+        //Search
         MenuItem menuItem = menu.findItem(R.id.search_action);
         SearchView searchView = (SearchView) menuItem.getActionView();
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
@@ -138,7 +144,23 @@ public class homeFragment extends Fragment {
                 return false;
             }
         });
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.settings){
+            return true;
+        }
+        else if (item.getItemId() == R.id.log_out_button){
+            getActivity().finish();
+            FirebaseAuth.getInstance().signOut();
+
+            Intent i = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
+            startActivity(i);
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 

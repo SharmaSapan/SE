@@ -9,10 +9,18 @@
         android:icon="@drawable/ic_round_search_24"
         app:showAsAction="always|collapseActionView"
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
+
+    <item
+        android:id="@+id/log_out_button"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="Log Out"
+        app:showAsAction="never"/>
+
     <item
         android:id="@+id/settings"
         android:icon="@drawable/ic_baseline_settings_24"
         android:title="Settings"
-        app:showAsAction="always" />
+        app:showAsAction="never"/>
+
 
 </menu>

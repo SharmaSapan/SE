@@ -17,6 +17,7 @@
         <activity android:name=".profile" />
         <activity android:name="com.example.a4p02app.LoginActivity"/>
         <activity android:name="com.example.a4p02app.SignUpActivity"/>
+        <activity android:name="com.example.a4p02app.ChatActivity"/>
         <activity android:name="com.example.a4p02app.MainActivity"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
