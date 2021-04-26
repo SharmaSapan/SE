@@ -1,13 +1,23 @@
 package com.example.a4p02app;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,6 +30,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -31,12 +43,16 @@ public class favourites extends AppCompatActivity {
 
     private FirebaseFirestore db =  FirebaseFirestore.getInstance();
 
-    String userID;
-    String [] favs;
-    int count;
-    ArrayList<String> favID = new ArrayList<String>();
+    private String userID;
 
-    ListView listView;
+
+    List<String> postList = new ArrayList<String>();
+    List<String> nameList = new ArrayList<String>();
+    List<Integer> postPic = Arrays.asList(R.drawable.app_icon,R.drawable.blank_profile_picture,
+            R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon);
+    List<String> dateList = new ArrayList<String>();
+
+    RecyclerView fList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,55 +64,55 @@ public class favourites extends AppCompatActivity {
         userID = String.valueOf(activeUser);
 
         setContentView(R.layout.activity_favourites);
-
-        listView = (ListView)findViewById(R.id.listview);
+        getPostsFromDatabase();
     }
 
     public void getPostsFromDatabase () {
         //Retrieve a list of all favourited items connected to the currently logged in user
-        db.collection("accounts/"+userID+"/favourites").whereEqualTo("favourited", true)
-            .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("accounts/"+userID+"/favourites")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        favID.add(document.getId()); //Add favourited document to list
-                        Log.d("TAG: ", document.getId() + " => " + document.getData());
-                    }
-                } else {
-                    Log.d("TAG: ", "Error getting documents: ", task.getException());
+            public void onEvent( QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                postList.clear();
+                for(DocumentSnapshot val: value){
+                    postList.add(val.getString("pContent"));
+                }
+                nameList.clear();
+                for(DocumentSnapshot snapshot: value) {
+                    nameList.add(snapshot.getString("pWriter"));
+                }
+                dateList.clear();
+                for(DocumentSnapshot snapshot: value){
+                    dateList.add(Objects.requireNonNull(snapshot.getTimestamp("pDate")).toDate().toString());
                 }
             }
         });
-        //Connect favourited documents with documents in database and print to screen
-        //not finished
-        favs = new String[favID.size()];
-        count = 0;
-        while(favID.get(count) != null){
-            DocumentReference docRef = db.collection("posts").document(favID.remove(count));
-            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-                            //print to screen
-                            favs[count] = document.getString("pTitle");
-                            Log.d("TAG: ", "DocumentSnapshot data: " + document.getData());
-                        } else {
-                            favs[count] = "Post not longer exists.";
-                            Log.d("TAG: ", "No such document");
-                        }
-                    } else {
-                        favs[count] = "Error.";
-                        Log.d("TAG: ", "get failed with ", task.getException());
-                    }
-                }
-            });
-            count++;
-        }
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,favs);
-        listView.setAdapter(arrayAdapter);
+        fList = findViewById(R.id.flist);
+        NPOAdapter myAdapter = new NPOAdapter(this, nameList, postPic);
+
+        fList.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
+        fList.setLayoutManager(new LinearLayoutManager(this));
+        fList.setAdapter(myAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {//searchbar implementation
+
+        getMenuInflater().inflate(R.menu.search, menu);
+        MenuItem item = menu.findItem(R.id.search_action);
+        SearchView sv = (SearchView) item.getActionView();
+        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
     }
 
     public void goBack(View view) {
@@ -115,6 +131,11 @@ public class favourites extends AppCompatActivity {
     }
     public void goInfo(View view) {//will go to info page of non-profit
         Intent intent = new Intent(this, nonProfit.class);
+        startActivity(intent);
+    }
+
+    public void goNPOList(View view) {//will bring user to the info page for selected non-profit
+        Intent intent = new Intent(this, NPOlist.class);
         startActivity(intent);
     }
 

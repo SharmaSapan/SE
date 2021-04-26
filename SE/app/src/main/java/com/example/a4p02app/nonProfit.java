@@ -19,6 +19,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Map;
+
 //the default profile picture is from https://pixabay.com/vectors/blank-profile-picture-mystery-man-973460/
 
 public class nonProfit extends AppCompatActivity {
@@ -29,7 +31,11 @@ public class nonProfit extends AppCompatActivity {
     String documentID;
     String webURL;
     String phoneNum;
-    String address;
+    String unitNum;
+    String sName;
+    String city;
+    String province;
+    String postalCode;
     String emailAddress;
 
     //get an instance of Firebase so that the firestore database can be used
@@ -45,12 +51,16 @@ public class nonProfit extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras == null) {
             //if there is no nonprofit name given in the intent display a default one
-            npName = "No Profile Found";
+            npName = "No Non-Profit Name added.";
             profilePicName = "blank_profile_picture";
-            npDesc = "An error occurred, please try again.";
-            webURL ="";
-            phoneNum ="No phone number found.";
-            address = "No address found.";
+            npDesc = "No description added.";
+            webURL ="No website added.";
+            phoneNum ="No phone number added.";
+            unitNum = "No unit number added.";
+            sName = "No street name added.";
+            city = "No city added.";
+            postalCode = "No postal code added.";
+            emailAddress = "No email address added.";
             getInfo();
         } else {
             //get all info from the database here
@@ -64,7 +74,7 @@ public class nonProfit extends AppCompatActivity {
     //for more info on this, go to https://firebase.google.com/docs/firestore/query-data/get-data
     public void getFromDatabase() {
         //should change testNP later
-        DocumentReference docRef = db.collection("nonprofits").document(documentID);
+        DocumentReference docRef = db.collection("test").document(documentID);;
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -72,14 +82,22 @@ public class nonProfit extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     assert document != null;
                     if (document.exists()) {
-                        Log.d("TAG: ", "DocumentSnapshot data: " + document.getData());
-                        npName = document.getString("npName");
-                        npDesc = document.getString("npDescription");
+                       // Log.d("TAG: ", "DocumentSnapshot data: " + document.getData());
+                        npName = document.getString("if_npo_name");
+                        npDesc = document.getString("if_npo_desc");
                         profilePicName = document.getString("profilePic");
-                        webURL = document.getString("webURL");
-                        address = document.getString("address");
-                        phoneNum = document.getString("phoneNumber");
-                        emailAddress = document.getString("email");
+                        webURL = document.getString("if_npo_url");
+
+                        //get the map for the address values
+                        Map<String, String> addMap = (Map<String, String>) document.get("address");
+                        unitNum = addMap.get("unit_number");
+                        sName = addMap.get("street_name");
+                        city = addMap.get("city");
+                        postalCode = addMap.get("postal_code");
+                        province = addMap.get("province");
+
+                        phoneNum = document.getString("if_npo_phone");
+                        emailAddress = document.getString("user_email");
                         //update the page
                         getInfo();
                     } else {
@@ -90,6 +108,12 @@ public class nonProfit extends AppCompatActivity {
                 }
             }
         });
+   }
+
+    public void fromList(){
+        if(getIntent().hasExtra("npoName")){
+            npName = getIntent().getStringExtra("npoName");
+        }
     }
 
     //this method updates the page to match the non-profit's info
@@ -98,15 +122,22 @@ public class nonProfit extends AppCompatActivity {
         TextView nonProfitName = (TextView) findViewById(R.id.npNameDisplay);
         nonProfitName.setText(npName);
 
-        //update profile picture
-        ImageView nonProfitPic = (ImageView) findViewById(R.id.profilePic);
+        //update profile picture -- change this to work with image handler
+        /*ImageView nonProfitPic = (ImageView) findViewById(R.id.profilePic);
+        if (profilePicName.equals("") || profilePicName == null) {
+            profilePicName = "blank_profile_picture";
+        }
         int id = getResources().getIdentifier(profilePicName, "drawable", getPackageName());
-        nonProfitPic.setImageResource(id);
+        nonProfitPic.setImageResource(id);*/
 
         //update description
         TextView nonProfitDescription = (TextView) findViewById(R.id.profilePart);
-        String s = npDesc + "\n\n Address: " + address + "\nPhone number: " + phoneNum + "\nEmail Address: " + emailAddress;
+        String s = npDesc + "\n\n Address: " + getAddressAsString() + "\nPhone number: " + phoneNum + "\nEmail Address: " + emailAddress;
         nonProfitDescription.setText(s);
+    }
+
+    private String getAddressAsString(){
+       return unitNum + " " +  sName + ", " + city + ", " + province + ", " + postalCode;
     }
 
     public void openWebsite(View view){
@@ -123,7 +154,7 @@ public class nonProfit extends AppCompatActivity {
     //this method allows the user to start a phone call with with the organization
     public void callOrganization(View view) {
         if(phoneNum.equals("")) {
-            Toast toast = Toast.makeText(getApplicationContext(), "This organization doe not have a phone number available.", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(getApplicationContext(), "This organization does not have a phone number available.", Toast.LENGTH_SHORT);
             toast.show();
         } else {
             Intent callInt = new Intent(Intent.ACTION_VIEW);
@@ -134,16 +165,28 @@ public class nonProfit extends AppCompatActivity {
 
     //this method allows the user to send an email to the organization
     public void sendEmail(View view){
-        //Intent emailInt = new Intent(Intent.ACTION_SEND);
-        //emailInt.setData(Uri.parse("mailto:" + emailAddress + "?subject=" + "DonApp Inquiry" + "&body=" +""));
-        //startActivity(emailInt);
+        if (emailAddress.equals("")) {
+            Toast toast = Toast.makeText(getApplicationContext(), "This organization does not have an email address available.", Toast.LENGTH_SHORT);
+            toast.show();
+        } else {
+            Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                    "mailto", emailAddress, null));
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+            emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
+            startActivity(Intent.createChooser(emailIntent, "Send email..."));
+        }
     }
 
     //this method opens the map
     public void openMap(View view){
-        //String map = String.format(Locale.ENGLISH, "geo:0,0?q=" + address);
-        //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(map));
-        //startActivity(intent);
+        if(sName.equals("")) {
+            Toast toast = Toast.makeText(getApplicationContext(), "This organization does not have an address available.", Toast.LENGTH_SHORT);
+            toast.show();
+        } else {
+            String map = "http://maps.google.co.in/maps?q=" + getAddressAsString();
+            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(map));
+            startActivity(i);
+        }
     }
 
     public void goBack(View view) {
@@ -165,6 +208,12 @@ public class nonProfit extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+    public void goNPOList(View view) {//will bring user to the info page for selected non-profit
+        Intent intent = new Intent(this, NPOlist.class);
+        startActivity(intent);
+    }
+
     public void goFavs(View view) {//will go to Users favourited non-profits
         Intent intent = new Intent(this, favourites.class);
         startActivity(intent);
@@ -172,6 +221,11 @@ public class nonProfit extends AppCompatActivity {
 
     public void makePost(View view) {//will bring user to post writing page
         Intent intent = new Intent(this, makePost.class);
+        startActivity(intent);
+    }
+
+    public void openSettings(View view) {
+        Intent intent = new Intent(this, npPreferences.class);
         startActivity(intent);
     }
 

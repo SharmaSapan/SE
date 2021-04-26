@@ -12,95 +12,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/botBord"
-        app:layout_constraintTop_toBottomOf="@+id/headerline"
-        android:layout_margin="5dp">
-
-        <ListView
-            android:id="@+id/homeList"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/botBord">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/plist"
             android:layout_width="match_parent"
             android:layout_height="425dp"
-            android:background="@color/white"
-            android:divider="@color/dark_blue"
-            android:dividerHeight="3dp"
-            android:listSelector="@color/light_orange"
-            android:padding="10sp"/>
-    </LinearLayout>
-    <View
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:background="@color/light_blue"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:layout_margin="5dp"
 
-    <View
-        android:id="@+id/headerline"
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="@color/dark_blue"
-        app:layout_constraintBottom_toBottomOf="@id/header" />
-
-    <ImageButton
-        android:id="@+id/search_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@color/light_blue"
-        android:contentDescription="@string/todo"
-        android:onClick="reveal"
-        android:src="@drawable/ic_round_search_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:fontFamily="@font/raleway_bold"
-        android:text="@string/donate_title"
-        android:textColor="@color/dark_blue"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <RelativeLayout
-        android:id="@+id/searcher"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/light_blue"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/headerline"
-        >
-
-        <ImageButton
-            android:id="@+id/closerArrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="10dp"
-            android:background="@color/light_blue"
-            android:contentDescription="@string/todo"
-            android:onClick="reveal"
-            android:src="@drawable/ic_round_keyboard_arrow_up_24"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <SearchView
-            android:id="@+id/searchbar"
-            android:layout_width="250dp"
-            android:layout_height="40dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_margin="15dp"
-            android:background="@color/light_orange"
-            android:queryHint="@string/search_non_profits"
-            android:iconifiedByDefault="false"
-            android:searchIcon="@null"
-            android:queryBackground="@color/light_orange"
-            android:textAlignment="textStart"
-            android:fontFamily="@font/raleway_bold"
             />
-    </RelativeLayout>
+
+    </LinearLayout>
+
+
+
 
     <View
         android:id="@+id/botBord"
@@ -181,9 +106,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="5dp"
         app:layout_constraintStart_toEndOf="@id/favs"
-        android:src="@drawable/ic_round_info_24"
+        android:src="@drawable/ic_round_import_contacts_24"
         android:background="@color/light_orange"
-        android:onClick="goInfo"
+        android:onClick="goNPOList"
         android:contentDescription="@string/todo"
         />
 

@@ -7,49 +7,20 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <View
-        android:id="@+id/header"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:background="@color/light_blue"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <View
-        android:id="@+id/headerline"
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="@color/dark_blue"
-        app:layout_constraintBottom_toBottomOf="@id/header"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintBottom_toTopOf="@id/botBord">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/flist"
+            android:layout_width="match_parent"
+            android:layout_height="425dp"
+            android:layout_margin="5dp"
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/raleway_bold"
-        android:text="@string/favourites"
-        android:textColor="@color/dark_blue"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            />
 
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/light_blue"
-        android:contentDescription="@string/todo"
-        android:onClick="goBack"
-        android:src="@drawable/ic_round_arrow_back_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
 
 
     <View
@@ -130,13 +101,13 @@
         android:id="@+id/info"
         android:layout_width="55dp"
         android:layout_height="55dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="178dp"
+        android:layout_marginTop="5dp"
         android:background="@color/light_orange"
         android:contentDescription="@string/todo"
-        android:onClick="goInfo"
-        android:src="@drawable/ic_round_info_24"
-        app:layout_constraintEnd_toEndOf="@+id/botNav"
+        android:onClick="goNPOList"
+        android:src="@drawable/ic_round_import_contacts_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/botBord" />
 
     <TextView
@@ -161,12 +132,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ListView
-        android:id="@+id/listview"
-        android:layout_width="417dp"
-        android:layout_height="578dp"
-        app:layout_constraintBottom_toTopOf="@+id/botBord"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,17 +15,13 @@
         <activity android:name=".messages" />
         <activity android:name=".favourites" />
         <activity android:name=".profile" />
-        <activity android:name="com.example.a4p02app.LoginActivity"/>
-        <activity android:name="com.example.a4p02app.SignUpActivity"/>
+        <activity android:name=".NPOlist" />
+        <activity android:name=".LoginActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".SignUpActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".MainActivity"/>
         <activity android:name="com.example.a4p02app.ChatActivity"/>
-        <activity android:name="com.example.a4p02app.MainActivity"
-            android:windowSoftInputMode="adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>
