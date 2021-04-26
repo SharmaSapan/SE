@@ -15,11 +15,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.a4p02app.LoginActivity;
 import com.example.a4p02app.NPOdapter;
 import com.example.a4p02app.PostAdapter;
 import com.example.a4p02app.R;
 import com.example.a4p02app.donations;
 import com.example.a4p02app.messages;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -100,6 +102,21 @@ public class NPO_ListFragment extends Fragment {
             }
         });
 
+    }
+
+    //Override All Existing Menu Options*
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.log_out_button){
+            getActivity().finish();
+            FirebaseAuth.getInstance().signOut();
+
+            Intent i = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
+            startActivity(i);
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

@@ -16,11 +16,4 @@
         android:title="Log Out"
         app:showAsAction="never"/>
 
-    <item
-        android:id="@+id/settings"
-        android:icon="@drawable/ic_baseline_settings_24"
-        android:title="Settings"
-        app:showAsAction="never"/>
-
-
 </menu>

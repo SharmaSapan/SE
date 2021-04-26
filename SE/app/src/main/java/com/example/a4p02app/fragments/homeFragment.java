@@ -148,10 +148,7 @@ public class homeFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.settings){
-            return true;
-        }
-        else if (item.getItemId() == R.id.log_out_button){
+if (item.getItemId() == R.id.log_out_button){
             getActivity().finish();
             FirebaseAuth.getInstance().signOut();
 
