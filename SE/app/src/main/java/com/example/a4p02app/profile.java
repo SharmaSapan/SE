@@ -52,8 +52,6 @@ public class profile extends AppCompatActivity {
                 postalCode+"\n"+
                 emailAddress;
         profilePart2.setText(combine);
-
-
     }
 
 
@@ -94,10 +92,12 @@ public class profile extends AppCompatActivity {
         Intent intent = new Intent(this, favourites.class);
         startActivity(intent);
     }
+
     public void makePost(View view) {//will bring user to post writing page
         Intent intent = new Intent(this, makePost.class);
         startActivity(intent);
     }
+
     public void goUpdateProfile(View view) {//will go to Users favourited non-profits
         Intent intent = new Intent(this, updateProfile.class);
         startActivity(intent);

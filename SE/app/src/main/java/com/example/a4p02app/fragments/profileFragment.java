@@ -2,16 +2,20 @@ package com.example.a4p02app.fragments;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import com.example.a4p02app.R;
 import com.example.a4p02app.donations;
 import com.example.a4p02app.messages;
+import com.example.a4p02app.updateProfile;
 import com.example.a4p02app.userData;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -32,12 +36,16 @@ public class profileFragment extends Fragment {
 
     private View v;
 
+    private Button btnEdit;
+    private Button btnDonations;
+    private Button btnMessages;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        v = inflater.inflate(R.layout.fragment_non_profit, container, false);
+        v = inflater.inflate(R.layout.fragment_profile, container, false);
 
         first_name = userData.getInstance().getUser_first();
         last_name = userData.getInstance().getUser_last();
@@ -62,7 +70,32 @@ public class profileFragment extends Fragment {
                 postalCode+"\n"+
                 emailAddress;
 
-        //profilePart2.setText(combine);
+        btnEdit = (Button) v.findViewById(R.id.btnEdit);
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), updateProfile.class);
+                startActivity(intent);
+            }
+        });
+
+        btnDonations = v.findViewById(R.id.donations);
+        btnDonations.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), donations.class);
+                startActivity(intent);
+            }
+        });
+
+        btnMessages = v.findViewById(R.id.messages);
+        btnMessages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), messages.class);
+                startActivity(intent);
+            }
+        });
 
         return v;
     }

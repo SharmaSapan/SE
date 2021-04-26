@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,11 +23,15 @@ public class updateProfile extends Activity {
     String postalCode;
     String emailAddress;
 
+    private ImageButton btnBack;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
 
+        btnBack = (ImageButton) findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> updateProfile.super.onBackPressed());
 
         first_name = userData.getInstance().getUser_first();
         last_name = userData.getInstance().getUser_last();
@@ -86,5 +91,9 @@ public class updateProfile extends Activity {
         toast.show();
         // update data app wide
         userData.getInstance().updateData();
+    }
+
+    private void goBack(View v){
+        super.onBackPressed();
     }
 }
