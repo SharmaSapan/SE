@@ -19,32 +19,19 @@ import java.util.List;
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> implements Filterable {
 
     private static final String TAG = "PostAdapter";
-    //List<String> nameListFilt;
-    //List<String> nameListAll;
-    //List<String> contentListFilt;
-    //List<String> contentListAll;
-    //List<String> dateListFilt;
-    //List<String> dateListAll;
+
     List<Integer> profPic;
     List<Post> postListFilt;
     List<Post> postListAll;
+    NPOdapter.RowClickListener clickListener;
 
-    public PostAdapter(List<Post> postListFilt, List<Integer> pics) {
+    public PostAdapter(List<Post> postListFilt, List<Integer> pics, NPOdapter.RowClickListener clickListener) {
         this.postListFilt = postListFilt;
         postListAll = postListFilt;
-        //this.contentListFilt = content;
-        //contentListAll = contentListFilt;
-        //this.dateListFilt = dates;
-        //dateListAll = dateListFilt;
         this.profPic = pics;
         System.out.println(postListAll.get(0).getName());
-        /*System.out.println(postListFilt.get(1));
-        System.out.println(postListFilt.get(2));
-        System.out.println(postListFilt.get(3));
-        System.out.println(postListFilt.get(4));
-    */
+        this.clickListener = clickListener;
     }
-
 
     @NonNull
     @Override
@@ -57,11 +44,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //holder.rowCountTextView.setText(String.valueOf(position));
         holder.npoName.setText(postListFilt.get(position).getName());
         holder.postContent.setText(postListFilt.get(position).getContent());
         holder.postDate.setText(postListFilt.get(position).getDate());
         holder.npoPic.setImageResource(profPic.get(position));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                clickListener.onRowClick(postListFilt.get(position).getName());
+            }
+        });
     }
 
     @Override
@@ -81,7 +75,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
 
-            //int i=0;
             String search = charSequence.toString();
 
             if (search.isEmpty()) {
@@ -117,7 +110,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
 
 
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView npoName, postContent, postDate;
         ImageView npoPic;
@@ -130,14 +123,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
             npoPic = itemView.findViewById(R.id.NPO_pic);
             postDate = itemView.findViewById(R.id.postDate);
             cLayout = itemView.findViewById(R.id.row);
-
-            itemView.setOnClickListener(this);
-
         }
-
-        @Override
-        public void onClick(View view) {
-            //Toast.makeText(view.getContext(), postListFilt.get(getAdapterPosition()), Toast.LENGTH_SHORT).show();
-        }
+    }
+    public interface RowClickListener{
+        void onRowClick(String npo);
     }
 }

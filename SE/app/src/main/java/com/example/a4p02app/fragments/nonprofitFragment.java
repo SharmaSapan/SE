@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.a4p02app.MainActivity;
 import com.example.a4p02app.R;
 
 import android.widget.ImageView;
@@ -31,6 +33,7 @@ import java.util.Map;
 
 public class nonprofitFragment extends Fragment {
 
+    private String passedName;
     private String npName;
     private String npDesc;
     private String profilePicName;
@@ -38,7 +41,7 @@ public class nonprofitFragment extends Fragment {
     private String webURL;
     private String phoneNum;
     private String unitNum;
-    private String sName;
+    private String address;
     private String city;
     private String province;
     private String postalCode;
@@ -53,32 +56,46 @@ public class nonprofitFragment extends Fragment {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private View v;
 
+    /*public static nonprofitFragment newInstance(String param1) {
+        nonprofitFragment fragment = new nonprofitFragment();
+        Bundle args = new Bundle();
+        args.putString(param1);
+        //args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }*/
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_non_profit, container, false);
-
+        passedName = getArguments().getString("name");
+        System.out.println(passedName +"--------------------------------------------");
         //this page should be sent the id of the non-profit in the intent so that
         //the correct non-profit is displayed
-        Bundle extras = getActivity().getIntent().getExtras();
-        if (extras == null) {
+        //Bundle extras = getActivity().getIntent().getExtras();
+        if (passedName == null) {
             //if there is no nonprofit name given in the intent display a default one
             npName = "No Non-Profit Name added.";
             profilePicName = "blank_profile_picture";
             npDesc = "No description added.";
             webURL ="No website added.";
             phoneNum ="No phone number added.";
-            unitNum = "No unit number added.";
-            sName = "No street name added.";
-            city = "No city added.";
-            postalCode = "No postal code added.";
+            address = "No address added";
+            //unitNum = "No unit number added.";
+            //sName = "No street name added.";
+            //city = "No city added.";
+            //postalCode = "No postal code added.";
             emailAddress = "No email address added.";
-            getInfo();
+            getInfo(npName);
         } else {
             //get all info from the database here
-            documentID = extras.getString("NON_PROFIT_TO_DISPLAY");
+            documentID = passedName;
+            //documentID = extras.getString("NON_PROFIT_TO_DISPLAY");
             getFromDatabase();
+            // Set title bar
+            //((MainActivity) getActivity())
+                    //.setActionBarTitle(npName);
         }
 
         btnEmail = v.findViewById(R.id.email);
@@ -117,12 +134,23 @@ public class nonprofitFragment extends Fragment {
         return v;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+
+        super.onCreate(savedInstanceState);
+
+        // Set title bar
+        //((MainActivity) getActivity())
+                //.setActionBarTitle(npName);
+    }
+
     //this method gets the info from the database
     //not done yet
     //for more info on this, go to https://firebase.google.com/docs/firestore/query-data/get-data
     public void getFromDatabase() {
         //should change testNP later
-        DocumentReference docRef = db.collection("test").document(documentID);;
+        DocumentReference docRef = db.collection("nonprofits").document(documentID);;
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -131,23 +159,24 @@ public class nonprofitFragment extends Fragment {
                     assert document != null;
                     if (document.exists()) {
                         // Log.d("TAG: ", "DocumentSnapshot data: " + document.getData());
-                        npName = document.getString("if_npo_name");
-                        npDesc = document.getString("if_npo_desc");
+                        npName = passedName;
+                        System.out.println(passedName +"--------------------------------------------");
+                        npDesc = document.getString("npDescription");
                         profilePicName = document.getString("profilePic");
-                        webURL = document.getString("if_npo_url");
-
+                        webURL = document.getString("webURL");
+                        address = document.getString("address");
                         //get the map for the address values
-                        Map<String, String> addMap = (Map<String, String>) document.get("address");
-                        unitNum = addMap.get("unit_number");
-                        sName = addMap.get("street_name");
-                        city = addMap.get("city");
-                        postalCode = addMap.get("postal_code");
-                        province = addMap.get("province");
+                        //Map<String, String> addMap = (Map<String, String>) document.get("address");
+                        //unitNum = addMap.get("unit_number");
+                        //sName = addMap.get("street_name");
+                        //city = addMap.get("city");
+                        //postalCode = addMap.get("postal_code");
+                        //province = addMap.get("province");
 
-                        phoneNum = document.getString("if_npo_phone");
-                        emailAddress = document.getString("user_email");
+                        phoneNum = document.getString("phoneNumber");
+                        emailAddress = document.getString("email");
                         //update the page
-                        getInfo();
+                        getInfo(npName);
                     } else {
                         Log.d("TAG: ", "No such document");
                     }
@@ -158,18 +187,13 @@ public class nonprofitFragment extends Fragment {
         });
     }
 
-    public void fromList(){
-        if(getActivity().getIntent().hasExtra("npoName")){
-            npName = getActivity().getIntent().getStringExtra("npoName");
-        }
-    }
 
     //this method updates the page to match the non-profit's info
-    public void getInfo(){
+    public void getInfo(String npName){
         //update non-profit's name
-        TextView nonProfitName = (TextView) v.findViewById(R.id.npNameDisplay);
-        nonProfitName.setText(npName);
-
+        //TextView nonProfitName = (TextView) v.findViewById(R.id.npNameDisplay);
+        //nonProfitName.setText(npName);
+        //getActivity().getActionBar().setTitle("Fragment1");
         //update profile picture -- change this to work with image handler
         /*ImageView nonProfitPic = (ImageView) findViewById(R.id.profilePic);
         if (profilePicName.equals("") || profilePicName == null) {
@@ -185,7 +209,7 @@ public class nonprofitFragment extends Fragment {
     }
 
     private String getAddressAsString(){
-        return unitNum + " " +  sName + ", " + city + ", " + province + ", " + postalCode;
+        return address; //unitNum + " " +  sName + ", " + city + ", " + province + ", " + postalCode;
     }
 
     public void openWebsite(View view){
@@ -227,7 +251,7 @@ public class nonprofitFragment extends Fragment {
 
     //this method opens the map
     public void openMap(View view){
-        if(sName.equals("")) {
+        if(address.equals("")) {
             Toast toast = Toast.makeText(getActivity().getApplicationContext(), "This organization does not have an address available.", Toast.LENGTH_SHORT);
             toast.show();
         } else {
@@ -236,6 +260,8 @@ public class nonprofitFragment extends Fragment {
             startActivity(i);
         }
     }
+
+
 
     public void writeMessage(View view) {
         //message writing pop-up?

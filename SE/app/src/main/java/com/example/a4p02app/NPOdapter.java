@@ -26,22 +26,16 @@ public class NPOdapter extends RecyclerView.Adapter<NPOdapter.ViewHolder> implem
 
     private static final String TAG = "NPOdapter";
 
-    private android.app.FragmentManager fragmentManager;
-    private nonprofitFragment nonprofitFrag;
-
     List<String> nameListFilt;
     List<String> nameListAll;
-    List<String> contentListFilt;
-    List<String> contentListAll;
-    List<String> dateListFilt;
-    List<String> dateListAll;
+    RowClickListener clickListener;
     List<Integer> profPic;
-    //List<Integer> counter = new ArrayList<>();
 
-    public NPOdapter(List<String> nameListFilt, List<Integer> pics) {
+    public NPOdapter(List<String> nameListFilt, List<Integer> pics, RowClickListener clickListener) {
         this.nameListFilt = nameListFilt;
         nameListAll = nameListFilt;
         this.profPic = pics;
+        this.clickListener = clickListener;
     }
 
     @NonNull
@@ -55,9 +49,16 @@ public class NPOdapter extends RecyclerView.Adapter<NPOdapter.ViewHolder> implem
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //holder.rowCountTextView.setText(String.valueOf(position));
         holder.npoName.setText(nameListFilt.get(position));
         holder.npoPic.setImageResource(profPic.get(position));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                clickListener.onRowClick(nameListFilt.get(position));
+            }
+        });
     }
 
     @Override
@@ -77,7 +78,6 @@ public class NPOdapter extends RecyclerView.Adapter<NPOdapter.ViewHolder> implem
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
 
-            //int i=0;
             String search = charSequence.toString();
 
             if (search.isEmpty()) {
@@ -110,8 +110,8 @@ public class NPOdapter extends RecyclerView.Adapter<NPOdapter.ViewHolder> implem
 
 
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
+    class ViewHolder extends RecyclerView.ViewHolder  {
+//implements View.OnClickListener
         TextView npoName;
         ImageView npoPic;
         ConstraintLayout cLayout;
@@ -122,22 +122,19 @@ public class NPOdapter extends RecyclerView.Adapter<NPOdapter.ViewHolder> implem
             npoPic = itemView.findViewById(R.id.NPO_pic);
             cLayout = itemView.findViewById(R.id.row);
 
-            itemView.setOnClickListener(this);
+            //itemView.setOnClickListener(this);
 
         }
 
-        @Override
-        public void onClick(View view) {
-           /* nonprofitFrag = new nonprofitFragment();
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction
-                    .replace(R.id.fragment_container, nonprofitFrag)
-                    .addToBackStack(null)
-                    .commit();
+       // @Override
+       // public void onClick(View view) {
 
-            */
-            Toast.makeText(view.getContext(), nameListFilt.get(getAdapterPosition()), Toast.LENGTH_SHORT).show();
-        }
+
+
+          //  Toast.makeText(view.getContext(), nameListFilt.get(getAdapterPosition()), Toast.LENGTH_SHORT).show();
+        //}
+    }
+    public interface RowClickListener{
+        void onRowClick(String npo);
     }
 }

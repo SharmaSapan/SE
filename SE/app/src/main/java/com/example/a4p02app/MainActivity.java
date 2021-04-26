@@ -39,6 +39,7 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventList
 
 public class MainActivity extends AppCompatActivity {
 
+
     //Firebase
     private FirebaseUser activeUser;
     private FirebaseAuth mAuth;
@@ -47,12 +48,12 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomAppBar;
 
     //Window Fragments
-    private FragmentManager fragmentManager;
+    FragmentManager fragmentManager;
     private donationFragment donationFrag;
     private profileFragment profileFrag;
     private favouriteFragment favFrag;
     private homeFragment homeFrag;
-    private nonprofitFragment nonprofitFrag;
+    public static Fragment nonprofitFrag;
     private postFragment postFrag;
     private infoFragment infoFrag;
     private NPO_ListFragment npoListFrag;
@@ -205,5 +206,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateUser(FirebaseUser activeUser){
         this.activeUser = activeUser;
+    }
+
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
     }
 }

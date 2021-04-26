@@ -1,6 +1,7 @@
 package com.example.a4p02app.fragments;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a4p02app.LoginActivity;
+import com.example.a4p02app.MainActivity;
 import com.example.a4p02app.NPOdapter;
 import com.example.a4p02app.PostAdapter;
 import com.example.a4p02app.R;
@@ -33,7 +35,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class NPO_ListFragment extends Fragment {
+public class NPO_ListFragment extends Fragment implements NPOdapter.RowClickListener{
 
     private View npoListview;
     RecyclerView npolist;
@@ -63,7 +65,7 @@ public class NPO_ListFragment extends Fragment {
             }
         });
         npolist = npoListview.findViewById(R.id.npolist);
-        npoAdapter = new NPOdapter(NPOs, postPic);
+        npoAdapter = new NPOdapter(NPOs, postPic, this);
         npolist.setAdapter(npoAdapter);
 
         // DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(con, DividerItemDecoration.VERTICAL);
@@ -78,6 +80,10 @@ public class NPO_ListFragment extends Fragment {
         setHasOptionsMenu(true);
 
         super.onCreate(savedInstanceState);
+
+        // Set title bar
+        ((MainActivity) getActivity())
+                .setActionBarTitle("Donation Machine");
 
     }
 
@@ -119,4 +125,17 @@ public class NPO_ListFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onRowClick(String npo) {
+        //Fragment fragment = nonprofitFragment.newInstance(npo);
+
+        FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
+        Bundle args = new Bundle();
+        args.putString("name", npo);
+        MainActivity.nonprofitFrag.setArguments(args);
+        fragmentTransaction
+                .replace(R.id.fragment_container, MainActivity.nonprofitFrag)
+                .addToBackStack(null)
+                .commit();
+    }
 }

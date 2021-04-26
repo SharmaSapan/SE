@@ -1,6 +1,7 @@
 package com.example.a4p02app.fragments;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.a4p02app.ChatActivity;
 import com.example.a4p02app.LoginActivity;
 import com.example.a4p02app.MainActivity;
+import com.example.a4p02app.NPOdapter;
 import com.example.a4p02app.Post;
 import com.example.a4p02app.PostAdapter;
 import com.example.a4p02app.R;
@@ -35,7 +37,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class homeFragment extends Fragment {
+public class homeFragment extends Fragment implements NPOdapter.RowClickListener{
 
 
     private View homeview;
@@ -63,7 +65,7 @@ public class homeFragment extends Fragment {
             //adds all current field in firestore to the lists
             @Override
             public void onEvent( QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                int i=0;
+
                 postList.clear();
 
                 for(DocumentSnapshot snapshot: value){
@@ -72,40 +74,13 @@ public class homeFragment extends Fragment {
                     post.setName(snapshot.getString("pWriter"));
                     post.setDate(Objects.requireNonNull(snapshot.getTimestamp("pDate")).toDate().toString());
 
-                    //System.out.println(post.getName());
                     postList.add(post);
-                    System.out.println(postList.get(i).getName());
-                    i++;
-                    //postList.add(val.getString("pContent"));
+
                 }
-                //nameList.clear();
-               // for(DocumentSnapshot snapshot: value) {
-                    //post.setName(snapshot.getString("pWriter"));
-                    //nameList.add(snapshot.getString("pWriter"));
-                //}
-                //dateList.clear();
-                //for(DocumentSnapshot snapshot: value){
-                    //post.setDate(Objects.requireNonNull(snapshot.getTimestamp("pDate")).toDate().toString());
-                    //dateList.add(Objects.requireNonNull(snapshot.getTimestamp("pDate")).toDate().toString());
-                //}
-               // System.out.println(postList.get(0).getName());
-                //System.out.println(postList.get(1));
-                //System.out.println(postList.get(2));
-                //System.out.println(postList.get(3));
-                //System.out.println(postList.get(4));
-                plist = homeview.findViewById(R.id.plist);
-                pAdapter = new PostAdapter(postList, postPic); //change to nameList <--> manualPostList
-                plist.setAdapter(pAdapter);
+                initRecycler(postList);
+
             }
         });
-        /*System.out.println(postList.get(0).getName());
-        //System.out.println(postList.get(1));
-        //System.out.println(postList.get(2));
-        //System.out.println(postList.get(3));
-        //System.out.println(postList.get(4));
-        plist = homeview.findViewById(R.id.plist);
-        pAdapter = new PostAdapter(postList, postPic); //change to nameList <--> manualPostList
-        plist.setAdapter(pAdapter);*/
 
         // DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(con, DividerItemDecoration.VERTICAL);
         //plist.addItemDecoration(dividerItemDecoration);
@@ -114,11 +89,23 @@ public class homeFragment extends Fragment {
         return homeview;
     }
 
+    private void initRecycler(ArrayList<Post> postList) {
+        plist = homeview.findViewById(R.id.plist);
+        pAdapter = new PostAdapter(postList, postPic, this);
+        plist.setAdapter(pAdapter);
+    }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
+
+
+
+        // Set title bar
+        ((MainActivity) getActivity())
+                .setActionBarTitle("Donation Machine");
 
     }
 
@@ -158,6 +145,20 @@ if (item.getItemId() == R.id.log_out_button){
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRowClick(String npo) {
+        //Fragment fragment = nonprofitFragment.newInstance(npo);
+
+        FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
+        Bundle args = new Bundle();
+        args.putString("name", npo);
+        MainActivity.nonprofitFrag.setArguments(args);
+        fragmentTransaction
+                .replace(R.id.fragment_container, MainActivity.nonprofitFrag)
+                .addToBackStack(null)
+                .commit();
     }
 }
 
