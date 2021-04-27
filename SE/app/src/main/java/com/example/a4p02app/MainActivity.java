@@ -45,17 +45,17 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     //UI Component
-    private BottomNavigationView bottomAppBar;
+    public static BottomNavigationView bottomAppBar;
 
     //Window Fragments
-    FragmentManager fragmentManager;
-    private donationFragment donationFrag;
-    private profileFragment profileFrag;
-    private favouriteFragment favFrag;
-    private homeFragment homeFrag;
+    public FragmentManager fragmentManager;
+    private static donationFragment donationFrag;
+    private static profileFragment profileFrag;
+    private static favouriteFragment favFrag;
+    private static homeFragment homeFrag;
     public static Fragment nonprofitFrag;
-    private postFragment postFrag;
-    private infoFragment infoFrag;
+    private static postFragment postFrag;
+    private static infoFragment infoFrag;
     private NPO_ListFragment npoListFrag;
 
 
@@ -184,9 +184,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+
     @Override
     public void onBackPressed() {
-
         if (fragmentManager.getBackStackEntryCount() > 1) {
             super.onBackPressed();
             Fragment f = fragmentManager.findFragmentById(R.id.fragment_container);

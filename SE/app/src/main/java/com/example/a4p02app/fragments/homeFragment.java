@@ -135,7 +135,7 @@ public class homeFragment extends Fragment implements NPOdapter.RowClickListener
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-if (item.getItemId() == R.id.log_out_button){
+        if (item.getItemId() == R.id.log_out_button){
             getActivity().finish();
             FirebaseAuth.getInstance().signOut();
 
@@ -154,11 +154,14 @@ if (item.getItemId() == R.id.log_out_button){
         FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
         Bundle args = new Bundle();
         args.putString("name", npo);
+
         MainActivity.nonprofitFrag.setArguments(args);
         fragmentTransaction
                 .replace(R.id.fragment_container, MainActivity.nonprofitFrag)
                 .addToBackStack(null)
                 .commit();
+
+        MainActivity.bottomAppBar.getMenu().getItem(3).setChecked(true);
     }
 }
 
