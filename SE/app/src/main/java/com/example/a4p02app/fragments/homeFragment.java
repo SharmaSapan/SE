@@ -44,11 +44,8 @@ public class homeFragment extends Fragment implements NPOdapter.RowClickListener
     RecyclerView plist;
     PostAdapter pAdapter;
     ArrayList<Post> postList;
-    List<String> nameList;
     List<Integer> postPic = Arrays.asList(R.drawable.app_icon,R.drawable.blank_profile_picture,
             R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon);
-    List<String> dateList;
-    //Context con;
 
     @Nullable
     @Override
@@ -56,9 +53,7 @@ public class homeFragment extends Fragment implements NPOdapter.RowClickListener
 
         homeview = inflater.inflate(R.layout.fragment_home, container, false);
 
-       // nameList = new ArrayList<>();
         postList = new ArrayList<>();
-       // dateList = new ArrayList<>();
 
         FirebaseFirestore fsdb = FirebaseFirestore.getInstance();
         fsdb.collection("posts").addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -81,10 +76,6 @@ public class homeFragment extends Fragment implements NPOdapter.RowClickListener
 
             }
         });
-
-        // DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(con, DividerItemDecoration.VERTICAL);
-        //plist.addItemDecoration(dividerItemDecoration);
-//dividers not working in fragment
 
         return homeview;
     }

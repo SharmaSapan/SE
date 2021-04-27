@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a4p02app.LoginActivity;
 import com.example.a4p02app.MainActivity;
+import com.example.a4p02app.NPO;
 import com.example.a4p02app.NPOdapter;
 import com.example.a4p02app.PostAdapter;
 import com.example.a4p02app.R;
@@ -40,7 +41,7 @@ public class NPO_ListFragment extends Fragment implements NPOdapter.RowClickList
     private View npoListview;
     RecyclerView npolist;
     NPOdapter npoAdapter;
-    List<String> NPOs;
+    ArrayList<NPO> NPOs;
     List<Integer> postPic = Arrays.asList(R.drawable.app_icon,R.drawable.blank_profile_picture,
             R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon);
 
@@ -60,7 +61,10 @@ public class NPO_ListFragment extends Fragment implements NPOdapter.RowClickList
                 
                 NPOs.clear();
                 for(DocumentSnapshot snapshot: value) {
-                    NPOs.add(snapshot.getId());
+                    NPO npo = new NPO();
+                    npo.setName(snapshot.getId());
+                    //npo.setName(snapshot.getString("pWriter")); might need if name becomes field
+                    NPOs.add(npo);
                 }
             }
         });
@@ -68,9 +72,6 @@ public class NPO_ListFragment extends Fragment implements NPOdapter.RowClickList
         npoAdapter = new NPOdapter(NPOs, postPic, this);
         npolist.setAdapter(npoAdapter);
 
-        // DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(con, DividerItemDecoration.VERTICAL);
-        //plist.addItemDecoration(dividerItemDecoration);
-//dividers not working in fragment, to figure out
 
         return npoListview;
     }

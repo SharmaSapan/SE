@@ -29,7 +29,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
         this.postListFilt = postListFilt;
         postListAll = postListFilt;
         this.profPic = pics;
-        System.out.println(postListAll.get(0).getName());
+        //System.out.println(postListAll.get(0).getName());
         this.clickListener = clickListener;
     }
 

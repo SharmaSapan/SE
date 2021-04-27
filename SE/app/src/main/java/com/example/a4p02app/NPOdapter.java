@@ -1,7 +1,5 @@
 package com.example.a4p02app;
 
-import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,15 +7,10 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.a4p02app.fragments.nonprofitFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,14 +19,14 @@ public class NPOdapter extends RecyclerView.Adapter<NPOdapter.ViewHolder> implem
 
     private static final String TAG = "NPOdapter";
 
-    List<String> nameListFilt;
-    List<String> nameListAll;
+    List<NPO> npoListFilt;
+    List<NPO> npoListAll;
     RowClickListener clickListener;
     List<Integer> profPic;
 
-    public NPOdapter(List<String> nameListFilt, List<Integer> pics, RowClickListener clickListener) {
-        this.nameListFilt = nameListFilt;
-        nameListAll = nameListFilt;
+    public NPOdapter(List<NPO> npoListFilt, List<Integer> pics, RowClickListener clickListener) {
+        this.npoListFilt = npoListFilt;
+        npoListAll = npoListFilt;
         this.profPic = pics;
         this.clickListener = clickListener;
     }
@@ -49,21 +42,21 @@ public class NPOdapter extends RecyclerView.Adapter<NPOdapter.ViewHolder> implem
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.npoName.setText(nameListFilt.get(position));
+        holder.npoName.setText(npoListFilt.get(position).getName());
         holder.npoPic.setImageResource(profPic.get(position));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                clickListener.onRowClick(nameListFilt.get(position));
+                clickListener.onRowClick(npoListFilt.get(position).getName());
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return nameListFilt.size();
+        return npoListFilt.size();
     }
 
     @Override
@@ -82,20 +75,20 @@ public class NPOdapter extends RecyclerView.Adapter<NPOdapter.ViewHolder> implem
 
             if (search.isEmpty()) {
 
-                nameListFilt = nameListAll;
+                npoListFilt = npoListAll;
             } else {
-                List<String> filteredNameList = new ArrayList<>();
-                for (String nposearch: nameListAll) {
-                    if (nposearch.toLowerCase().contains(search.toLowerCase())) {
+                List<NPO> filteredNameList = new ArrayList<>();
+                for (NPO nposearch: npoListAll) {
+                    if (nposearch.getName().toLowerCase().contains(search.toLowerCase())) {
                         filteredNameList.add(nposearch);
                     }
                 }
-                nameListFilt = filteredNameList;
+                npoListFilt = filteredNameList;
 
             }
             FilterResults filterResults = new FilterResults();
 
-            filterResults.values = nameListFilt;
+            filterResults.values = npoListFilt;
             return filterResults;
         }
 
@@ -103,7 +96,7 @@ public class NPOdapter extends RecyclerView.Adapter<NPOdapter.ViewHolder> implem
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
 
-            nameListFilt = (ArrayList<String>) filterResults.values;
+            npoListFilt = (ArrayList<NPO>) filterResults.values;
             notifyDataSetChanged();
         }
     };

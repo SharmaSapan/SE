@@ -35,7 +35,7 @@ public class NotificationTest {
         // create multiple dummy users for testing in database with tokens of my virtual devices
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference dummyUsers = db.collection("NotificationTest");
-        // create dummy NPO for posting
+        // create dummy com.example.a4p02app.NPO for posting
 
         // NOTE: THIS WAS HARD CODED FOR TESTING, WILL INTEGRATE WITH PROFILE + DB IN THE FUTURE
         // will use new singleton class to access user data ex.// userData.getInstance().getPhone();
@@ -187,7 +187,7 @@ public class NotificationTest {
     }
 
     /**
-     * Verifies user is navigated to NPO page when urgent need notification is clicked.
+     * Verifies user is navigated to com.example.a4p02app.NPO page when urgent need notification is clicked.
      */
     @Test
     public void onInteractUrgentNeed_returnsTrue(){
@@ -202,13 +202,13 @@ public class NotificationTest {
 
     // perhaps not necessary, depends on how NPOs want to interact with the app.
     /**
-     * Verifies NPO is navigated to page when new donation response notification is clicked.
+     * Verifies com.example.a4p02app.NPO is navigated to page when new donation response notification is clicked.
      */
     @Test
     public void onInteractNPONewMessage_returnsTrue(){
     }
 
-    //TODO: ensure all test cases covered with all types of potential NPO and Donor interactions in current iteration.
+    //TODO: ensure all test cases covered with all types of potential com.example.a4p02app.NPO and Donor interactions in current iteration.
 
     /**
      * Verifies single notification is removed after user interaction.
