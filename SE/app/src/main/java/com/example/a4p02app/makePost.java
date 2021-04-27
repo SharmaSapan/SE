@@ -1,29 +1,32 @@
 package com.example.a4p02app;
 
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.firestore.ServerTimestamp;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Date;
+import java.util.Calendar;
+
 
 public class makePost extends AppCompatActivity {
 
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageRef = storage.getReference();
     final String UID = userData.getInstance().getUID();; //gets current users' id
-
 
     Button Post;
     EditText author_id;
@@ -32,9 +35,9 @@ public class makePost extends AppCompatActivity {
     EditText item;
     EditText location_geostamp;
     EditText post_type;
-    EditText post_date;
     EditText tags;
     EditText title;
+    TextView post_date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +50,16 @@ public class makePost extends AppCompatActivity {
         // generate geo stamp from the user provided location
         // get time from system post_date
         tags = (EditText) findViewById(R.id.Tags);
-        Post = (Button) findViewById(R.id.Post);
 
+        post_date = findViewById(R.id.PostDate);
+        Calendar calender;
+        Date post_date = Calendar.getInstance().getTime();
+        String dateAdjusted = DateFormat.getInstance().format(post_date); //formatted date to be displayed as eg "December 15 2000"
+        Log.d("myLOG", post_date.toString());
+        Log.d("myLOG", post_date.toString());
+
+
+        Post = (Button) findViewById(R.id.Post);
         Post.setOnClickListener(new View.OnClickListener() {
 
 
@@ -57,7 +68,7 @@ public class makePost extends AppCompatActivity {
                 //if statement to ensure none of the fields are empty
                 if (author_id.getText().toString().isEmpty() || description.getText().toString().isEmpty() || dropoff_location.getText().toString().isEmpty()
                         || item.getText().toString().isEmpty() || location_geostamp.getText().toString().isEmpty() || post_type.getText().toString().isEmpty() ||
-                        post_date.getText().toString().isEmpty() || tags.getText().toString().isEmpty() || title.getText().toString().isEmpty()) {
+                        tags.getText().toString().isEmpty() || title.getText().toString().isEmpty()) {
 
                     Toast.makeText(getApplicationContext(), "Data Missing", Toast.LENGTH_SHORT).show();
 
@@ -72,7 +83,7 @@ public class makePost extends AppCompatActivity {
                     post_data.put("dropoff_location", dropoff_location.getText().toString()); //
                     post_data.put("item", item.getText().toString());
                     post_data.put("location_geostamp", location_geostamp.getText().toString()); //
-                    post_data.put("post_date", post_date.getText().toString()); //
+                    // post_data.put("post_date", post_date.getDate().toString());
                     post_data.put("post_type", userData.getInstance().getUser_privilege());
                     post_data.put("title", title.getText().toString());
                     post_data.put("tags", tags.getText().toString());
@@ -84,8 +95,10 @@ public class makePost extends AppCompatActivity {
 
                 }
             }
+
         });
-    }
+        }
+
 
     public void writePost(View view) {
     }
