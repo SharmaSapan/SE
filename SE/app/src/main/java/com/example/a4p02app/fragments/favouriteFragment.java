@@ -12,22 +12,13 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a4p02app.LoginActivity;
-import com.example.a4p02app.MainActivity;
-import com.example.a4p02app.NPOAdapter;
-import com.example.a4p02app.NPOlist;
+import com.example.a4p02app.NPOdapter;
 import com.example.a4p02app.R;
-import com.example.a4p02app.donations;
-import com.example.a4p02app.makePost;
-import com.example.a4p02app.messages;
-import com.example.a4p02app.nonProfit;
-import com.example.a4p02app.profile;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -93,11 +84,10 @@ public class favouriteFragment extends Fragment {
                     }
                 });
         fList = v.findViewById(R.id.flist);
-        NPOAdapter myAdapter = new NPOAdapter(getActivity(), nameList, postPic);
+        //NPOdapter myAdapter = new NPOdapter(getActivity(), nameList, postPic);
 
-        fList.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
         fList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        fList.setAdapter(myAdapter);
+        //fList.setAdapter(myAdapter);
     }
 
 

@@ -27,7 +27,7 @@ public class userData {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private final String UID = user.getUid();
-    DocumentReference userDocument = db.collection("test").document(UID);
+    DocumentReference userDocument = db.collection("accounts").document(UID);
 
     private String address_city;
     private String address_postal;

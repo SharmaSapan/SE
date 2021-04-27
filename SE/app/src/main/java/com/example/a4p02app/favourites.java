@@ -88,11 +88,11 @@ public class favourites extends AppCompatActivity {
             }
         });
         fList = findViewById(R.id.flist);
-        NPOAdapter myAdapter = new NPOAdapter(this, nameList, postPic);
+        //NPOAdapter myAdapter = new NPOAdapter(this, nameList, postPic);
 
         fList.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
         fList.setLayoutManager(new LinearLayoutManager(this));
-        fList.setAdapter(myAdapter);
+        //fList.setAdapter(myAdapter);
     }
 
     @Override

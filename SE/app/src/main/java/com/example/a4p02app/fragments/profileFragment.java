@@ -1,6 +1,7 @@
 package com.example.a4p02app.fragments;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
@@ -12,6 +13,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+
+import com.example.a4p02app.MainActivity;
 import com.example.a4p02app.R;
 import com.example.a4p02app.donations;
 import com.example.a4p02app.messages;
@@ -74,6 +77,8 @@ public class profileFragment extends Fragment {
                 postalCode+"\n"+
                 emailAddress;
 
+        profilePart2.setText(combine);
+
         btnEdit = (Button) v.findViewById(R.id.btnEdit);
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,8 +92,16 @@ public class profileFragment extends Fragment {
         btnDonations.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), donations.class);
-                startActivity(intent);
+                String uid = userData.getInstance().getUID();
+                FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
+                Bundle args = new Bundle();
+                args.putString("UserID", uid);
+                MainActivity.donationFrag.setArguments(args);
+                fragmentTransaction
+                        .replace(R.id.fragment_container, MainActivity.nonprofitFrag)
+                        .addToBackStack(null)
+                        .commit();
+
             }
         });
 

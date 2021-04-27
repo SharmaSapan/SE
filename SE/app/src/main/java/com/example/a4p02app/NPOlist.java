@@ -55,11 +55,11 @@ public class NPOlist extends AppCompatActivity {
         });
 
         npoList = findViewById(R.id.nporecycler);
-        NPOAdapter myAdapter = new NPOAdapter(this, nameList, postPic);
+        //NPOAdapter myAdapter = new NPOAdapter(this, nameList, postPic);
 
         npoList.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         npoList.setLayoutManager(new LinearLayoutManager(this));
-        npoList.setAdapter(myAdapter);
+        //npoList.setAdapter(myAdapter);
     }
 
     @Override

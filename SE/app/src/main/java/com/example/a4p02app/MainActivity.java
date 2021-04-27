@@ -46,10 +46,11 @@ public class MainActivity extends AppCompatActivity {
 
     //UI Component
     public static BottomNavigationView bottomAppBar;
+    //public androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
 
     //Window Fragments
     public FragmentManager fragmentManager;
-    private static donationFragment donationFrag;
+    public static donationFragment donationFrag;
     private static profileFragment profileFrag;
     private static favouriteFragment favFrag;
     private static homeFragment homeFrag;
@@ -154,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
                         replace(R.id.fragment_container, profileFrag)
                         .addToBackStack("profile")
                         .commit();
+                //setActionBar(INVISIB);
                 break;
 
             case 3:

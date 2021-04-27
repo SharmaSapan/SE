@@ -11,6 +11,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -55,6 +57,7 @@ public class nonprofitFragment extends Fragment {
     //get an instance of Firebase so that the firestore database can be used
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private View v;
+
 
     /*public static nonprofitFragment newInstance(String param1) {
         nonprofitFragment fragment = new nonprofitFragment();
@@ -140,6 +143,8 @@ public class nonprofitFragment extends Fragment {
 
         super.onCreate(savedInstanceState);
 
+        //androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
+        //actionBar.setTitle("YOUR ACTIONBAR's NEW TITLE HERE");
         // Set title bar
         //((MainActivity) getActivity())
                 //.setActionBarTitle(npName);
@@ -260,8 +265,6 @@ public class nonprofitFragment extends Fragment {
             startActivity(i);
         }
     }
-
-
 
     public void writeMessage(View view) {
         //message writing pop-up?
