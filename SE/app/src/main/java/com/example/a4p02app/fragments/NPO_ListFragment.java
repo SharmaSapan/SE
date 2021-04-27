@@ -20,10 +20,7 @@ import com.example.a4p02app.LoginActivity;
 import com.example.a4p02app.MainActivity;
 import com.example.a4p02app.NPO;
 import com.example.a4p02app.NPOdapter;
-import com.example.a4p02app.PostAdapter;
 import com.example.a4p02app.R;
-import com.example.a4p02app.donations;
-import com.example.a4p02app.messages;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -34,7 +31,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class NPO_ListFragment extends Fragment implements NPOdapter.RowClickListener{
 

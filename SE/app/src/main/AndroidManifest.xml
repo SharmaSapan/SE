@@ -11,7 +11,6 @@
         android:theme="@style/Theme.4P02App">
         <activity android:name=".nonProfit" />
         <activity android:name=".makePost" />
-        <activity android:name=".donations" />
         <activity android:name=".messages" />
         <activity android:name=".favourites" />
         <activity android:name=".profile" />

@@ -1,7 +1,6 @@
 package com.example.a4p02app.fragments;
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,16 +10,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.a4p02app.MainActivity;
-import com.example.a4p02app.NPOlist;
 import com.example.a4p02app.R;
-import com.example.a4p02app.donations;
-import com.example.a4p02app.favourites;
-import com.example.a4p02app.messages;
-import com.example.a4p02app.nonProfit;
-import com.example.a4p02app.profile;
 import com.example.a4p02app.userData;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.storage.FirebaseStorage;

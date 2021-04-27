@@ -3,20 +3,19 @@ package com.example.a4p02app.fragments;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 import com.example.a4p02app.MainActivity;
 import com.example.a4p02app.R;
-import com.example.a4p02app.donations;
 import com.example.a4p02app.messages;
 import com.example.a4p02app.updateProfile;
 import com.example.a4p02app.userData;
@@ -92,25 +91,25 @@ public class profileFragment extends Fragment {
         btnDonations.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String uid = userData.getInstance().getUID();
-                FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
-                Bundle args = new Bundle();
-                args.putString("UserID", uid);
-                MainActivity.donationFrag.setArguments(args);
-                fragmentTransaction
-                        .replace(R.id.fragment_container, MainActivity.nonprofitFrag)
-                        .addToBackStack(null)
-                        .commit();
-
+                Toast.makeText(v.getContext(), "For Future Implementation", Toast.LENGTH_SHORT).show();
             }
         });
+
 
         btnMessages = v.findViewById(R.id.messages);
         btnMessages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), messages.class);
-                startActivity(intent);
+                String uid = userData.getInstance().getUID();
+                FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
+                Bundle args = new Bundle();
+                args.putString("UserID", uid);
+                //MainActivity.messages.setArguments(args);
+                fragmentTransaction
+                        .replace(R.id.fragment_container, MainActivity.nonprofitFrag)
+                        .addToBackStack(null)
+                        .commit();
+
             }
         });
 

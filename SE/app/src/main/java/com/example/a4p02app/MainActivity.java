@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
 
     //Window Fragments
     public FragmentManager fragmentManager;
-    public static donationFragment donationFrag;
     private static profileFragment profileFrag;
     private static favouriteFragment favFrag;
     private static homeFragment homeFrag;
@@ -104,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
         //topAppBar = findViewById(R.id.topAppBar);
 
         //Fragments
-        donationFrag = new donationFragment();
         profileFrag = new profileFragment();
         favFrag = new favouriteFragment();
         homeFrag = new homeFragment();

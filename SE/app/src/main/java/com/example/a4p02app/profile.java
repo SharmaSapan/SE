@@ -61,10 +61,10 @@ public class profile extends AppCompatActivity {
         //go back to the previous activity
         finish();
     }
-    public void goDonos(View view) {//will go to users completed donations
-        Intent intent = new Intent(this, donations.class);
-        startActivity(intent);
-    }
+    //public void goDonos(View view) {//will go to users completed donations
+       // Intent intent = new Intent(this, donations.class);
+        //startActivity(intent);
+    //}
     public void goMessages(View view) {//will go to users sent messages
         Intent intent = new Intent(this, messages.class);
         startActivity(intent);
