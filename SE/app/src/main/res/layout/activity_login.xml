@@ -1,21 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/topAppBar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"></androidx.appcompat.widget.Toolbar>
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -27,27 +16,27 @@
             android:layout_width="200dp"
             android:layout_height="126dp"
             android:layout_marginTop="12dp"
+            android:layout_marginBottom="15dp"
             android:contentDescription="@string/todo"
             android:src="@drawable/app_icon"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+            app:layout_constraintBottom_toTopOf="@id/textInputLayout" />
 
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="35dp"
             android:fontFamily="@font/raleway_bold"
-            android:text="Log In"
+            android:text="@string/title_login"
             android:textColor="@color/dark_blue"
             android:textSize="30sp"
+            android:layout_marginBottom="15dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="@id/imageView" />
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/btnGoogleSignIn"
@@ -56,6 +45,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_marginBottom="32dp"
+            android:layout_marginTop="20dp"
             android:scaleX=".85"
             android:scaleY=".85"
             app:layout_constraintBottom_toTopOf="@+id/txtSignup"
@@ -72,18 +62,16 @@
             android:text="@string/login"
             android:textColor="@color/white"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.708" />
+            app:layout_constraintTop_toBottomOf="@id/textInputLayout2" />
 
         <TextView
             android:id="@+id/txtSignup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="25dp"
             android:fontFamily="@font/raleway_bold"
             android:text="@string/create_an_account"
             android:textAllCaps="false"
@@ -91,24 +79,22 @@
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnLogIn" />
+            app:layout_constraintTop_toBottomOf="@id/btnGoogleSignIn" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
             android:layout_width="350dp"
             android:layout_height="60dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toTopOf="@id/textInputLayout2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.508"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.421">
+            app:layout_constraintStart_toStartOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email" />
+                android:hint="@string/email" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -119,13 +105,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.535">
+            android:layout_marginTop="60dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 

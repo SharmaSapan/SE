@@ -16,8 +16,10 @@
         <activity android:name=".favourites" />
         <activity android:name=".profile" />
         <activity android:name=".updateProfile" />
-        <activity android:name="com.example.a4p02app.LoginActivity"/>
-        <activity android:name="com.example.a4p02app.SignUpActivity"/>
+        <activity android:name="com.example.a4p02app.LoginActivity"
+            android:theme="@style/Theme.4P02App.NoActionBar"/>
+        <activity android:name="com.example.a4p02app.SignUpActivity"
+            android:theme="@style/Theme.4P02App.NoActionBar"/>
         <activity android:name="com.example.a4p02app.MainActivity"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>

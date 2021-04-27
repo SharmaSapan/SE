@@ -20,4 +20,8 @@
         <item name ="android:textColor">@color/dark_blue</item>
         <item name="android:fontFamily">@font/raleway_bold</item>
     </style>
+    <style name = "Theme.4P02App.NoActionBar" >
+        <item name = "windowActionBar">false</item>
+        <item name = "windowNoTitle">true</item>
+    </style>
 </resources>

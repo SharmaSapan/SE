@@ -43,4 +43,7 @@
     <string name="business">Business</string>
     <string name="write_a_post">Post</string>
     <string name="sign_up">Sign Up</string>
+    <string name="title_login">Log In</string>
+    <string name="conf_pass">Confirm Password</string>
+    <string name="register">Register</string>
 </resources>

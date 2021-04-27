@@ -8,15 +8,6 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/topAppBar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
@@ -24,78 +15,75 @@
         app:layout_anchor="@+id/constraintLayout2"
         app:layout_anchorGravity="center">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout3"
-            android:layout_width="350dp"
-            android:layout_height="60dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txtPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Password"
-                android:inputType="textPassword" />
-        </com.google.android.material.textfield.TextInputLayout>
-
         <Button
             android:id="@+id/btnSignUp"
             android:layout_width="260dp"
             android:layout_height="51dp"
-            android:layout_marginBottom="80dp"
+            android:layout_marginTop="25dp"
             android:background="@color/teal_700"
             android:fontFamily="@font/raleway_bold"
             android:text="@string/sign_up"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rdoGroup"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="64dp"
+            android:layout_marginBottom="10dp"
             android:fontFamily="@font/raleway_bold"
-            android:text="Register"
+            android:text="@string/register"
             android:textColor="@color/dark_blue"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.484"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="@id/imageView2"
+            />
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="160dp"
             android:layout_height="129dp"
-            android:layout_marginTop="20dp"
             android:src="@drawable/app_icon"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+            android:layout_marginBottom="15dp"
+            app:layout_constraintBottom_toTopOf="@id/textInputLayer2"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayer2"
             android:layout_width="350dp"
             android:layout_height="60dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.399">
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toTopOf="@id/textInputLayout3"
+            >
 
-            <com.google.android.material.textfield.TextInputEditText
+        <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email" />
+                android:hint="@string/email" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout3"
+            android:layout_width="350dp"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toTopOf="@id/textInputLayout4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="5dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -106,13 +94,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.605">
+            android:layout_marginTop="150dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtConfirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Confirm Password"
+                android:hint="@string/conf_pass"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -120,11 +108,11 @@
             android:id="@+id/rdoGroup"
             android:layout_width="188dp"
             android:layout_height="61dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayout4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.708">
+            android:layout_marginTop="25dp"
+            >
 
             <RadioButton
                 android:id="@+id/rdoPersonal"
@@ -152,12 +140,11 @@
             android:text="@string/account_type"
             android:textColor="#A0A0A0"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.151"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayout4"
+            app:layout_constraintEnd_toStartOf="@id/rdoGroup"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.693" />
+            android:layout_marginTop="25dp"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
