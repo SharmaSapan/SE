@@ -5,67 +5,54 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/light_orange">
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/topAppBar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/topAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_anchor="@+id/constraintLayout2"
+        app:layout_anchorGravity="center">
 
-        <EditText
-            android:id="@+id/txtConfirm"
-            android:layout_width="282dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:ems="10"
-            android:hint="Confirm Password"
-            android:background="@color/light_blue"
-            android:textColorHint="@color/dark_blue"
-            android:fontFamily="@font/raleway_bold"
-            android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.503"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
-
-        <EditText
-            android:id="@+id/txtPassword"
-            android:layout_width="282dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:ems="10"
-            android:hint="Password"
-            android:textColorHint="@color/dark_blue"
-            android:background="@color/light_blue"
-            android:inputType="textPassword"
-            android:fontFamily="@font/raleway_bold"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout3"
+            android:layout_width="350dp"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btnSignUp"
             android:layout_width="260dp"
             android:layout_height="51dp"
-            android:layout_marginBottom="108dp"
-            android:text="@string/sign_up"
+            android:layout_marginBottom="80dp"
+            android:background="@color/teal_700"
             android:fontFamily="@font/raleway_bold"
-            android:textColor="@color/light_blue"
-            android:background="@color/dark_blue"
-            app:layout_constraintTop_toBottomOf="@id/accountSpinner"
-            android:layout_marginTop="15dp"
+            android:text="@string/sign_up"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
@@ -74,30 +61,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="64dp"
-            android:text="@string/join"
+            android:fontFamily="@font/raleway_bold"
+            android:text="Register"
+            android:textColor="@color/dark_blue"
             android:textSize="30sp"
-            android:textColor="@color/dark_orange"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.484"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/txtEmail"
-            android:layout_width="282dp"
-            android:layout_height="44dp"
-            android:layout_marginTop="32dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/email"
-            android:textColorHint="@color/dark_blue"
-            android:background="@color/light_blue"
-            android:inputType="textPersonName"
-            android:fontFamily="@font/raleway_bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.503"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         <ImageView
             android:id="@+id/imageView2"
@@ -110,36 +81,83 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
-        <Spinner
-            android:id="@+id/accountSpinner"
-            android:layout_width="133dp"
-            android:layout_height="29dp"
-            android:spinnerMode="dropdown"
-            android:background="@color/light_blue"
-            android:outlineSpotShadowColor="@color/white"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayer2"
+            android:layout_width="350dp"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="12dp"
-            app:layout_constraintHorizontal_bias="0.737"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtConfirm"
-            app:layout_constraintVertical_bias="0.491"
-            />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.399">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout4"
+            android:layout_width="350dp"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.605">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtConfirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Confirm Password"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <RadioGroup
+            android:id="@+id/rdoGroup"
+            android:layout_width="188dp"
+            android:layout_height="61dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.708">
+
+            <RadioButton
+                android:id="@+id/rdoPersonal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/personal"
+                android:textColor="#9E9E9E"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/rdoBusiness"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/business"
+                android:textColor="#A5A5A5"
+                android:textSize="18sp"
+                tools:layout_editor_absoluteX="106dp"
+                tools:layout_editor_absoluteY="531dp" />
+        </RadioGroup>
 
         <TextView
-            android:id="@+id/txtAccountType"
+            android:id="@+id/textView2"
             android:layout_width="121dp"
-            android:layout_height="28dp"
+            android:layout_height="29dp"
             android:text="@string/account_type"
+            android:textColor="#A0A0A0"
             android:textSize="18sp"
-            android:textColor="@color/dark_blue"
-            android:background="@color/light_blue"
-            android:fontFamily="@font/raleway_bold"
-            android:layout_marginTop="12dp"
-            app:layout_constraintEnd_toStartOf="@+id/accountSpinner"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.151"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtConfirm"
-            app:layout_constraintVertical_bias="0.491" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.693" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

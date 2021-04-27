@@ -26,7 +26,7 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="create_an_account">No Account? Click Here!</string>
-    <string name="account_type">Account Type:</string>
+    <string name="account_type">Account Type</string>
     <string name="home">Home</string>
     <string name="info">Info</string>
     <string name="favourites">Favourites</string>
@@ -39,7 +39,8 @@
     <string name="listing">Listing</string>
     <string name="NPOlisting">Non-Profit Listing</string>
     <string name="blank"> </string>
-
+    <string name="personal">Personal</string>
+    <string name="business">Business</string>
     <string name="write_a_post">Post</string>
     <string name="sign_up">Sign Up</string>
 </resources>

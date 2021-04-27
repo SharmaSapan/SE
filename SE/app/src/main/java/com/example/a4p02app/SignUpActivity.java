@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,8 +32,9 @@ public class SignUpActivity extends AppCompatActivity {
     private TextView txtPassword;
     private TextView txtConfirm;
     private Button btnSignup;
-    private String[] accountTypes = {"Personal", "Business"};
-    private Spinner accountSpinner;
+    private RadioGroup rdoGroup;
+    private RadioButton rdoPersonal;
+    private RadioButton rdoBusiness;
 
 
     @Override
@@ -41,14 +44,14 @@ public class SignUpActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        accountSpinner = findViewById(R.id.accountSpinner);
         btnSignup = findViewById(R.id.btnSignUp);
         txtEmail = findViewById(R.id.txtEmail);
         txtPassword = findViewById(R.id.txtPassword);
         txtConfirm = findViewById(R.id.txtConfirm);
+        rdoGroup = findViewById(R.id.rdoGroup);
+        rdoPersonal = findViewById(R.id.rdoPersonal);
+        rdoBusiness = findViewById(R.id.rdoBusiness);
 
-        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, accountTypes);
-        accountSpinner.setAdapter(adapter);
 
         btnSignup.setOnClickListener(v -> {
             try {
@@ -58,6 +61,7 @@ public class SignUpActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         });
+        rdoPersonal.setChecked(true);
     }
 
     /**
@@ -77,8 +81,14 @@ public class SignUpActivity extends AppCompatActivity {
                         .addOnCompleteListener(this, task -> {
                             if (task.isSuccessful()) {
                                 Log.d(TAG, "createUserWithEmail:success");
+
+                                int accountType = 0;
+                                if (!rdoPersonal.isChecked()){
+                                    accountType = 1;
+                                }
+
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                Firestore.addAccount(db, email, user, accountSpinner.getSelectedItemPosition());
+                                Firestore.addAccount(db, email, user, accountType);
 
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);

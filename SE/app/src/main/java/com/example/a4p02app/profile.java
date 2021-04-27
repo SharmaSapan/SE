@@ -40,6 +40,8 @@ public class profile extends AppCompatActivity {
         postalCode = userData.getInstance().getAddress_postal();
         emailAddress = userData.getInstance().getEmail();
 
+        System.out.println(first_name);
+
         TextView profilePart2 = (TextView) findViewById(R.id.profilePart2);
         String combine = first_name +"\n"+
                 last_name+"\n"+
