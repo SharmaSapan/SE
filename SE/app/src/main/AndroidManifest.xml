@@ -9,17 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.4P02App">
+        <activity android:name=".GetMoreInfo"></activity>
         <activity android:name=".nonProfit" />
         <activity android:name=".makePost" />
         <activity android:name=".messages" />
         <activity android:name=".favourites" />
         <activity android:name=".profile" />
         <activity android:name=".updateProfile" />
-        <activity android:name="com.example.a4p02app.LoginActivity"
-            android:theme="@style/Theme.4P02App.NoActionBar"/>
-        <activity android:name="com.example.a4p02app.SignUpActivity"
-            android:theme="@style/Theme.4P02App.NoActionBar"/>
-        <activity android:name="com.example.a4p02app.MainActivity"
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/Theme.4P02App.NoActionBar" />
+        <activity
+            android:name=".SignUpActivity"
+            android:theme="@style/Theme.4P02App.NoActionBar" />
+        <activity
+            android:name=".MainActivity"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

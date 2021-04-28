@@ -11,9 +11,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.a4p02app.data.Firestore;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -21,6 +24,9 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -88,9 +94,30 @@ public class SignUpActivity extends AppCompatActivity {
                                 }
 
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                Firestore.addAccount(db, email, user, accountType);
+                                String UID = user.getUid();
+                                Map<String, Object> deets = new HashMap<>();
+                                deets.put("user_email", email);
+                                if (accountType == 0)
+                                    deets.put("user_privilege", "donor");
+                                if (accountType == 1)
+                                    deets.put("user_privilege", "npo");
+                                // create an accounts document with userID as unique id
+                                db.collection("accounts").document(UID)
+                                        .set(deets)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Log.d(TAG, "DocumentSnapshot successfully written!");
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.w(TAG, "Error writing document", e);
+                                            }
+                                        });
 
-                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                Intent intent = new Intent(getApplicationContext(), GetMoreInfo.class);
                                 startActivity(intent);
 
                             } else {
