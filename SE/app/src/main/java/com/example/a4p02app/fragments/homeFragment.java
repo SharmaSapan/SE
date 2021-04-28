@@ -57,6 +57,7 @@ public class homeFragment extends Fragment implements NPOdapter.RowClickListener
 
         FirebaseFirestore fsdb = FirebaseFirestore.getInstance();
         fsdb.collection("posts").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            //collectionGroup("post")
             //adds all current field in firestore to the lists
             @Override
             public void onEvent( QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -66,8 +67,8 @@ public class homeFragment extends Fragment implements NPOdapter.RowClickListener
                     Post post = new Post();
                     post.setContent(snapshot.getString("pContent"));
                     post.setName(snapshot.getString("pWriter"));
-                    post.setDate(Objects.requireNonNull(snapshot.getTimestamp("pDate")).toDate().toString());
-
+                    post.setDate((snapshot.getTimestamp("pDate")).toDate().toString());
+                    //Objects.requireNonNull
                     postList.add(post);
 
                 }
@@ -149,7 +150,11 @@ public class homeFragment extends Fragment implements NPOdapter.RowClickListener
                 .addToBackStack(null)
                 .commit();
 
-        MainActivity.bottomAppBar.getMenu().getItem(3).setChecked(true);
+        //MainActivity.bottomAppBar.getMenu().getItem(2).setChecked(true);
+        //MainActivity.bottomAppBar.getMenu().getItem(1).setChecked(false);
+        //MainActivity.bottomAppBar.getMenu().getItem(2).setChecked(false);
+        //MainActivity.bottomAppBar.getMenu().getItem(3).setChecked(false);
+        //MainActivity.bottomAppBar.getMenu().getItem(4).setChecked(false);
     }
 }
 

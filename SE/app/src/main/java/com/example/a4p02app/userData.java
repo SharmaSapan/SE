@@ -26,7 +26,7 @@ public class userData {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    private final String UID = user.getUid();
+    private String UID = user.getUid();
     DocumentReference userDocument = db.collection("accounts").document(UID);
 
     private String address_city;
@@ -62,13 +62,13 @@ public class userData {
                     address_street = snapshot.getString("address_street");
                     address_unit = snapshot.getString("address_unit");
                     email = snapshot.getString("user_email");
-                    phone = snapshot.getString("user_phone");
-                    user_first = snapshot.getString("user_first");
-                    user_last = snapshot.getString("user_last");
+                    phone = snapshot.getString("phoneNumber");
+                    user_first = snapshot.getString("user_first_name");
+                    user_last = snapshot.getString("user_last_name");
                     user_privilege = snapshot.getString("user_privilege");
-                    npo_desc = snapshot.getString("npo_desc");
-                    npo_name = snapshot.getString("npo_name");
-                    npo_url = snapshot.getString("npo_url");
+                    npo_desc = snapshot.getString("if_npo_desc");
+                    npo_name = snapshot.getString("if_npo_name");
+                    npo_url = snapshot.getString("if_npo_url");
                 }
                 else System.out.println("No document at user data fetch");
             }
@@ -86,13 +86,13 @@ public class userData {
                     address_street = snapshot.getString("address_street");
                     address_unit = snapshot.getString("address_unit");
                     email = snapshot.getString("user_email");
-                    phone = snapshot.getString("user_phone");
-                    user_first = snapshot.getString("user_first");
-                    user_last = snapshot.getString("user_last");
+                    phone = snapshot.getString("phoneNumber");
+                    user_first = snapshot.getString("user_first_name");
+                    user_last = snapshot.getString("user_last_name");
                     user_privilege = snapshot.getString("user_privilege");
-                    npo_desc = snapshot.getString("npo_desc");
-                    npo_name = snapshot.getString("npo_name");
-                    npo_url = snapshot.getString("npo_url");
+                    npo_desc = snapshot.getString("if_npo_desc");
+                    npo_name = snapshot.getString("if_npo_name");
+                    npo_url = snapshot.getString("if_npo_url");
                 }
                 else System.out.println("No document at user data fetch");
             }
@@ -156,7 +156,7 @@ public class userData {
     }
 
     public void setEmail(String email) {
-        userDocument.update("email", email);
+        userDocument.update("user_email", email);
     }
 
     public String getPhone() {
@@ -164,7 +164,7 @@ public class userData {
     }
 
     public void setPhone(String phone) {
-        userDocument.update("phone", phone);
+        userDocument.update("phoneNumber", phone);
     }
 
     public String getUser_first() {
@@ -172,7 +172,7 @@ public class userData {
     }
 
     public void setUser_first(String user_first) {
-        userDocument.update("user_first", user_first);
+        userDocument.update("user_first_name", user_first);
     }
 
     public String getUser_last() {
@@ -180,7 +180,7 @@ public class userData {
     }
 
     public void setUser_last(String user_last) {
-        userDocument.update("user_last", user_last);
+        userDocument.update("user_last_name", user_last);
     }
 
     public String getUser_privilege() {
@@ -196,7 +196,7 @@ public class userData {
     }
 
     public void setNpo_desc(String npo_desc) {
-        userDocument.update("npo_desc", npo_desc);
+        userDocument.update("if_npo_desc", npo_desc);
     }
 
     public String getNpo_name() {
@@ -204,7 +204,7 @@ public class userData {
     }
 
     public void setNpo_name(String npo_name) {
-        userDocument.update("npo_name", npo_name);
+        userDocument.update("if_npo_name", npo_name);
     }
 
     public String getNpo_url() {
@@ -212,6 +212,6 @@ public class userData {
     }
 
     public void setNpo_url(String npo_url) {
-        userDocument.update("npo_url", npo_url);
+        userDocument.update("if_npo_url", npo_url);
     }
 }
