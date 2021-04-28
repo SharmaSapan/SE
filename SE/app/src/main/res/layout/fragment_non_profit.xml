@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/grey"
     tools:context="com.">
     <!--android:theme="@style/Theme.4P02App.NoActionBar"-->
 
@@ -11,13 +12,15 @@
         android:id="@+id/btnAddtoFavs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/profilePart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="5dp"
-        android:src="@drawable/ic_round_favorite_page"
+        android:layout_marginTop="36dp"
         android:background="@color/fui_transparent"
-        android:contentDescription="TODO" />
+        android:contentDescription="TODO"
+        android:tint="@color/teal_700"
+        android:src="@drawable/ic_star"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.112"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profilePart" />
 
     <TextView
         android:id="@+id/npNameDisplay"
