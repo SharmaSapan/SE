@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.4P02App">
-        <activity android:name=".GetMoreInfo"></activity>
+        <activity
+            android:name=".GetMoreInfo"
+            android:theme="@style/Theme.4P02App.NoActionBar" />
+
         <activity android:name=".updateProfile" />
         <activity
             android:name=".LoginActivity"
