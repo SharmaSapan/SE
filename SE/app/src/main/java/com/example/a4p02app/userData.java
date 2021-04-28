@@ -25,9 +25,9 @@ public class userData {
     private static userData instance;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    private String UID = user.getUid();
-    DocumentReference userDocument = db.collection("accounts").document(UID);
+    private FirebaseUser user;
+    private String UID;
+    DocumentReference userDocument;
 
     private String address_city;
     private String address_postal;
@@ -42,6 +42,7 @@ public class userData {
     private String npo_desc;
     private String npo_name;
     private String npo_url;
+    private String id;
 
     // to get single instance of the class and prevent other classes to create an instance
     public static synchronized userData getInstance(){
@@ -52,6 +53,9 @@ public class userData {
     }
 
     private userData(){
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        UID = user.getUid();
+        userDocument = db.collection("accounts").document(UID);
         userDocument.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot snapshot) {
@@ -69,6 +73,7 @@ public class userData {
                     npo_desc = snapshot.getString("if_npo_desc");
                     npo_name = snapshot.getString("if_npo_name");
                     npo_url = snapshot.getString("if_npo_url");
+                    id = snapshot.getString("UID");
                 }
                 else System.out.println("No document at user data fetch");
             }
@@ -76,6 +81,9 @@ public class userData {
     }
 
     public void updateData(){
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        UID = user.getUid();
+        userDocument = db.collection("accounts").document(UID);
         userDocument.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot snapshot) {
@@ -93,6 +101,7 @@ public class userData {
                     npo_desc = snapshot.getString("if_npo_desc");
                     npo_name = snapshot.getString("if_npo_name");
                     npo_url = snapshot.getString("if_npo_url");
+                    id = snapshot.getString("UID");
                 }
                 else System.out.println("No document at user data fetch");
             }
@@ -109,6 +118,14 @@ public class userData {
 
     public DocumentReference getDocRef() {
         return userDocument;
+    }
+
+    public String getDocID() {
+        return id;
+    }
+
+    public void setDocID(String id) {
+        userDocument.update("UID", id);
     }
 
     public String getAddress_city() {
