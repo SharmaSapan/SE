@@ -145,10 +145,11 @@ public class npPreferences extends Activity {
 
     //changes the profile picture of the non-profit
     public void changePicture(View view) {
-        try{
-            Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-            photoPickerIntent.setType("image/*");
-            startActivityForResult(photoPickerIntent, 1);
+       try{
+           //upload the image
+            showImageChooser();
+            imageHandler i = new imageHandler(filePath);
+            i.uploadProfile();
         }catch(Exception e){
             Log.i("Error: ",e.toString());
         }

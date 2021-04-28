@@ -16,7 +16,6 @@ import java.util.Map;
 
 public class GetMoreInfo extends AppCompatActivity {
     String userPrivilege;
-    String email;
     EditText unit;
     EditText street;
     EditText postal;
@@ -34,6 +33,7 @@ public class GetMoreInfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_more_info);
+        userData.getInstance().updateData();
         unit = (EditText) findViewById(R.id.unit);
         street = (EditText) findViewById(R.id.street);
         postal = (EditText) findViewById(R.id.postal);
@@ -46,9 +46,7 @@ public class GetMoreInfo extends AppCompatActivity {
         url = (EditText) findViewById(R.id.url);
         np = (TextView) findViewById(R.id.textView5);
         userPrivilege = userData.getInstance().getUser_privilege();
-        description.setVisibility(View.INVISIBLE);
-        nponame.setVisibility(View.INVISIBLE);
-        url.setVisibility(View.INVISIBLE);
+
         if (userPrivilege == "npo") {
             np.setVisibility(View.VISIBLE);
             description.setVisibility(View.VISIBLE);
@@ -56,6 +54,7 @@ public class GetMoreInfo extends AppCompatActivity {
             url.setVisibility(View.VISIBLE);
         }
         else if (userPrivilege == "donor") {
+            np.setVisibility(View.INVISIBLE);
             description.setVisibility(View.INVISIBLE);
             nponame.setVisibility(View.INVISIBLE);
             url.setVisibility(View.INVISIBLE);
@@ -68,6 +67,7 @@ public class GetMoreInfo extends AppCompatActivity {
             public void onClick(View v) {
                 DocumentReference post_reference = userData.getInstance().getDocRef();
                 Map<String, Object> create_details = new HashMap<>();
+                create_details.put("user_privilege", userData.getInstance().getUser_privilege());
                 create_details.put("user_email", userData.getInstance().getEmail());
                 create_details.put("address_unit", unit.getText().toString());
                 create_details.put("address_street", street.getText().toString());
@@ -77,6 +77,7 @@ public class GetMoreInfo extends AppCompatActivity {
                 create_details.put("user_first_name", firstname.getText().toString());
                 create_details.put("user_last_name", lastname.getText().toString());
                 create_details.put("phoneNumber", phone.getText().toString());
+                create_details.put("UID", userData.getInstance().getUID());
                 if (userPrivilege == "npo") {
                     create_details.put("if_npo_desc", description.getText().toString());
                     create_details.put("if_npo_name", nponame.getText().toString());

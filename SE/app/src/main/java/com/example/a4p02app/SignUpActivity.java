@@ -105,6 +105,10 @@ public class SignUpActivity extends AppCompatActivity {
                                 deets.put("user_first_name", "");
                                 deets.put("user_last_name", "");
                                 deets.put("phoneNumber", "");
+                                deets.put("if_npo_desc", "");
+                                deets.put("if_npo_name", "");
+                                deets.put("if_npo_url", "");
+                                deets.put("UID", UID);
                                 if (accountType == 0)
                                     deets.put("user_privilege", "donor");
                                 if (accountType == 1)
