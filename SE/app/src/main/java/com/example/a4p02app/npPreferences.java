@@ -30,6 +30,7 @@ public class npPreferences extends Activity {
     String province;
     String postalCode;
     String emailAddress;
+    Uri filePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,6 +156,23 @@ public class npPreferences extends Activity {
         }
     }
 
+    // to get user upload from file using upload button
+    private void showImageChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
+    }
+
+    // handle the result from the intent
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            filePath = data.getData();
+        }
+    }
+
     //returns the index of the spinner which should be selected when the settings page is loaded
     private int getSpinnerIndex(Spinner s, String str) {
         for (int i = 0; i < s.getCount(); i++) {
@@ -163,24 +181,6 @@ public class npPreferences extends Activity {
             }
         }
         return -1;
-    }
-
-    @Override
-    protected void onActivityResult(int reqCode, int resultCode, Intent data) {
-        super.onActivityResult(reqCode, resultCode, data);
-
-        if (resultCode == RESULT_OK) {
-            try {
-                final Uri imageUri = data.getData();
-                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
-                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                //image_view.setImageBitmap(selectedImage);
-            } catch (FileNotFoundException e) {
-                Log.i("File not found: ", e.toString());
-            }
-        } else {
-            Toast.makeText(this.getApplicationContext(), "No profile picture was selected.",Toast.LENGTH_LONG).show();
-        }
     }
 
     //goes back to the previous activity
