@@ -4,31 +4,31 @@
 
     <item
         android:id="@+id/home"
-        android:icon="@drawable/ic_round_home_24"
+        android:icon="@drawable/ic_homedetail"
         android:title="@string/home"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/profile"
-        android:icon="@drawable/ic_round_person_24"
+        android:icon="@drawable/ic_profilecard"
         android:title="@string/profile"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/npolist"
-        android:icon="@drawable/ic_baseline_menu_book_24"
+        android:icon="@drawable/ic_bookdetail"
         android:title="@string/NPOlisting"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/favs"
-        android:icon="@drawable/ic_round_favorite_24"
+        android:icon="@drawable/ic_star"
         android:title="@string/favourites"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/post"
-        android:icon="@drawable/ic_round_edit_24"
+        android:icon="@drawable/ic_pencildetail"
         android:title="@string/write_a_post"
         app:showAsAction="always" />
 

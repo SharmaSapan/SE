@@ -33,39 +33,41 @@
                 android:layout_width="275dp"
                 android:layout_height="55dp"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/raleway_bold"
+                android:fontFamily="@font/roboto_regular"
+                android:hint="@string/content"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:hint="@string/content"
                 app:layout_constraintStart_toStartOf="@id/NPO_name"
                 app:layout_constraintTop_toBottomOf="@id/NPO_name" />
 
             <TextView
                 android:id="@+id/NPO_name"
-                android:layout_width="275dp"
-                android:layout_height="28dp"
+                android:layout_width="273dp"
+                android:layout_height="36dp"
                 android:layout_marginStart="40dp"
-                android:fontFamily="@font/raleway_bold"
+                android:fontFamily="@font/roboto_bold"
+                android:paddingTop="5dp"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                android:paddingTop="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/NPO_pic"
                 app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/postDate"
                 android:layout_width="80dp"
                 android:layout_height="25dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
-                android:layout_marginStart="5dp"
+                android:fontFamily="@font/roboto_regular"
                 android:hint="@string/date"
-                android:fontFamily="@font/raleway_bold"
+                android:textAlignment="viewStart"
                 android:textColor="@color/black"
                 android:textSize="10sp"
-                android:textAlignment="viewStart"
-                app:layout_constraintStart_toStartOf="@id/NPO_pic"
                 app:layout_constraintEnd_toStartOf="@id/postContent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@id/NPO_pic"
                 app:layout_constraintTop_toBottomOf="@id/NPO_pic" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

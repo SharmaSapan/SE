@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
                 android:layout_margin="15dp"
-                android:fontFamily="@font/raleway_bold"
+                android:fontFamily="@font/roboto_bold"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
