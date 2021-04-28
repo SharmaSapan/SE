@@ -74,24 +74,26 @@ public class MainActivity extends AppCompatActivity {
          }
 
 
-//        KeyboardVisibilityEvent.setEventListener(
-//                this,
-//                new KeyboardVisibilityEventListener() { //DO NOT SIMPLIFY (lambda) (WILL BREAK) -brian
-//                    @Override
-//                    public void onVisibilityChanged(boolean isOpen) {
-//                        //Log.d(TAG,"onVisibilityChanged: Keyboard visibility changed");
-//                        if(isOpen){
-//                            //Log.d(TAG, "onVisibilityChanged: Keyboard is open");
-//                            bottomAppBar.setVisibility(View.INVISIBLE);
-//                            //Log.d(TAG, "onVisibilityChanged: NavBar got Invisible");
-//                        }else{
-//                            //Log.d(TAG, "onVisibilityChanged: Keyboard is closed");
-//                            bottomAppBar.setVisibility(View.VISIBLE);
-//                            //Log.d(TAG, "onVisibilityChanged: NavBar got Visible");
-//                        }
-//                    }
-//                });
-//        bottomAppBar.setVisibility(View.INVISIBLE);
+       /*KeyboardVisibilityEvent.setEventListener(
+               this,
+               new KeyboardVisibilityEventListener() { //DO NOT SIMPLIFY (lambda) (WILL BREAK) -brian
+                    @Override
+                    public void onVisibilityChanged(boolean isOpen) {
+                        //Log.d(TAG,"onVisibilityChanged: Keyboard visibility changed");
+                        if(isOpen){
+                            //Log.d(TAG, "onVisibilityChanged: Keyboard is open");
+                           bottomAppBar.setVisibility(View.VISIBLE);
+                            //Log.d(TAG, "onVisibilityChanged: NavBar got Invisible");
+                        }else{
+                            //Log.d(TAG, "onVisibilityChanged: Keyboard is closed");
+                            bottomAppBar.setVisibility(View.INVISIBLE);
+                            //Log.d(TAG, "onVisibilityChanged: NavBar got Visible");
+                        }
+                    }
+                });
+
+        */
+        bottomAppBar.setVisibility(View.VISIBLE);
     }
 
 
