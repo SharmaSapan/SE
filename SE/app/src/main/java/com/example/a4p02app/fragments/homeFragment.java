@@ -60,7 +60,6 @@ public class homeFragment extends Fragment implements NPOdapter.RowClickListener
             //adds all current field in firestore to the lists
             @Override
             public void onEvent( QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-
                 postList.clear();
 
                 for(DocumentSnapshot snapshot: value){
@@ -91,8 +90,6 @@ public class homeFragment extends Fragment implements NPOdapter.RowClickListener
     public void onCreate(@Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
-
-
 
         // Set title bar
         ((MainActivity) getActivity())
