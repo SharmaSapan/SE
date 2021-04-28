@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/grey"
     tools:context="com."
     android:theme="@style/Theme.4P02App.NoActionBar">
 
@@ -12,7 +13,7 @@
         android:layout_width="220dp"
         android:layout_height="170dp"
         android:layout_marginTop="72dp"
-        android:background="@color/grey"
+        android:background="@color/teal_darkgrey"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/profilePart"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,7 +28,7 @@
         android:layout_height="180dp"
         android:layout_margin="10dp"
         android:layout_marginStart="8dp"
-        android:background="@color/purple_200"
+        android:background="@color/teal_700"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,52 +39,54 @@
         android:id="@+id/email"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        app:layout_constraintBottom_toTopOf="@id/profilePart"
-        app:layout_constraintTop_toBottomOf="@id/profilePic"
-        app:layout_constraintEnd_toEndOf="@id/guideline"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/dark_blue"
+        android:background="@color/teal_700"
         android:contentDescription="@string/todo"
-        android:src="@drawable/email_icon"/>
+        android:src="@drawable/email_icon"
+        app:layout_constraintBottom_toTopOf="@id/profilePart"
+        app:layout_constraintEnd_toEndOf="@id/guideline"
+        app:layout_constraintHorizontal_bias="0.288"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profilePic" />
 
     <ImageView
         android:id="@+id/map"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@color/dark_blue"
+        android:background="@color/teal_700"
         android:contentDescription="TODO"
+        android:src="@drawable/map_icon"
         app:layout_constraintBottom_toTopOf="@id/profilePart"
         app:layout_constraintEnd_toEndOf="@id/guideline"
-        app:layout_constraintHorizontal_bias="0.82"
+        app:layout_constraintHorizontal_bias="0.871"
         app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/map_icon"
         app:layout_constraintTop_toBottomOf="@id/profilePic" />
+
 
     <ImageView
         android:id="@+id/callOrg"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@color/dark_blue"
+        android:background="@color/teal_700"
         android:contentDescription="@string/todo"
+        android:src="@drawable/phone_icon"
         app:layout_constraintBottom_toTopOf="@id/profilePart"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.645"
+        app:layout_constraintHorizontal_bias="0.628"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profilePic"
-        android:src="@drawable/phone_icon"/>
+        app:layout_constraintTop_toBottomOf="@id/profilePic" />
 
     <ImageView
         android:id="@+id/visitWebsite"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        app:layout_constraintBottom_toTopOf="@id/profilePart"
-        app:layout_constraintTop_toBottomOf="@id/profilePic"
-        app:layout_constraintStart_toStartOf="@id/guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@color/dark_blue"
+        android:background="@color/teal_700"
         android:contentDescription="@string/todo"
-        android:src="@drawable/visit_web_icon"/>
-
+        android:src="@drawable/visit_web_icon"
+        app:layout_constraintBottom_toTopOf="@id/profilePart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.709"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/profilePic" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -94,10 +97,10 @@
         android:src="@drawable/ic_round_comment_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.973"
+        app:layout_constraintHorizontal_bias="0.953"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/profilePart"
-        app:layout_constraintVertical_bias="0.439" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
