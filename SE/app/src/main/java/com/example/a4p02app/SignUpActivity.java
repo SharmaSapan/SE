@@ -97,6 +97,14 @@ public class SignUpActivity extends AppCompatActivity {
                                 String UID = user.getUid();
                                 Map<String, Object> deets = new HashMap<>();
                                 deets.put("user_email", email);
+                                deets.put("address_unit", "");
+                                deets.put("address_street", "");
+                                deets.put("address_postal", "");
+                                deets.put("address_province", "ON");
+                                deets.put("address_city", "");
+                                deets.put("user_first_name", "");
+                                deets.put("user_last_name", "");
+                                deets.put("phoneNumber", "");
                                 if (accountType == 0)
                                     deets.put("user_privilege", "donor");
                                 if (accountType == 1)
@@ -107,9 +115,9 @@ public class SignUpActivity extends AppCompatActivity {
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
-                                                Log.d(TAG, "DocumentSnapshot successfully written!");
-                                            }
-                                        })
+                                            Log.d(TAG, "DocumentSnapshot successfully written!");
+                                        }
+                                    })
                                         .addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {

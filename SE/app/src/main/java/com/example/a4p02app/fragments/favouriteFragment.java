@@ -1,6 +1,7 @@
 package com.example.a4p02app.fragments;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,7 +18,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a4p02app.LoginActivity;
+import com.example.a4p02app.MainActivity;
+import com.example.a4p02app.NPO;
 import com.example.a4p02app.NPOdapter;
+import com.example.a4p02app.Post;
+import com.example.a4p02app.PostAdapter;
 import com.example.a4p02app.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,7 +37,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class favouriteFragment extends Fragment {
+public class favouriteFragment extends Fragment implements NPOdapter.RowClickListener{
 
     private FirebaseUser activeUser;
     private FirebaseAuth mAuth;
@@ -41,11 +46,10 @@ public class favouriteFragment extends Fragment {
     private String userID;
     private View v;
 
-    List<String> postList = new ArrayList<String>();
-    List<String> nameList = new ArrayList<String>();
+    NPOdapter npoAdapter;
+    ArrayList<NPO> favs;
     List<Integer> postPic = Arrays.asList(R.drawable.app_icon,R.drawable.blank_profile_picture,
             R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon);
-    List<String> dateList = new ArrayList<String>();
 
     RecyclerView fList;
 
@@ -58,6 +62,7 @@ public class favouriteFragment extends Fragment {
         activeUser = mAuth.getCurrentUser();
 
         userID = String.valueOf(activeUser);
+        favs = new ArrayList<>();
         getPostsFromDatabase();
 
         return v;
@@ -69,29 +74,25 @@ public class favouriteFragment extends Fragment {
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent( QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        postList.clear();
-                        for(DocumentSnapshot val: value){
-                            postList.add(val.getString("pContent"));
-                        }
-                        nameList.clear();
+
+                        favs.clear();
+                        NPO npotest = new NPO();
+                        npotest.setName("Habitat For Humanity");
+                        favs.add(npotest);
                         for(DocumentSnapshot snapshot: value) {
-                            nameList.add(snapshot.getString("pWriter"));
-                        }
-                        dateList.clear();
-                        for(DocumentSnapshot snapshot: value){
-                            dateList.add(Objects.requireNonNull(snapshot.getTimestamp("pDate")).toDate().toString());
+                            NPO npo = new NPO();
+                            npo.setName(snapshot.getId());
+                            //npo.setName(snapshot.getString("pWriter")); might need if name becomes field
+                            favs.add(npo);
+                            System.out.println(npo.getName()+"-------------------------------");
                         }
                     }
                 });
-        fList = v.findViewById(R.id.flist);
-        //NPOdapter myAdapter = new NPOdapter(getActivity(), nameList, postPic);
+        fList = v.findViewById(R.id.favslist);
+        npoAdapter = new NPOdapter(favs, postPic, this);
+        fList.setAdapter(npoAdapter);
 
-        fList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        //fList.setAdapter(myAdapter);
     }
-
-
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
@@ -132,5 +133,18 @@ public class favouriteFragment extends Fragment {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRowClick(String favNPO) {
+        FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
+        Bundle args = new Bundle();
+        args.putString("name", favNPO);
+        MainActivity.nonprofitFrag.setArguments(args);
+        fragmentTransaction
+                .replace(R.id.fragment_container, MainActivity.nonprofitFrag)
+                .addToBackStack(null)
+                .commit();
+
     }
 }

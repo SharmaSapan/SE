@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.a4p02app">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,12 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.4P02App">
-        <activity android:name=".GetMoreInfo"></activity>
-        <activity android:name=".nonProfit" />
-        <activity android:name=".makePost" />
-        <activity android:name=".messages" />
-        <activity android:name=".favourites" />
-        <activity android:name=".profile" />
+        <activity
+            android:name=".GetMoreInfo"
+            android:theme="@style/Theme.4P02App.NoActionBar" />
+
         <activity android:name=".updateProfile" />
         <activity
             android:name=".LoginActivity"
@@ -31,6 +31,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <uses-library android:name="android.test.base"
+            android:required="false" />
+        <uses-library android:name="android.test.mock"
+            android:required="false" />
+
+
     </application>
+
+
 
 </manifest>

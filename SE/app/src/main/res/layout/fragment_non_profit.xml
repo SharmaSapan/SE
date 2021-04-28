@@ -4,9 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey"
-    tools:context="com."
-    android:theme="@style/Theme.4P02App.NoActionBar">
+    tools:context="com.">
+    <!--android:theme="@style/Theme.4P02App.NoActionBar"-->
+
+    <ImageButton
+        android:id="@+id/btnAddtoFavs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/profilePart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/ic_round_favorite_page"
+        android:background="@color/fui_transparent"
+        android:contentDescription="TODO" />
+
+    <TextView
+        android:id="@+id/npNameDisplay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/raleway_extra_bold"
+        android:layout_marginTop="35dp"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textAlignment="center"/>
+
 
     <ImageView
         android:id="@+id/profilePic"
@@ -17,10 +40,8 @@
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/profilePart"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/profilePart"
@@ -107,5 +128,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
