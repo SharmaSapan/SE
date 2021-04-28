@@ -123,12 +123,12 @@ public class NPO_ListFragment extends Fragment implements NPOdapter.RowClickList
     }
 
     @Override
-    public void onRowClick(String npo) {
+    public void onRowClick(String uid) {
         //Fragment fragment = nonprofitFragment.newInstance(npo);
 
         FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
         Bundle args = new Bundle();
-        args.putString("name", npo);
+        args.putString("name", uid);
         MainActivity.nonprofitFrag.setArguments(args);
         fragmentTransaction
                 .replace(R.id.fragment_container, MainActivity.nonprofitFrag)

@@ -5,6 +5,8 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -93,24 +95,23 @@ public class profileFragment extends Fragment {
             }
         });
 
-
         btnMessages = v.findViewById(R.id.messages);
         btnMessages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String uid = userData.getInstance().getUID();
-                FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
-                Bundle args = new Bundle();
-                args.putString("UserID", uid);
-                //MainActivity.messages.setArguments(args);
-                fragmentTransaction
-                        .replace(R.id.fragment_container, MainActivity.nonprofitFrag)
-                        .addToBackStack(null)
-                        .commit();
-
+                Toast.makeText(v.getContext(), "For Future Implementation", Toast.LENGTH_SHORT).show();
             }
         });
 
         return v;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+        inflater.inflate(R.menu.settings_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+
+
     }
 }

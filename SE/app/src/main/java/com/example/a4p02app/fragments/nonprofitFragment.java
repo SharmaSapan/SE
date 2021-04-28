@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.example.a4p02app.R;
 
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +47,7 @@ public class nonprofitFragment extends Fragment {
     private ImageView btnMap;
     private ImageView btnOrg;
     private ImageView btnWeb;
+    private ImageButton btnAddtoFavs;
 
     //get an instance of Firebase so that the firestore database can be used
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -63,6 +65,13 @@ public class nonprofitFragment extends Fragment {
 
         getFromDatabase();
         setInfo();
+        btnAddtoFavs = v.findViewById(R.id.btnAddtoFavs);
+        btnAddtoFavs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), "For Future Implementation", Toast.LENGTH_SHORT).show();
+            }
+        });
         return v;
     }
 
