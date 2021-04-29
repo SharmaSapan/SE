@@ -10,14 +10,14 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:background="@color/light_blue"
+        android:background="@color/teal_500"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/headerline"
         android:layout_width="match_parent"
         android:layout_height="5dp"
-        android:background="@color/dark_blue"
+        android:background="@color/teal_700"
         app:layout_constraintBottom_toBottomOf="@id/header" />
 
 
@@ -25,11 +25,11 @@
         android:id="@+id/npNameDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginStart="55dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/raleway_bold"
         android:text="Settings"
-        android:textColor="@color/dark_blue"
+        android:textColor="@color/teal_700"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,7 +40,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
-        android:background="@color/light_blue"
+        android:background="@color/teal_500"
+        android:tint="@color/teal_700"
         android:contentDescription="@string/todo"
         android:src="@drawable/ic_round_arrow_back_24"
         app:layout_constraintStart_toStartOf="parent"

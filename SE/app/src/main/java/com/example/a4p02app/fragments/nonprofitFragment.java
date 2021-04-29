@@ -235,7 +235,7 @@ public class nonprofitFragment extends Fragment {
         //this method updates the page to match the non-profit's info
         public void setInfo() {
             //update non-profit's name
-            TextView nonProfitName = (TextView) v.findViewById(R.id.npNameDisplay);
+            TextView nonProfitName = (TextView) v.findViewById(R.id.nameDisplay);
             nonProfitName.setText(npName);
             //update profile picture
             ImageView nonProfitPic = (ImageView) v.findViewById(R.id.profilePic);
@@ -244,9 +244,18 @@ public class nonprofitFragment extends Fragment {
 //        }
             Glide.with(nonprofitFragment.this).load(storageReference).into(nonProfitPic);
             //update description
-            TextView nonProfitDescription = (TextView) v.findViewById(R.id.profilePart);
-            String s = npDesc + "\n\n Address: " + getAddressAsString() + "\nPhone number: " + phoneNum + "\nEmail Address: " + emailAddress;
-            nonProfitDescription.setText(s);
+
+            TextView profileContact = (TextView) v.findViewById(R.id.profileContact);
+            String pe = emailAddress  + "\n"+ phoneNum;
+            profileContact.setText(pe);
+
+            TextView profileAddress = (TextView) v.findViewById(R.id.npoAddress);
+            String a = address;
+            profileAddress.setText(a);
+
+            TextView profileDesc = (TextView) v.findViewById(R.id.profileDesc);
+            String s = npDesc;
+            profileDesc.setText(s);
         }
 
         private String getAddressAsString() {
