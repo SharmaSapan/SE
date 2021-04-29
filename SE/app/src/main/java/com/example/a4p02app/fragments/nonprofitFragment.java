@@ -11,10 +11,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.example.a4p02app.LoginActivity;
 import com.example.a4p02app.R;
 
 import android.widget.ImageButton;
@@ -25,6 +27,7 @@ import android.widget.Toast;
 import com.example.a4p02app.userData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -101,6 +104,19 @@ public class nonprofitFragment extends Fragment {
 
 
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.log_out_button){
+            getActivity().finish();
+            FirebaseAuth.getInstance().signOut();
+
+            Intent i = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
+            startActivity(i);
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
         //this method gets the info from the database
         //not done yet
         //for more info on this, go to https://firebase.google.com/docs/firestore/query-data/get-data
@@ -132,6 +148,7 @@ public class nonprofitFragment extends Fragment {
                 }
             });
         }
+
 
 
         //this method updates the page to match the non-profit's info

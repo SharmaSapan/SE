@@ -45,6 +45,10 @@ public class homeFragment extends Fragment implements NPOdapter.RowClickListener
     PostAdapter pAdapter;
     ArrayList<Post> postList;
     List<Integer> postPic = Arrays.asList(R.drawable.app_icon,R.drawable.blank_profile_picture,
+            R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon,
+            R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.blank_profile_picture,
+            R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon,
+            R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.blank_profile_picture,
             R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon);
 
     @Nullable
@@ -56,7 +60,7 @@ public class homeFragment extends Fragment implements NPOdapter.RowClickListener
         postList = new ArrayList<>();
 
         FirebaseFirestore fsdb = FirebaseFirestore.getInstance();
-        fsdb.collection("posts").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        fsdb.collectionGroup("post").addSnapshotListener(new EventListener<QuerySnapshot>() {
             //collectionGroup("post")
             //adds all current field in firestore to the lists
             @Override
@@ -65,10 +69,11 @@ public class homeFragment extends Fragment implements NPOdapter.RowClickListener
 
                 for(DocumentSnapshot snapshot: value){
                     Post post = new Post();
-                    post.setContent(snapshot.getString("pContent"));
-                    post.setName(snapshot.getString("pWriter"));
-                    post.setDate((snapshot.getTimestamp("pDate")).toDate().toString());
-                    //Objects.requireNonNull
+                    post.setContent(snapshot.getString("description"));
+                    post.setName(snapshot.getString("title"));
+                    post.setUID(snapshot.getId());
+                    //post.setDate((Objects.requireNonNull(snapshot.getTimestamp("post_date"))).toDate().toString());
+                    //dont know why this keeps returning a null -Alex
                     postList.add(post);
 
                 }
@@ -137,12 +142,12 @@ public class homeFragment extends Fragment implements NPOdapter.RowClickListener
     }
 
     @Override
-    public void onRowClick(String npo) {
+    public void onRowClick(String uid) {
         //Fragment fragment = nonprofitFragment.newInstance(npo);
 
         FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
         Bundle args = new Bundle();
-        args.putString("name", npo);
+        args.putString("UID", uid);
 
         MainActivity.nonprofitFrag.setArguments(args);
         fragmentTransaction

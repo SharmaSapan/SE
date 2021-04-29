@@ -53,7 +53,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
             @Override
             public void onClick(View v) {
 
-                clickListener.onRowClick(postListFilt.get(position).getName());
+                clickListener.onRowClick(postListFilt.get(position).getUID());
             }
         });
     }
@@ -126,6 +126,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
         }
     }
     public interface RowClickListener{
-        void onRowClick(String npo);
+        void onRowClick(String uid);
     }
 }

@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 });
 
         */
-        bottomAppBar.setVisibility(View.VISIBLE);
+        //bottomAppBar.setVisibility(View.VISIBLE);
     }
 
 
