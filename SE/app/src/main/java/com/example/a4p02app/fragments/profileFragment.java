@@ -62,19 +62,28 @@ public class profileFragment extends Fragment {
         postalCode = userData.getInstance().getAddress_postal();
         emailAddress = userData.getInstance().getEmail();
 
-        TextView profilePart2 = (TextView) v.findViewById(R.id.profilePart2);
-        String combine = first_name +"\n"+
-                last_name+"\n"+
-                idtype+"\n"+
+        TextView profileName = (TextView) v.findViewById(R.id.profileName);
+        String combine = first_name +" "+ last_name;
+        profileName.setText(combine);
+
+        TextView profileEmail = (TextView) v.findViewById(R.id.profileEmail);
+        String combineE = emailAddress + "\n" + phoneNum;
+        profileEmail.setText(combineE);
+
+        TextView profileAddress = (TextView) v.findViewById(R.id.profileAddress);
+        String combineA = unitNum + " " + sName + "\n" + city + " " + province + "\n" + postalCode;
+        profileAddress.setText(combineA);
+
+                /*idtype+"\n"+
                 phoneNum+"\n"+
                 unitNum+"\n"+
                 sName+"\n"+
                 city+"\n"+
                 province+"\n"+
                 postalCode+"\n"+
-                emailAddress;
+                emailAddress;*/
 
-        profilePart2.setText(combine);
+
 
         btnEdit = (Button) v.findViewById(R.id.btnEdit);
         btnEdit.setOnClickListener(new View.OnClickListener() {

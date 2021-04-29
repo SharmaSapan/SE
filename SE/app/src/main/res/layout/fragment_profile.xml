@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:background="@color/grey"
-    android:layout_height="match_parent"
     android:id="@+id/profileFrag"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey"
     tools:context=".profile">
 
 
@@ -35,54 +35,32 @@
 
     <TextView
         android:id="@+id/profilePart2"
-        android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_width="412dp"
+        android:layout_height="297dp"
         android:background="@color/teal_500"
         android:maxLines="10"
-        android:text="editable profile details"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/frame"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="@+id/frame"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.453" />
+        app:layout_constraintVertical_bias="0.46" />
 
-    <Button
-        android:id="@+id/donations"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_marginTop="84dp"
-        android:background="@color/teal_700"
-        android:elevation="20dp"
-        android:padding="5dp"
-        android:rotationY="0"
-        android:text="@string/past_donations"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@id/guideline"
-        app:layout_constraintHorizontal_bias="0.534"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profilePart2" />
 
-    <Button
-        android:id="@+id/messages"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@color/teal_700"
-        android:bottomLeftRadius="45dp"
-        android:bottomRightRadius="45dp"
-        android:elevation="20dp"
-        android:padding="5dp"
-        android:text="@string/messages"
-        android:textColor="@color/white"
-        android:topLeftRadius="45dp"
-        android:topRightRadius="45dp"
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="262dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="108dp"
+        android:text="ADDRESS:"
+        android:textAlignment="center"
+        android:textColor="@color/teal_300"
+        android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/profilePart2" />
-
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileName" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -96,19 +74,109 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="108dp"
+        android:background="@color/teal_darkgrey"
         android:onClick="goUpdateProfile"
         android:shadowColor="@color/teal_700"
         android:shadowDx="40"
         android:shadowDy="40"
         android:shadowRadius="50"
-        android:textColor="@color/white"
-        android:background="@color/teal_darkgrey"
         android:text="Edit Account"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="@+id/profilePart2"
         app:layout_constraintTop_toBottomOf="@+id/profilePart2"
-        app:layout_constraintVertical_bias="0.079" />
+        app:layout_constraintVertical_bias="0.346" />
+
+    <Button
+        android:id="@+id/donations"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginTop="184dp"
+        android:background="@color/teal_700"
+        android:elevation="20dp"
+        android:padding="5dp"
+        android:rotationY="0"
+        android:text="@string/past_donations"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@id/guideline"
+        app:layout_constraintHorizontal_bias="0.43"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profilePart2" />
+
+    <Button
+        android:id="@+id/messages"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginTop="152dp"
+        android:background="@color/teal_700"
+        android:bottomLeftRadius="45dp"
+        android:bottomRightRadius="45dp"
+        android:elevation="20dp"
+        android:padding="5dp"
+        android:text="@string/messages"
+        android:textColor="@color/white"
+        android:topLeftRadius="45dp"
+        android:topRightRadius="45dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/profilePart2" />
+
+    <TextView
+        android:id="@+id/profileName"
+        android:layout_width="0dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/profilePart2" />
+
+    <TextView
+        android:id="@+id/profileEmail"
+        android:layout_width="410dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/profilePart2"
+        app:layout_constraintTop_toBottomOf="@+id/profileName" />
+
+    <TextView
+        android:id="@+id/profileAddress"
+        android:layout_width="402dp"
+        android:layout_height="82dp"
+        android:layout_marginTop="90dp"
+        android:ems="10"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/profilePart2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileName"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="262dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="9dp"
+        android:text="CONTACT:"
+        android:textAlignment="center"
+        android:textColor="@color/teal_300"
+        android:textSize="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
