@@ -2,6 +2,7 @@ package com.example.a4p02app.fragments;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,15 +31,11 @@ public class postFragment extends Fragment {
     EditText description;
     EditText dropoff_location;
     EditText item;
-    EditText location_geostamp;
-    String post_type;
-    String post_date;
     EditText tags;
     EditText title;
 
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageRef = storage.getReference();
-    final String UID = userData.getInstance().getUID();; //gets current users' id
 
     View v;
 
@@ -47,21 +44,20 @@ public class postFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_make_post, container, false);
 
-        title = (EditText) v.findViewById(R.id.Title);
-        description = (EditText) v.findViewById(R.id.Description);
-        item = (EditText) v.findViewById(R.id.Item);
-        dropoff_location = (EditText) v.findViewById(R.id.DropoffLocation); // fill user location
-        // generate geo stamp from the user provided location
-        // get time from system post_date
-        tags = (EditText) v.findViewById(R.id.Tags);
-        Post = (Button) v.findViewById(R.id.Post);
+        title = v.findViewById(R.id.Title);
+        description = v.findViewById(R.id.Description);
+        item = v.findViewById(R.id.Item);
+        dropoff_location = v.findViewById(R.id.DropoffLocation); // fill user location
+
+        tags = v.findViewById(R.id.Tags);
+        Post = v.findViewById(R.id.Post);
         Date currentTime = Calendar.getInstance().getTime();
 
         Post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //if statement to ensure none of the fields are empty
-                if (description.getText().toString().isEmpty() || dropoff_location.getText().toString().isEmpty() || item.getText().toString().isEmpty() || location_geostamp.getText().toString().isEmpty() ||
+                if (description.getText().toString().isEmpty() || dropoff_location.getText().toString().isEmpty() || item.getText().toString().isEmpty() ||
                         tags.getText().toString().isEmpty() || title.getText().toString().isEmpty()) {
 
                     Toast.makeText(getActivity().getApplicationContext(), "Data Missing", Toast.LENGTH_SHORT).show();
@@ -86,23 +82,14 @@ public class postFragment extends Fragment {
                     }
                     post_reference.set(post_data);
 
+
                 }
             }
         });
 
         return v;
     }
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
 
-        super.onCreate(savedInstanceState);
-
-        // Set title bar
-        ((MainActivity) getActivity())
-                .setActionBarTitle("Donation Machine");
-
-    }
 
 }
 

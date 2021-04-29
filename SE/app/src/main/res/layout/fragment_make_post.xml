@@ -2,129 +2,139 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/postFrag"
+    android:id="@+id/asdf"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.a4p02app.postFragment">
+    android:background="@color/white">
 
 
-    <EditText
-        android:id="@+id/DropoffLocation"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputlayer1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/Description"
-        android:layout_alignLeft="@+id/Description"
-        android:layout_marginTop="430dp"
-        android:layout_marginBottom="200dp"
-        android:hint="Dropoff Location"
+        android:layout_height="70dp"
+        android:layout_marginTop="30dp"
+        android:autofillHints=""
+        android:inputType="textShortMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Title" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputlayer2"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignStart="@+id/inputlayer1"
+        android:layout_marginTop="5dp"
+        android:autofillHints=""
+        android:inputType="textShortMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputlayer1"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/Item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Item" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputlayer3"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="5dp"
+        android:autofillHints=""
+        android:inputType="textShortMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputlayer2"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/Description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Description" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputlayer4"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="5dp"
+        android:autofillHints=""
         android:inputType="textPostalAddress"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/Tags"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/Tags"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputlayer3"
+        tools:ignore="MissingConstraints">
 
-    <EditText
-        android:id="@+id/Item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/DropoffLocation"
-        android:layout_alignLeft="@+id/DropoffLocation"
-        android:layout_marginTop="175dp"
-        android:layout_marginBottom="420dp"
-        android:hint="Item"
-        android:inputType="textShortMessage"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/Title"
-        app:layout_constraintStart_toStartOf="@+id/Title"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/DropoffLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Drop-off Location" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/Title"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputlayer5"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="114dp"
-        android:layout_marginBottom="480dp"
-        android:hint="Title"
-        android:inputType="textShortMessage"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView3"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/Tags"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/Title"
-        android:layout_alignLeft="@+id/Title"
-        android:layout_marginTop="359dp"
-        android:layout_marginBottom="240dp"
-        android:hint="Tags"
+        android:layout_height="70dp"
+        android:layout_marginTop="5dp"
+        android:autofillHints=""
         android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/Description"
-        app:layout_constraintStart_toStartOf="@+id/Description"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputlayer4"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/Tags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tags" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/Post"
         android:layout_width="103dp"
         android:layout_height="51dp"
-        android:layout_marginTop="558dp"
-        android:layout_marginBottom="114dp"
-        android:backgroundTint="?attr/colorControlActivated"
-        android:onClick="goHome"
+        android:layout_marginStart="265dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="43dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@color/teal_darkgrey"
         android:text="Post"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/DropoffLocation"
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toStartOf="@+id/DropoffLocation"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputlayer5"
         tools:ignore="MissingConstraints" />
-
-
-    <EditText
-        android:id="@+id/Description"
-        android:layout_width="381dp"
-        android:layout_height="106dp"
-        android:layout_marginTop="241dp"
-        android:layout_marginBottom="300dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="Description"
-        android:inputType="textMultiLine"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/Item"
-        app:layout_constraintStart_toStartOf="@+id/Item"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="86dp"
-        android:layout_marginTop="93dp"
-        android:layout_marginEnd="86dp"
-        android:layout_marginBottom="577dp"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginEnd="168dp"
+        android:layout_marginBottom="652dp"
         android:text="Create Post"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.35"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.85"
-        tools:text="Create Post" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
