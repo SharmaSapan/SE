@@ -47,14 +47,14 @@
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="449dp"
-        android:layout_height="686dp"
+        android:layout_width="251dp"
+        android:layout_height="400dp"
         android:layout_marginStart="60dp"
         android:layout_marginEnd="60dp"
-        android:layout_marginBottom="132dp"
+        android:layout_marginBottom="204dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="@+id/imageView3"
         app:srcCompat="@drawable/ic_charity" />
 </androidx.constraintlayout.widget.ConstraintLayout>
