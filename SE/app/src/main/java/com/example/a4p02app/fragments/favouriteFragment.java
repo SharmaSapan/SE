@@ -53,6 +53,18 @@ public class favouriteFragment extends Fragment implements NPOdapter.RowClickLis
     NPOdapter npoAdapter;
     ArrayList<NPO> favs;
     List<Integer> postPic = Arrays.asList(R.drawable.app_icon,R.drawable.blank_profile_picture,
+            R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon,
+            R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.blank_profile_picture,
+            R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon,
+            R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.blank_profile_picture,
+            R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.app_icon,
+            R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.blank_profile_picture,
+            R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.app_icon,
+            R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.blank_profile_picture,
+            R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.app_icon,
+            R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.blank_profile_picture,
+            R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.app_icon,
+            R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.blank_profile_picture,
             R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon);
 
     RecyclerView fList;
@@ -68,12 +80,12 @@ public class favouriteFragment extends Fragment implements NPOdapter.RowClickLis
         uid = userData.getInstance().getUID();
         userID = String.valueOf(activeUser);
         favs = new ArrayList<>();
-        getPostsFromDatabase();
+        getFavFromDatabase();
 
         return v;
     }
 
-    public void getPostsFromDatabase () {
+    public void getFavFromDatabase () {
         //Retrieve a list of all favourited items connected to the currently logged in user
         db.collection("accounts/"+uid+"/favourites")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
