@@ -51,11 +51,6 @@ public class profileFragment extends Fragment {
 
         super.onCreate(savedInstanceState);
         v = inflater.inflate(R.layout.fragment_profile, container, false);
-
-        System.out.println("User ID: " + userData.getInstance().getUID());
-
-        System.out.println(userData.getInstance().getUser_first());
-
         first_name = userData.getInstance().getUser_first();
         last_name = userData.getInstance().getUser_last();
         idtype = userData.getInstance().getUser_privilege();

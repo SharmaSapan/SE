@@ -3,6 +3,7 @@ package com.example.a4p02app.fragments;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.annotation.Nullable;
 
 import com.example.a4p02app.MainActivity;
 import com.example.a4p02app.R;
+import com.example.a4p02app.imageHandler;
 import com.example.a4p02app.userData;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.storage.FirebaseStorage;
@@ -25,6 +27,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.app.Activity.RESULT_OK;
+
 public class postFragment extends Fragment {
 
     Button Post;
@@ -33,11 +37,24 @@ public class postFragment extends Fragment {
     EditText item;
     EditText tags;
     EditText title;
+    Button Upload;
 
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageRef = storage.getReference();
+    private final int PICK_IMAGE_REQUEST = 71;
+    Uri filePath;
 
     View v;
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            filePath = data.getData();
+            imageHandler im = new imageHandler(filePath);
+            im.uploadProfile();
+        }
+    }
 
     @Nullable
     @Override
@@ -51,6 +68,7 @@ public class postFragment extends Fragment {
 
         tags = v.findViewById(R.id.Tags);
         Post = v.findViewById(R.id.Post);
+        Upload = v.findViewById(R.id.Upload);
         Date currentTime = Calendar.getInstance().getTime();
 
         Post.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +94,9 @@ public class postFragment extends Fragment {
                     post_data.put("post_type", userData.getInstance().getUser_privilege());
                     post_data.put("title", title.getText().toString());
                     post_data.put("tags", tags.getText().toString());
+                    if (filePath != null) {
+                        post_data.put("image_path", filePath.getLastPathSegment().toString());
+                    }
                     if (userData.getInstance().getUser_privilege() == "npo") {
                         post_data.put("if_npo_phone", userData.getInstance().getPhone());
                         post_data.put("if_npo_url", userData.getInstance().getNpo_url());
@@ -88,14 +109,22 @@ public class postFragment extends Fragment {
                     tags.getText().clear();
                     Toast.makeText(getActivity().getApplicationContext(), "Post uploaded!", Toast.LENGTH_SHORT).show();
 
-
                     FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
-
                     fragmentTransaction
                             .replace(R.id.fragment_container, MainActivity.homeFrag)
                             .addToBackStack(null)
                             .commit();
                 }
+            }
+        });
+
+        Upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
             }
         });
 
