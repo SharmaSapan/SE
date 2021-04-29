@@ -3,6 +3,7 @@ package com.example.a4p02app.fragments;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +26,7 @@ import com.example.a4p02app.NPOdapter;
 import com.example.a4p02app.Post;
 import com.example.a4p02app.PostAdapter;
 import com.example.a4p02app.R;
+import com.example.a4p02app.userData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -34,6 +37,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -43,7 +47,7 @@ public class favouriteFragment extends Fragment implements NPOdapter.RowClickLis
     private FirebaseAuth mAuth;
 
     private FirebaseFirestore db =  FirebaseFirestore.getInstance();
-    private String userID;
+    private String userID, uid;
     private View v;
 
     NPOdapter npoAdapter;
@@ -61,6 +65,7 @@ public class favouriteFragment extends Fragment implements NPOdapter.RowClickLis
         mAuth = FirebaseAuth.getInstance();
         activeUser = mAuth.getCurrentUser();
 
+        uid = userData.getInstance().getUID();
         userID = String.valueOf(activeUser);
         favs = new ArrayList<>();
         getPostsFromDatabase();
@@ -70,22 +75,25 @@ public class favouriteFragment extends Fragment implements NPOdapter.RowClickLis
 
     public void getPostsFromDatabase () {
         //Retrieve a list of all favourited items connected to the currently logged in user
-        db.collection("accounts/"+userID+"/favourites")
+        db.collection("accounts/"+uid+"/favourites")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void onEvent( QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
                         favs.clear();
-                        NPO npotest = new NPO();
-                        npotest.setName("Habitat For Humanity");
-                        favs.add(npotest);
+                        //NPO npotest = new NPO();
+                        //npotest.setName("Habitat For Humanity");
+                        //favs.add(npotest);
                         for(DocumentSnapshot snapshot: value) {
                             NPO npo = new NPO();
-                            npo.setName(snapshot.getId());
+                            npo.setName(snapshot.getString("name"));
+                            npo.setUID(snapshot.getString("UID"));
                             //npo.setName(snapshot.getString("pWriter")); might need if name becomes field
                             favs.add(npo);
                             System.out.println(npo.getName()+"-------------------------------");
                         }
+                        favs.sort(Comparator.comparing(NPO::getName));//sort by alphabetical
                     }
                 });
         fList = v.findViewById(R.id.favslist);
@@ -136,10 +144,10 @@ public class favouriteFragment extends Fragment implements NPOdapter.RowClickLis
     }
 
     @Override
-    public void onRowClick(String favNPO) {
+    public void onRowClick(String uid) {
         FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
         Bundle args = new Bundle();
-        args.putString("name", favNPO);
+        args.putString("UID", uid);
         MainActivity.nonprofitFrag.setArguments(args);
         fragmentTransaction
                 .replace(R.id.fragment_container, MainActivity.nonprofitFrag)

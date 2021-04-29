@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,10 +32,14 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -60,9 +66,10 @@ public class homeFragment extends Fragment implements NPOdapter.RowClickListener
         postList = new ArrayList<>();
 
         FirebaseFirestore fsdb = FirebaseFirestore.getInstance();
-        fsdb.collectionGroup("post").addSnapshotListener(new EventListener<QuerySnapshot>() {
-            //collectionGroup("post")
+        fsdb.collectionGroup("post")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
             //adds all current field in firestore to the lists
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onEvent( QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 postList.clear();
@@ -72,9 +79,21 @@ public class homeFragment extends Fragment implements NPOdapter.RowClickListener
                     post.setContent(snapshot.getString("description"));
                     post.setName(snapshot.getString("title"));
                     post.setUID(snapshot.getId());
-                    post.setDate((Objects.requireNonNull(snapshot.getTimestamp("post_date"))).toDate().toString());
-                    //dont know why this keeps returning a null -Alex
+
+                    post.setDateTime((Objects.requireNonNull(snapshot.getTimestamp("post_date"))).toDate());
+                    //for sorting by date
                     postList.add(post);
+
+                }
+                //Collections.sort();
+                postList.sort(Comparator.comparing(Post::getDateTime).reversed());
+                System.out.println("The Object after sorting is : ");
+                        //sort by date, then make toString();
+                for(int i=0;i<postList.size();i++){
+                    Date dt = postList.get(i).getDateTime();
+                    String date = postList.get(i).getDateTime().toString();
+                    postList.get(i).setDate(date);
+                    System.out.println(dt+", ");
 
                 }
                 initRecycler(postList);
@@ -90,6 +109,7 @@ public class homeFragment extends Fragment implements NPOdapter.RowClickListener
         pAdapter = new PostAdapter(postList, postPic, this);
         plist.setAdapter(pAdapter);
     }
+
 
 
     @Override

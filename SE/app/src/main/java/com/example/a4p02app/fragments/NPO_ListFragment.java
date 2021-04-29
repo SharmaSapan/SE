@@ -3,6 +3,7 @@ package com.example.a4p02app.fragments;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,16 +22,19 @@ import com.example.a4p02app.LoginActivity;
 import com.example.a4p02app.MainActivity;
 import com.example.a4p02app.NPO;
 import com.example.a4p02app.NPOdapter;
+import com.example.a4p02app.Post;
 import com.example.a4p02app.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class NPO_ListFragment extends Fragment implements NPOdapter.RowClickListener{
@@ -56,6 +61,7 @@ public class NPO_ListFragment extends Fragment implements NPOdapter.RowClickList
                 .whereEqualTo("user_privilege","npo")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
             //adds all current field in firestore to the lists
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onEvent( QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 
@@ -64,11 +70,9 @@ public class NPO_ListFragment extends Fragment implements NPOdapter.RowClickList
                     NPO npo = new NPO();
                     npo.setUID(snapshot.getId());
                     npo.setName(snapshot.getString("if_npo_name"));
-                    //npo.setName(snapshot.getString("pWriter")); might need if name becomes field
                     NPOs.add(npo);
-                    //System.out.println(npo.getUID()+ "--------------------------------------------");
-                    System.out.println(npo.getName()+ "--------------------------------------------");
                 }
+                NPOs.sort(Comparator.comparing(NPO::getName));//sort by alphabetical
             }
         });
         npolist = npoListview.findViewById(R.id.npolist);

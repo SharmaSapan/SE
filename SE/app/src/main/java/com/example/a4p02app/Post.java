@@ -1,11 +1,14 @@
 package com.example.a4p02app;
 
+import java.util.Date;
+
 public class Post {
 
     private String name;
     private String content;
     private String date;
     private String uid;
+    private Date datetime;
 
     public String getName(){
         return name;
@@ -37,5 +40,13 @@ public class Post {
 
     public void setDate(String pDate){
         this.date=pDate;
+    }
+
+    public Date getDateTime(){
+        return datetime;
+    }
+
+    public void setDateTime(Date pDate){
+        this.datetime=pDate;
     }
 }

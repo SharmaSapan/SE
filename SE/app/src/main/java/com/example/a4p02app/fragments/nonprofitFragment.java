@@ -37,6 +37,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.HashMap;
+import java.util.Map;
+
 //the default profile picture is from https://pixabay.com/vectors/blank-profile-picture-mystery-man-973460/
 
 public class nonprofitFragment extends Fragment {
@@ -73,7 +76,7 @@ public class nonprofitFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         passedUID = getArguments().getString("UID");
-        System.out.println(passedUID + "--------------------------------------------");
+        System.out.println(passedUID + "---------------------------ID-----------------");
 
 
         getFromDatabase(passedUID);
@@ -82,7 +85,12 @@ public class nonprofitFragment extends Fragment {
         btnAddtoFavs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "For Future Implementation", Toast.LENGTH_SHORT).show();
+                DocumentReference post_reference = userData.getInstance().getDocRef().collection("favourites").document();//tries to access the documents in the post collection
+                Map<String, Object> post_data = new HashMap<>();
+                post_data.put("UID", passedUID);
+                post_data.put("name", npName);
+                post_reference.set(post_data);
+                Toast.makeText(v.getContext(), "Added to Favourites!", Toast.LENGTH_SHORT).show();
             }
         });
         return v;
