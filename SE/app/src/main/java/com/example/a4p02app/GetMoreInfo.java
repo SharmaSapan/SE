@@ -119,7 +119,7 @@ public class GetMoreInfo extends AppCompatActivity {
                 }
             }
         });
-        save.setOnClickListener(new View.OnClickListener(){
+        Upload_im.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
