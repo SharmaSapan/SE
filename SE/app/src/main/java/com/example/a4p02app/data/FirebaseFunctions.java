@@ -2,18 +2,42 @@ package com.example.a4p02app.data;
 
 import android.util.Log;
 
+import com.example.a4p02app.MainActivity;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Firestore {
+public class FirebaseFunctions {
 
     private static final String TAG = "Firestore";
+
+
+    public static void checkForEmulator(FirebaseAuth auth, FirebaseFirestore store){
+        auth = FirebaseAuth.getInstance();
+        store = FirebaseFirestore.getInstance();
+
+        if (MainActivity.isTesting) {
+
+            auth.useEmulator("10.0.2.2", 9099);
+            store.useEmulator("10.0.2.2", 8080);
+
+            FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                    .setPersistenceEnabled(false)
+                    .build();
+            store.setFirestoreSettings(settings);
+        }
+    }
+
+
+    private FirebaseAuth mAuth;
+    private static FirebaseFirestore db;
 
     /**
      * Adds a user to the accounts document in firestore.

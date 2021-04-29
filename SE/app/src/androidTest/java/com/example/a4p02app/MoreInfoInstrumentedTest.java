@@ -24,22 +24,57 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 @LargeTest
 public class MoreInfoInstrumentedTest {
 
-    private Random rand;
-    private String testPass;
-    private String testEmail;
-    private String testConfirm;
+    private String fname;
+    private String lname;
+    private String phone;
+    private String unit;
+    private String street;
+    private String postal;
+    private String city;
+
+    private String nponame;
+    private String description;
+    private String url;
 
     @Rule
-    public ActivityScenarioRule<GetMoreInfo> moreRule = new ActivityScenarioRule<>(GetMoreInfo.class);
+    public ActivityScenarioRule<GetMoreInfo> signupRule = new ActivityScenarioRule<>(GetMoreInfo.class);
 
 
     @Before
     public void initValidString() {
+        Random rand;
+        rand = new Random();
+        int r = rand.nextInt((9999 - 100) + 1) + 10;
 
+        fname = "Unit";
+        lname = "Test";
+        phone = "1112223333";
+        unit = "1";
+        street = "Google Ave";
+        postal = "L0L 0L0";
+        city = "SanFran";
+
+        nponame = "A foundation";
+        description = "We do things";
+        url = "google.net";
     }
 
     @Test
-    public void testSignUp() {
+    public void collectInfo(){
 
+        //Advanced Info
+        onView(withId(R.id.firstname)).perform(typeText(fname), closeSoftKeyboard());
+        onView(withId(R.id.lastname)).perform(typeText(lname), closeSoftKeyboard());
+        onView(withId(R.id.phone)).perform(typeText(phone), closeSoftKeyboard());
+        onView(withId(R.id.unit)).perform(typeText(unit), closeSoftKeyboard());
+        onView(withId(R.id.street)).perform(typeText(street), closeSoftKeyboard());
+        onView(withId(R.id.postal)).perform(typeText(postal), closeSoftKeyboard());
+        onView(withId(R.id.city)).perform(typeText(city), closeSoftKeyboard());
+
+        onView(withId(R.id.nponame)).perform(typeText(nponame), closeSoftKeyboard());
+        onView(withId(R.id.description)).perform(typeText(description), closeSoftKeyboard());
+        onView(withId(R.id.url)).perform(typeText(url), closeSoftKeyboard());
+
+        onView(withId(R.id.save)).perform(click());
     }
 }

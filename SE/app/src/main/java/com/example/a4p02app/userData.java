@@ -24,7 +24,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class userData {
     private static userData instance;
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFirestore db;
+    private FirebaseAuth mAuth;
     private FirebaseUser user;
     private String UID;
     DocumentReference userDocument;
@@ -53,8 +54,12 @@ public class userData {
     }
 
     private userData(){
-        user = FirebaseAuth.getInstance().getCurrentUser();
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+        user = mAuth.getCurrentUser();
         UID = user.getUid();
+
         userDocument = db.collection("accounts").document(UID);
         userDocument.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override

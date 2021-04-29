@@ -24,7 +24,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 @LargeTest
 public class SignupInstrumentedTest {
 
-    private Random rand;
     private String testPass;
     private String testEmail;
     private String testConfirm;
@@ -35,8 +34,10 @@ public class SignupInstrumentedTest {
 
     @Before
     public void initValidString() {
+        Random rand;
         rand = new Random();
         int r = rand.nextInt((9999 - 100) + 1) + 10;
+
         testEmail = "user_" + Integer.toString(r) + "@test.junit";
         testPass = "asdf1234";
         testConfirm = testPass;
@@ -44,6 +45,8 @@ public class SignupInstrumentedTest {
 
     @Test
     public void testSignUp() {
+
+        //Basic Info
         onView(withId(R.id.txtEmail)).perform(typeText(testEmail), closeSoftKeyboard());
         onView(withId(R.id.txtPassword)).perform(typeText(testPass), closeSoftKeyboard());
         onView(withId(R.id.txtConfirm)).perform(typeText(testConfirm), closeSoftKeyboard());
@@ -56,4 +59,5 @@ public class SignupInstrumentedTest {
 
         onView(withId(R.id.btnSignUp)).perform(click());
     }
+
 }

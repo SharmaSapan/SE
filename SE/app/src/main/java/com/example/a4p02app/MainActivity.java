@@ -28,11 +28,13 @@ import android.widget.Toast;
 
 
 import com.example.a4p02app.R;
+import com.example.a4p02app.data.FirebaseFunctions;
 import com.example.a4p02app.fragments.*;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
@@ -42,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
     //Firebase
     private FirebaseUser activeUser;
-    private FirebaseAuth mAuth;
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     //UI Component
     public static BottomNavigationView bottomAppBar;
@@ -58,19 +61,31 @@ public class MainActivity extends AppCompatActivity {
     private static infoFragment infoFrag;
     private NPO_ListFragment npoListFrag;
 
+    public boolean begunTest = false;
+    public static boolean isTesting = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mAuth = FirebaseAuth.getInstance();
+        if (!begunTest) {
+            try {
+                FirebaseFunctions.checkForEmulator(mAuth, db);
+            }
+            catch (Exception e){
+                System.err.println("Already initialized");
+            }
+            begunTest = false;
+        }
+
+
         activeUser = mAuth.getCurrentUser();
-        //updateUser(activeUser);
         if (activeUser == null) {
             goLogin();
         }
          else {
-        startMainActivity();
+            startMainActivity();
          }
 
 

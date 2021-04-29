@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.338" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/unit"
             android:layout_width="85dp"
             android:layout_height="45dp"
@@ -42,7 +42,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView"
             app:layout_constraintVertical_bias="0.21" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/street"
             android:layout_width="240dp"
             android:layout_height="45dp"
@@ -58,7 +58,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView"
             app:layout_constraintVertical_bias="0.21" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/postal"
             android:layout_width="0dp"
             android:layout_height="45dp"
@@ -86,7 +86,7 @@
             android:orientation="vertical"
             app:layout_constraintGuide_end="35dp" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/city"
             android:layout_width="0dp"
             android:layout_height="45dp"
@@ -112,7 +112,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView7"
             app:layout_constraintVertical_bias="0.723" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/firstname"
             android:layout_width="158dp"
             android:layout_height="45dp"
@@ -128,7 +128,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/lastname"
             android:layout_width="174dp"
             android:layout_height="45dp"
@@ -145,7 +145,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phone"
             android:layout_width="341dp"
             android:layout_height="45dp"
@@ -175,7 +175,7 @@
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/description"
             android:layout_width="342dp"
             android:layout_height="45dp"
@@ -188,7 +188,7 @@
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/nponame" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/nponame"
             android:layout_width="342dp"
             android:layout_height="45dp"
@@ -204,7 +204,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/url"
             android:layout_width="343dp"
             android:layout_height="45dp"

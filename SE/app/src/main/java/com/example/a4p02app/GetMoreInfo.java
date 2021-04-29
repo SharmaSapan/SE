@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.DocumentReference;
 
 import java.util.HashMap;
@@ -17,16 +19,16 @@ import java.util.Map;
 
 public class GetMoreInfo extends AppCompatActivity {
     String userPrivilege;
-    EditText unit;
-    EditText street;
-    EditText postal;
-    EditText city;
-    EditText firstname;
-    EditText lastname;
-    EditText phone;
-    EditText description;
-    EditText nponame;
-    EditText url;
+    TextInputEditText unit;
+    TextInputEditText street;
+    TextInputEditText postal;
+    TextInputEditText city;
+    TextInputEditText firstname;
+    TextInputEditText lastname;
+    TextInputEditText phone;
+    TextInputEditText description;
+    TextInputEditText nponame;
+    TextInputEditText url;
     Button save;
     TextView np;
 
@@ -35,17 +37,18 @@ public class GetMoreInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_more_info);
         userData.getInstance().updateData();
-        unit = (EditText) findViewById(R.id.unit);
-        street = (EditText) findViewById(R.id.street);
-        postal = (EditText) findViewById(R.id.postal);
-        city = (EditText) findViewById(R.id.city);
-        firstname = (EditText) findViewById(R.id.firstname);
-        lastname = (EditText) findViewById(R.id.lastname);
-        phone = (EditText) findViewById(R.id.phone);
-        description = (EditText) findViewById(R.id.description);
-        nponame = (EditText) findViewById(R.id.nponame);
-        url = (EditText) findViewById(R.id.url);
-        np = (TextView) findViewById(R.id.textView5);
+
+        unit = findViewById(R.id.unit);
+        street = findViewById(R.id.street);
+        postal = findViewById(R.id.postal);
+        city = findViewById(R.id.city);
+        firstname = findViewById(R.id.firstname);
+        lastname = findViewById(R.id.lastname);
+        phone = findViewById(R.id.phone);
+        description = findViewById(R.id.description);
+        nponame = findViewById(R.id.nponame);
+        url = findViewById(R.id.url);
+        np = findViewById(R.id.textView5);
         userPrivilege = userData.getInstance().getUser_privilege();
 
         if (userPrivilege == "npo") {

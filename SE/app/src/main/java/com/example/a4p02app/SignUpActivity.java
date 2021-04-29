@@ -3,22 +3,19 @@ package com.example.a4p02app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.a4p02app.data.Firestore;
+import com.example.a4p02app.data.FirebaseFunctions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
@@ -136,8 +133,8 @@ public class SignUpActivity extends AppCompatActivity {
                                 startActivity(intent);
 
                             } else {
-                                String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
-                                Log.d(TAG, "createUserWithEmail:failure -> " + errorCode);
+                                //String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
+                                //Log.d(TAG, "createUserWithEmail:failure -> " + errorCode);
 
                                 if (task.getException() instanceof FirebaseAuthUserCollisionException)
                                     Toast.makeText(this, "Email already in use.", Toast.LENGTH_SHORT).show();
