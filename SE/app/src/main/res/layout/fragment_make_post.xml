@@ -134,6 +134,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/Upload"
+        android:layout_width="103dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="58dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="265dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@color/teal_darkgrey"
+        android:text="Upload"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputlayer5" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

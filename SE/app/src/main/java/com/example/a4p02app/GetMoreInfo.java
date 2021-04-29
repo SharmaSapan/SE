@@ -51,13 +51,13 @@ public class GetMoreInfo extends AppCompatActivity {
         np = findViewById(R.id.textView5);
         userPrivilege = userData.getInstance().getUser_privilege();
 
-        if (userPrivilege == "npo") {
+        if (userPrivilege.equalsIgnoreCase("npo")) {
             np.setVisibility(View.VISIBLE);
             description.setVisibility(View.VISIBLE);
             nponame.setVisibility(View.VISIBLE);
             url.setVisibility(View.VISIBLE);
         }
-        else if (userPrivilege == "donor") {
+        else if (userPrivilege.equalsIgnoreCase("donor")) {
             np.setVisibility(View.INVISIBLE);
             description.setVisibility(View.INVISIBLE);
             nponame.setVisibility(View.INVISIBLE);
@@ -89,7 +89,7 @@ public class GetMoreInfo extends AppCompatActivity {
                     create_details.put("user_last_name", lastname.getText().toString());
                     create_details.put("phoneNumber", phone.getText().toString());
                     create_details.put("UID", userData.getInstance().getUID());
-                    if (userPrivilege == "npo") {
+                    if (userPrivilege.equalsIgnoreCase("npo")) {
                         create_details.put("if_npo_desc", description.getText().toString());
                         create_details.put("if_npo_name", nponame.getText().toString());
                         create_details.put("if_npo_url", url.getText().toString());

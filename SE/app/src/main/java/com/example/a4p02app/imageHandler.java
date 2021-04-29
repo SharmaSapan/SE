@@ -53,11 +53,11 @@ public class imageHandler extends AppCompatActivity {
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
-    void uploadProfile() {
+    public void uploadProfile() {
         if (filepath != null) {
-            StorageReference id_path = storageRef.child(UID + "." + getFileExtension(filepath));
+            StorageReference id_path = storageRef.child(UID +"/"+ filepath.getLastPathSegment());
             id_path.putFile(filepath);
-            userData.getInstance().getDocRef().update("image_path", id_path);
+            //userData.getInstance().addField("image_path", id_path);
         }
     }
 
