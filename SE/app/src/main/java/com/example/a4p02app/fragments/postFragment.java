@@ -88,6 +88,13 @@ public class postFragment extends Fragment {
                     tags.getText().clear();
                     Toast.makeText(getActivity().getApplicationContext(), "Post uploaded!", Toast.LENGTH_SHORT).show();
 
+
+                    FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
+
+                    fragmentTransaction
+                            .replace(R.id.fragment_container, MainActivity.homeFrag)
+                            .addToBackStack(null)
+                            .commit();
                 }
             }
         });

@@ -58,9 +58,7 @@ public class PostInstrumentedTest {
         onView(withId(R.id.DropoffLocation)).perform(typeText(dropLoc), closeSoftKeyboard());
         onView(withId(R.id.Tags)).perform(typeText(tags), closeSoftKeyboard());
 
-        //onView(withId(R.id.Post)).perform(click());
-        onView(withId(R.id.postFrag)).check(matches(isDisplayed()));
-
-
+        onView(withId(R.id.Post)).perform(click());
+        onView(withId(R.id.homeFrag)).check(matches(isDisplayed()));
     }
 }
