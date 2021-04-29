@@ -29,6 +29,7 @@ public class NPOdapter extends RecyclerView.Adapter<NPOdapter.ViewHolder> implem
         npoListAll = npoListFilt;
         this.profPic = pics;
         this.clickListener = clickListener;
+        //System.out.println(npoListFilt.get(1).getName()+"------------------------"+npoListFilt.get(1).getUID());
     }
 
     @NonNull
@@ -49,7 +50,7 @@ public class NPOdapter extends RecyclerView.Adapter<NPOdapter.ViewHolder> implem
             @Override
             public void onClick(View v) {
 
-                clickListener.onRowClick(npoListFilt.get(position).getName());
+                clickListener.onRowClick(npoListFilt.get(position).getUID());
             }
         });
     }
@@ -128,6 +129,6 @@ public class NPOdapter extends RecyclerView.Adapter<NPOdapter.ViewHolder> implem
         //}
     }
     public interface RowClickListener{
-        void onRowClick(String npo);
+        void onRowClick(String uid);
     }
 }

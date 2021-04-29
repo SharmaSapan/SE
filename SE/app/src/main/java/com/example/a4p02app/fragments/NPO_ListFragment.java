@@ -39,7 +39,9 @@ public class NPO_ListFragment extends Fragment implements NPOdapter.RowClickList
     NPOdapter npoAdapter;
     ArrayList<NPO> NPOs;
     List<Integer> postPic = Arrays.asList(R.drawable.app_icon,R.drawable.blank_profile_picture,
-            R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon);
+            R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon,
+            R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.blank_profile_picture,
+            R.drawable.app_icon);
 
 
     @Nullable
@@ -50,7 +52,9 @@ public class NPO_ListFragment extends Fragment implements NPOdapter.RowClickList
 
         NPOs = new ArrayList<>();
         FirebaseFirestore fsdb = FirebaseFirestore.getInstance();
-        fsdb.collection("nonprofits").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        fsdb.collection("accounts")
+                .whereEqualTo("user_privilege","npo")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
             //adds all current field in firestore to the lists
             @Override
             public void onEvent( QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -58,9 +62,12 @@ public class NPO_ListFragment extends Fragment implements NPOdapter.RowClickList
                 NPOs.clear();
                 for(DocumentSnapshot snapshot: value) {
                     NPO npo = new NPO();
-                    npo.setName(snapshot.getId());
+                    npo.setUID(snapshot.getId());
+                    npo.setName(snapshot.getString("if_npo_name"));
                     //npo.setName(snapshot.getString("pWriter")); might need if name becomes field
                     NPOs.add(npo);
+                    //System.out.println(npo.getUID()+ "--------------------------------------------");
+                    System.out.println(npo.getName()+ "--------------------------------------------");
                 }
             }
         });
@@ -128,7 +135,7 @@ public class NPO_ListFragment extends Fragment implements NPOdapter.RowClickList
 
         FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
         Bundle args = new Bundle();
-        args.putString("name", uid);
+        args.putString("UID", uid);
         MainActivity.nonprofitFrag.setArguments(args);
         fragmentTransaction
                 .replace(R.id.fragment_container, MainActivity.nonprofitFrag)

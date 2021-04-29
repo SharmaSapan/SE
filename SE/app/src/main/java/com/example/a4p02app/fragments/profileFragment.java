@@ -107,6 +107,12 @@ public class profileFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
         inflater.inflate(R.menu.settings_menu, menu);
@@ -114,4 +120,5 @@ public class profileFragment extends Fragment {
 
 
     }
+
 }

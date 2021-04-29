@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         activeUser = mAuth.getCurrentUser();
-
+        //updateUser(activeUser);
         if (activeUser == null) {
             goLogin();
         }

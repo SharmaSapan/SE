@@ -1,11 +1,13 @@
 package com.example.a4p02app.fragments;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,7 +23,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a4p02app.userData;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -29,7 +38,7 @@ import com.google.firebase.storage.StorageReference;
 
 public class nonprofitFragment extends Fragment {
 
-    private String passedName;
+    private String passedUID;
     private String npName;
     private String npDesc;
     private String profilePicName;
@@ -60,10 +69,11 @@ public class nonprofitFragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_non_profit, container, false);
         super.onCreate(savedInstanceState);
 
-        passedName = getArguments().getString("name");
-        System.out.println(passedName + "--------------------------------------------");
+        passedUID = getArguments().getString("UID");
+        System.out.println(passedUID + "--------------------------------------------");
 
-        getFromDatabase();
+
+        getFromDatabase(passedUID);
         setInfo();
         btnAddtoFavs = v.findViewById(R.id.btnAddtoFavs);
         btnAddtoFavs.setOnClickListener(new View.OnClickListener() {
@@ -94,20 +104,33 @@ public class nonprofitFragment extends Fragment {
         //this method gets the info from the database
         //not done yet
         //for more info on this, go to https://firebase.google.com/docs/firestore/query-data/get-data
-    public void getFromDatabase() {
-            //npName = userData.getInstance().getNpo_name();
-            npName = passedName;
-            npDesc = userData.getInstance().getNpo_desc();
-            //profilePicName = userData.;
-            webURL = userData.getInstance().getNpo_url();
-            phoneNum = userData.getInstance().getPhone();
-            unitNum = userData.getInstance().getAddress_unit();
-            //sName = userData.getInstance().getAddress_street();
-            city = userData.getInstance().getAddress_city();
-            province = userData.getInstance().getAddress_province();
-            postalCode = userData.getInstance().getAddress_postal();
-            emailAddress = userData.getInstance().getEmail();
-
+        public void getFromDatabase(String passedUID) {
+            DocumentReference docRef = db.collection("accounts").document(passedUID);;
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        assert document != null;
+                        if (document.exists()) {
+                            // Log.d("TAG: ", "DocumentSnapshot data: " + document.getData());
+                            npName = document.getString("if_npo_name");
+                            npDesc = document.getString("if_npo_desc");
+                            //profilePicName = document.getString("profilePic");
+                            webURL = document.getString("if_npo_url");
+                            address = document.getString("address");
+                            phoneNum = document.getString("phoneNumber");
+                            emailAddress = document.getString("user_email");
+                            //update the page
+                            setInfo();
+                        } else {
+                            Log.d("TAG: ", "No such document");
+                        }
+                    } else {
+                        Log.d("TAG: ", "get failed with ", task.getException());
+                    }
+                }
+            });
         }
 
 
