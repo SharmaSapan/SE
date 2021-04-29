@@ -72,7 +72,7 @@ public class homeFragment extends Fragment implements NPOdapter.RowClickListener
                     post.setContent(snapshot.getString("description"));
                     post.setName(snapshot.getString("title"));
                     post.setUID(snapshot.getId());
-                    //post.setDate((Objects.requireNonNull(snapshot.getTimestamp("post_date"))).toDate().toString());
+                    post.setDate((Objects.requireNonNull(snapshot.getTimestamp("post_date"))).toDate().toString());
                     //dont know why this keeps returning a null -Alex
                     postList.add(post);
 
