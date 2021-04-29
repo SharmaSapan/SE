@@ -1,5 +1,6 @@
 package com.example.a4p02app.fragments;
 
+import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Build;
@@ -8,7 +9,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,43 +45,44 @@ import java.util.Objects;
 public class postDetailsFragment extends Fragment {
 
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(userData.getInstance().getUID());
-    private String first_name;
-    private String last_name;
-    private String idtype;
-    private String phoneNum;
-    private String unitNum;
-    private String sName;
-    private String city;
-    private String province;
-    private String postalCode;
-    private String emailAddress;
-    private String passedUID;
-    private String passedPostID;
+    String postTitle;
+    String postDesc;
+    String postItem;
+    String postTime;
+    String postDrop;
+    String passedUID;
+    String passedPostID;
     private View v;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Button linkNPO;
-    private Button btnDonations;
-    private Button btnMessages;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        v = inflater.inflate(R.layout.fragment_profile, container, false);
+        v = inflater.inflate(R.layout.fragment_post_details, container, false);
 
 
 
 
 
         linkNPO = (Button) v.findViewById(R.id.linkToNPO);
+
+
+        passedUID = getArguments().getString("UID");
+        passedPostID = getArguments().getString("authid");
+        System.out.println(passedUID + "---------------------------ID-----------------");
+
+        getFromDatabase(passedUID, passedPostID);
+
         linkNPO.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
                 Bundle args = new Bundle();
-                //args.putString("UID", uid);
+                args.putString("UID", passedUID);
                 MainActivity.nonprofitFrag.setArguments(args);
                 fragmentTransaction
                         .replace(R.id.fragment_container, MainActivity.nonprofitFrag)
@@ -90,13 +91,13 @@ public class postDetailsFragment extends Fragment {
             }
         });
 
-        passedUID = getArguments().getString("UID");
-        passedPostID = getArguments().getString("postID");
-        System.out.println(passedUID + "---------------------------ID-----------------");
-        String uid = userData.getInstance().getUID();
+
+        /*String uid = userData.getInstance().getUID();
         /*DocumentReference fav_reference = userData.getInstance()
                 .getDocRef().collection("favourites").document();
-        db.collection("accounts/"+uid+"/favourites")
+
+        db.collectionGroup("accounts")
+                .whereEqualTo("")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
@@ -113,9 +114,7 @@ public class postDetailsFragment extends Fragment {
                     }
                 });
 
-
          */
-
         return v;
     }
 
@@ -147,7 +146,7 @@ public class postDetailsFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    public void getFromDatabase(String passedUID) {
+    public void getFromDatabase(String passedUID, String passedPostID) {
         DocumentReference docRef = db.collection("accounts/"+passedUID+"/post")
                 .document(passedPostID);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -158,15 +157,18 @@ public class postDetailsFragment extends Fragment {
                     assert document != null;
                     if (document.exists()) {
                         // Log.d("TAG: ", "DocumentSnapshot data: " + document.getData());
-                        //npName = document.getString("title");
-                        //npDesc = document.getString("description");
+                        postTitle = document.getString("title");
+                        postDesc = document.getString("description");
+                        postItem = document.getString("item");
+                        postTime = document.getTimestamp("post_date").toDate().toString();
+                        postDrop = document.getString("dropoff_location");
                         //profilePicName = document.getString("profilePic");
                         //webURL = document.getString("if_npo_url");
                         //address = document.getString("address");
-                        phoneNum = document.getString("phoneNumber");
-                        emailAddress = document.getString("user_email");
+                        //phoneNum = document.getString("phoneNumber");
+                        //emailAddress = document.getString("user_email");
                         //update the page
-                        //setInfo();
+                        setInfo();
                     } else {
                         Log.d("TAG: ", "No such document");
                     }
@@ -179,21 +181,33 @@ public class postDetailsFragment extends Fragment {
 
 
 
-    //this method updates the page to match the non-profit's info
-    /*public void setInfo() {
-        //update non-profit's name
-        TextView nonProfitName = (TextView) v.findViewById(R.id.npNameDisplay);
-        nonProfitName.setText(npName);
+    //this method updates the page to match the post's info
+    public void setInfo() {
+        //update post Details
+        TextView pTitle = (TextView) v.findViewById(R.id.postTitle);
+        pTitle.setText(postTitle);
+
+        TextView pDesc = (TextView) v.findViewById(R.id.postDesc);
+        pDesc.setText(postDesc);
+
+        TextView pDrop = (TextView) v.findViewById(R.id.dropoff);
+        pDrop.setText(postDrop);
+
+        TextView pItem = (TextView) v.findViewById(R.id.item);
+        pItem.setText(postItem);
+
+        //postDate as well
+
         //update profile picture
-        ImageView nonProfitPic = (ImageView) v.findViewById(R.id.profilePic);
+        //ImageView nonProfitPic = (ImageView) v.findViewById(R.id.profilePic);
 //        if (profilePicName.equals("") || profilePicName == null) {
 //            profilePicName = "blank_profile_picture";
 //        }
-        Glide.with(nonprofitFragment.this).load(storageReference).into(nonProfitPic);
+        //Glide.with(nonprofitFragment.this).load(storageReference).into(nonProfitPic);
         //update description
-        TextView nonProfitDescription = (TextView) v.findViewById(R.id.profilePart);
-        String s = npDesc + "\n\n Address: " + getAddressAsString() + "\nPhone number: " + phoneNum + "\nEmail Address: " + emailAddress;
-        nonProfitDescription.setText(s);
-    }*/
+
+        //String s = npDesc + "\n\n Address: " + getAddressAsString() + "\nPhone number: " + phoneNum + "\nEmail Address: " + emailAddress;
+        //nonProfitDescription.setText(s);
+    }
 
 }

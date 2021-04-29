@@ -43,7 +43,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-public class homeFragment extends Fragment implements NPOdapter.RowClickListener{
+public class homeFragment extends Fragment implements PostAdapter.RowClickListener{
 
 
     private View homeview;
@@ -87,6 +87,7 @@ public class homeFragment extends Fragment implements NPOdapter.RowClickListener
                     post.setContent(snapshot.getString("description"));
                     post.setName(snapshot.getString("title"));
                     post.setUID(snapshot.getId());
+                    post.setAuthID(snapshot.getString("author_id"));
 
                     post.setDateTime((Objects.requireNonNull(snapshot.getTimestamp("post_date"))).toDate());
                     //for sorting by date
@@ -170,16 +171,17 @@ public class homeFragment extends Fragment implements NPOdapter.RowClickListener
     }
 
     @Override
-    public void onRowClick(String uid) {
+    public void onRowClick(String uid, String authid) {
         //Fragment fragment = nonprofitFragment.newInstance(npo);
 
         FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
         Bundle args = new Bundle();
         args.putString("UID", uid);
+        args.putString("authid",authid);
 
-        MainActivity.nonprofitFrag.setArguments(args);
+        MainActivity.postDetailsFrag.setArguments(args);
         fragmentTransaction
-                .replace(R.id.fragment_container, MainActivity.nonprofitFrag)
+                .replace(R.id.fragment_container, MainActivity.postDetailsFrag)
                 .addToBackStack(null)
                 .commit();
 
@@ -188,6 +190,7 @@ public class homeFragment extends Fragment implements NPOdapter.RowClickListener
         //MainActivity.bottomAppBar.getMenu().getItem(2).setChecked(false);
         //MainActivity.bottomAppBar.getMenu().getItem(3).setChecked(false);
         //MainActivity.bottomAppBar.getMenu().getItem(4).setChecked(false);
+
     }
 }
 

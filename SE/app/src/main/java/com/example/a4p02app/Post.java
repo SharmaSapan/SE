@@ -9,6 +9,7 @@ public class Post {
     private String date;
     private String uid;
     private Date datetime;
+    private String authid;
 
     public String getName(){
         return name;
@@ -48,5 +49,13 @@ public class Post {
 
     public void setDateTime(Date pDate){
         this.datetime=pDate;
+    }
+
+    public String getAuthID(){
+        return authid;
+    }
+
+    public void setAuthID(String authuid){
+        this.authid = authuid;
     }
 }

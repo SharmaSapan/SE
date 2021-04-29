@@ -42,6 +42,7 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventList
 public class MainActivity extends AppCompatActivity {
 
 
+
     //Firebase
     private FirebaseUser activeUser;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -53,11 +54,12 @@ public class MainActivity extends AppCompatActivity {
 
     //Window Fragments
     public FragmentManager fragmentManager;
-    public static profileFragment profileFrag;
-    public static favouriteFragment favFrag;
+    private static profileFragment profileFrag;
+    private static favouriteFragment favFrag;
     public static homeFragment homeFrag;
+    public static postDetailsFragment postDetailsFrag;
     public static Fragment nonprofitFrag;
-    public static postFragment postFrag;
+    private static postFragment postFrag;
     private static infoFragment infoFrag;
     private NPO_ListFragment npoListFrag;
 
@@ -69,19 +71,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Check for emulator connection
-        if (isTesting) {
-            if (!begunTest) {
-                try {
-                    FirebaseFunctions.checkForEmulator(mAuth, db);
-                } catch (Exception e) {
-                    System.err.println("Already initialized");
-                }
-                begunTest = false;
+        if (!begunTest) {
+            try {
+                FirebaseFunctions.checkForEmulator(mAuth, db);
             }
+            catch (Exception e){
+                System.err.println("Already initialized");
+            }
+            begunTest = false;
         }
 
-        //Check for previous login
+
         activeUser = mAuth.getCurrentUser();
         if (activeUser == null) {
             goLogin();
@@ -129,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
         postFrag = new postFragment();
         infoFrag = new infoFragment();
         npoListFrag = new NPO_ListFragment();
+        postDetailsFrag = new postDetailsFragment();
 
         fragmentManager = getFragmentManager();
         changeFragment(1);

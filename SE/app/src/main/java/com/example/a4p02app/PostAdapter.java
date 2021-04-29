@@ -23,9 +23,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
     List<Integer> profPic;
     List<Post> postListFilt;
     List<Post> postListAll;
-    NPOdapter.RowClickListener clickListener;
+    PostAdapter.RowClickListener clickListener;
 
-    public PostAdapter(List<Post> postListFilt, List<Integer> pics, NPOdapter.RowClickListener clickListener) {
+    public PostAdapter(List<Post> postListFilt, List<Integer> pics, PostAdapter.RowClickListener clickListener) {
         this.postListFilt = postListFilt;
         postListAll = postListFilt;
         this.profPic = pics;
@@ -53,7 +53,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
             @Override
             public void onClick(View v) {
 
-                clickListener.onRowClick(postListFilt.get(position).getUID());
+                clickListener.onRowClick(postListFilt.get(position).getUID(),postListFilt.get(position).getAuthID());
+                //clickListener.onRowClick(postListFilt.get(position).getAuthID());
             }
         });
     }
@@ -126,6 +127,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
         }
     }
     public interface RowClickListener{
-        void onRowClick(String uid);
+        void onRowClick(String uid, String authid);
     }
 }
