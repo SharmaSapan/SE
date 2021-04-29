@@ -92,7 +92,7 @@ public class postFragment extends Fragment {
                     post_data.put("post_type", userData.getInstance().getUser_privilege());
                     post_data.put("title", title.getText().toString());
                     post_data.put("tags", tags.getText().toString());
-                    if (filePath!=null){
+                    if (filePath != null) {
                         post_data.put("image_path", filePath.getLastPathSegment().toString());
                     }
                     if (userData.getInstance().getUser_privilege() == "npo") {
@@ -106,6 +106,12 @@ public class postFragment extends Fragment {
                     dropoff_location.getText().clear();
                     tags.getText().clear();
                     Toast.makeText(getActivity().getApplicationContext(), "Post uploaded!", Toast.LENGTH_SHORT).show();
+
+                    FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
+                    fragmentTransaction
+                            .replace(R.id.fragment_container, MainActivity.homeFrag)
+                            .addToBackStack(null)
+                            .commit();
                 }
             }
         });

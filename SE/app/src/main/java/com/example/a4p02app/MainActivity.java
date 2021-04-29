@@ -53,11 +53,11 @@ public class MainActivity extends AppCompatActivity {
 
     //Window Fragments
     public FragmentManager fragmentManager;
-    private static profileFragment profileFrag;
-    private static favouriteFragment favFrag;
-    private static homeFragment homeFrag;
+    public static profileFragment profileFrag;
+    public static favouriteFragment favFrag;
+    public static homeFragment homeFrag;
     public static Fragment nonprofitFrag;
-    private static postFragment postFrag;
+    public static postFragment postFrag;
     private static infoFragment infoFrag;
     private NPO_ListFragment npoListFrag;
 
@@ -69,17 +69,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (!begunTest) {
-            try {
-                FirebaseFunctions.checkForEmulator(mAuth, db);
+        //Check for emulator connection
+        if (isTesting) {
+            if (!begunTest) {
+                try {
+                    FirebaseFunctions.checkForEmulator(mAuth, db);
+                } catch (Exception e) {
+                    System.err.println("Already initialized");
+                }
+                begunTest = false;
             }
-            catch (Exception e){
-                System.err.println("Already initialized");
-            }
-            begunTest = false;
         }
 
-
+        //Check for previous login
         activeUser = mAuth.getCurrentUser();
         if (activeUser == null) {
             goLogin();
