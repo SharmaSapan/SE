@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     private NPO_ListFragment npoListFrag;
 
     public boolean begunTest = false;
-    public static boolean isTesting = true;
+    public static boolean isTesting = false;
 
 
     @Override
