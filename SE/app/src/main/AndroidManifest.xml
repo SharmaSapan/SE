@@ -24,7 +24,8 @@
             android:name=".SignUpActivity"
             android:theme="@style/Theme.4P02App.NoActionBar" />
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashScreen"
+            android:theme="@style/Theme.4P02App.NoActionBar"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,6 +33,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"/>
+
 
         <uses-library android:name="android.test.base"
             android:required="false" />
