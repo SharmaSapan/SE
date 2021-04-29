@@ -5,43 +5,13 @@
     android:id="@+id/postFrag"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="@color/white"
-    tools:context="com.example.a4p02app.makePost">
+    tools:context="com.example.a4p02app.postFragment">
 
-
-    <EditText
-        android:id="@+id/Author_id"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:hint="Author id"
-        android:inputType="textPersonName"
-        android:selectAllOnFocus="true"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="16dp" />
-
-
-    <EditText
-        android:id="@+id/Description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/Author_id"
-        android:layout_alignLeft="@+id/Author_id"
-        android:layout_marginTop="12dp"
-        android:hint="Description"
-        android:inputType="textShortMessage"
-        app:layout_constraintEnd_toEndOf="@+id/Author_id"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/Author_id"
-        app:layout_constraintTop_toBottomOf="@+id/Author_id"
-        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/DropoffLocation"
@@ -49,13 +19,16 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/Description"
         android:layout_alignLeft="@+id/Description"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="430dp"
+        android:layout_marginBottom="200dp"
         android:hint="Dropoff Location"
         android:inputType="textPostalAddress"
-        app:layout_constraintEnd_toEndOf="@+id/Description"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/Description"
-        app:layout_constraintTop_toBottomOf="@+id/Description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/Tags"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/Tags"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         tools:ignore="MissingConstraints" />
 
     <EditText
@@ -64,74 +37,28 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/DropoffLocation"
         android:layout_alignLeft="@+id/DropoffLocation"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="175dp"
+        android:layout_marginBottom="420dp"
         android:hint="Item"
         android:inputType="textShortMessage"
-        app:layout_constraintEnd_toEndOf="@+id/DropoffLocation"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/DropoffLocation"
-        app:layout_constraintTop_toBottomOf="@+id/DropoffLocation"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/LocationGeoStamp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/Item"
-        android:layout_alignLeft="@+id/Item"
-        android:layout_marginTop="16dp"
-        android:hint="Location Geo Stamp"
-        android:inputType="textShortMessage"
-        app:layout_constraintEnd_toEndOf="@+id/Item"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/Item"
-        app:layout_constraintTop_toBottomOf="@+id/Item"
-        tools:ignore="MissingConstraints" />
-
-
-    <EditText
-        android:id="@+id/PostDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/LocationGeoStamp"
-        android:layout_alignLeft="@+id/LocationGeoStamp"
-        android:layout_marginTop="8dp"
-        android:hint="Post Date"
-        android:inputType="date"
-        app:layout_constraintEnd_toEndOf="@+id/LocationGeoStamp"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/LocationGeoStamp"
-        app:layout_constraintTop_toBottomOf="@+id/LocationGeoStamp"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/PostType"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/PostDate"
-        android:layout_alignLeft="@+id/PostDate"
-        android:layout_marginTop="8dp"
-        android:hint="Post Type"
-        android:inputType="textShortMessage"
-        app:layout_constraintEnd_toEndOf="@+id/PostDate"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/PostDate"
-        app:layout_constraintTop_toBottomOf="@+id/PostDate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/Title"
+        app:layout_constraintStart_toStartOf="@+id/Title"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/PostType"
-        android:layout_alignLeft="@+id/PostType"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="114dp"
+        android:layout_marginBottom="480dp"
         android:hint="Title"
         android:inputType="textShortMessage"
-        app:layout_constraintEnd_toEndOf="@+id/PostType"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/PostType"
-        app:layout_constraintTop_toBottomOf="@+id/PostType"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <EditText
@@ -140,35 +67,64 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/Title"
         android:layout_alignLeft="@+id/Title"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="359dp"
+        android:layout_marginBottom="240dp"
         android:hint="Tags"
         android:inputType="text"
-        app:layout_constraintEnd_toEndOf="@+id/Title"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/Title"
-        app:layout_constraintTop_toBottomOf="@+id/Title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/Description"
+        app:layout_constraintStart_toStartOf="@+id/Description"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/Post"
         android:layout_width="103dp"
         android:layout_height="51dp"
-        android:layout_marginTop="44dp"
-        android:backgroundTint="@color/teal_700"
+        android:layout_marginTop="558dp"
+        android:layout_marginBottom="114dp"
+        android:backgroundTint="?attr/colorControlActivated"
         android:onClick="goHome"
         android:text="Post"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/Tags"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/Tags"
-        app:layout_constraintTop_toBottomOf="@+id/Tags"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintEnd_toEndOf="@+id/DropoffLocation"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="@+id/DropoffLocation"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
+
+    <EditText
+        android:id="@+id/Description"
+        android:layout_width="381dp"
+        android:layout_height="106dp"
+        android:layout_marginTop="241dp"
+        android:layout_marginBottom="300dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Description"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/Item"
+        app:layout_constraintStart_toStartOf="@+id/Item"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="206dp" />
+        android:layout_marginStart="86dp"
+        android:layout_marginTop="93dp"
+        android:layout_marginEnd="86dp"
+        android:layout_marginBottom="577dp"
+        android:text="Create Post"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.35"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.85"
+        tools:text="Create Post" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

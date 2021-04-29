@@ -1,6 +1,7 @@
 package com.example.a4p02app.fragments;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,25 +12,27 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.example.a4p02app.MainActivity;
 import com.example.a4p02app.R;
 import com.example.a4p02app.userData;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class postFragment extends Fragment {
 
     Button Post;
-    EditText author_id;
     EditText description;
     EditText dropoff_location;
     EditText item;
     EditText location_geostamp;
-    EditText post_type;
-    EditText post_date;
+    String post_type;
+    String post_date;
     EditText tags;
     EditText title;
 
@@ -52,15 +55,14 @@ public class postFragment extends Fragment {
         // get time from system post_date
         tags = (EditText) v.findViewById(R.id.Tags);
         Post = (Button) v.findViewById(R.id.Post);
-
+        Date currentTime = Calendar.getInstance().getTime();
 
         Post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //if statement to ensure none of the fields are empty
-                if (author_id.getText().toString().isEmpty() || description.getText().toString().isEmpty() || dropoff_location.getText().toString().isEmpty()
-                        || item.getText().toString().isEmpty() || location_geostamp.getText().toString().isEmpty() || post_type.getText().toString().isEmpty() ||
-                        post_date.getText().toString().isEmpty() || tags.getText().toString().isEmpty() || title.getText().toString().isEmpty()) {
+                if (description.getText().toString().isEmpty() || dropoff_location.getText().toString().isEmpty() || item.getText().toString().isEmpty() || location_geostamp.getText().toString().isEmpty() ||
+                        tags.getText().toString().isEmpty() || title.getText().toString().isEmpty()) {
 
                     Toast.makeText(getActivity().getApplicationContext(), "Data Missing", Toast.LENGTH_SHORT).show();
 
@@ -74,8 +76,7 @@ public class postFragment extends Fragment {
                     post_data.put("description", description.getText().toString());
                     post_data.put("dropoff_location", dropoff_location.getText().toString()); //
                     post_data.put("item", item.getText().toString());
-                    post_data.put("location_geostamp", location_geostamp.getText().toString()); //
-                    post_data.put("post_date", post_date.getText().toString()); //
+                    post_data.put("post_date", currentTime); //
                     post_data.put("post_type", userData.getInstance().getUser_privilege());
                     post_data.put("title", title.getText().toString());
                     post_data.put("tags", tags.getText().toString());
@@ -91,5 +92,17 @@ public class postFragment extends Fragment {
 
         return v;
     }
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+
+        super.onCreate(savedInstanceState);
+
+        // Set title bar
+        ((MainActivity) getActivity())
+                .setActionBarTitle("Donation Machine");
+
+    }
+
 }
 
