@@ -44,6 +44,7 @@ public class userData {
     private String npo_name;
     private String npo_url;
     private String id;
+    private String image_path;
 
     // to get single instance of the class and prevent other classes to create an instance
     public static synchronized userData getInstance(){
@@ -79,6 +80,7 @@ public class userData {
                     npo_name = snapshot.getString("if_npo_name");
                     npo_url = snapshot.getString("if_npo_url");
                     id = snapshot.getString("UID");
+                    image_path = snapshot.getString("image_path");
                 }
                 else System.out.println("No document at user data fetch");
             }
@@ -107,6 +109,7 @@ public class userData {
                     npo_name = snapshot.getString("if_npo_name");
                     npo_url = snapshot.getString("if_npo_url");
                     id = snapshot.getString("UID");
+                    image_path = snapshot.getString("image_path");
                 }
                 else System.out.println("No document at user data fetch");
             }
@@ -135,6 +138,9 @@ public class userData {
 
     public String getAddress_city() {
         return address_city;
+    }
+    public String getImage_path() {
+        return image_path;
     }
 
     public void setAddress_city(String address_city) {

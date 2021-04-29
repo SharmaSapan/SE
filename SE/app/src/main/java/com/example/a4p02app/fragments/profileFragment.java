@@ -11,11 +11,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
 import com.example.a4p02app.LoginActivity;
 import com.example.a4p02app.MainActivity;
 import com.example.a4p02app.R;
@@ -27,7 +29,7 @@ import com.google.firebase.storage.StorageReference;
 
 public class profileFragment extends Fragment {
 
-    private StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(userData.getInstance().getUID());
+    private StorageReference storageReference;
     private String first_name;
     private String last_name;
     private String idtype;
@@ -40,10 +42,15 @@ public class profileFragment extends Fragment {
     private String emailAddress;
 
     private View v;
-
+    private ImageView newpic;
+    private ImageView pic;
     private Button btnEdit;
     private Button btnDonations;
     private Button btnMessages;
+    private TextView profileName;
+    private TextView profileEmail;
+    private TextView profileAddress;
+    private String path;
 
     @Nullable
     @Override
@@ -61,16 +68,21 @@ public class profileFragment extends Fragment {
         province = userData.getInstance().getAddress_province();
         postalCode = userData.getInstance().getAddress_postal();
         emailAddress = userData.getInstance().getEmail();
+        // image handler
+        pic = v.findViewById(R.id.pic);
+        path = userData.getInstance().getUID()+"/"+userData.getInstance().getImage_path();
+        storageReference = FirebaseStorage.getInstance().getReference().child(path);
+        Glide.with(getActivity().getApplicationContext()).load(storageReference).into(pic);
 
-        TextView profileName = (TextView) v.findViewById(R.id.profileName);
+        profileName = v.findViewById(R.id.profileName);
         String combine = first_name +" "+ last_name;
         profileName.setText(combine);
 
-        TextView profileEmail = (TextView) v.findViewById(R.id.profileEmail);
+        profileEmail = v.findViewById(R.id.profileEmail);
         String combineE = emailAddress + "\n" + phoneNum;
         profileEmail.setText(combineE);
 
-        TextView profileAddress = (TextView) v.findViewById(R.id.profileAddress);
+        profileAddress = v.findViewById(R.id.profileAddress);
         String combineA = unitNum + " " + sName + "\n" + city + " " + province + "\n" + postalCode;
         profileAddress.setText(combineA);
 
@@ -85,7 +97,7 @@ public class profileFragment extends Fragment {
 
 
 
-        btnEdit = (Button) v.findViewById(R.id.btnEdit);
+        btnEdit = v.findViewById(R.id.btnEdit);
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
