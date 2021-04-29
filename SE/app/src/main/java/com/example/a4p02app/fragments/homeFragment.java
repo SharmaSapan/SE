@@ -55,6 +55,14 @@ public class homeFragment extends Fragment implements NPOdapter.RowClickListener
             R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.blank_profile_picture,
             R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon,
             R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.blank_profile_picture,
+            R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.app_icon,
+            R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.blank_profile_picture,
+            R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.app_icon,
+            R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.blank_profile_picture,
+            R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.app_icon,
+            R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.blank_profile_picture,
+            R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.app_icon,
+            R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.blank_profile_picture,
             R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon);
 
     @Nullable

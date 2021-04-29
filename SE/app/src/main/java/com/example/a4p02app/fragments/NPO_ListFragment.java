@@ -46,7 +46,17 @@ public class NPO_ListFragment extends Fragment implements NPOdapter.RowClickList
     List<Integer> postPic = Arrays.asList(R.drawable.app_icon,R.drawable.blank_profile_picture,
             R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon,
             R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.blank_profile_picture,
-            R.drawable.app_icon);
+            R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon,
+            R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.blank_profile_picture,
+            R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.app_icon,
+            R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.blank_profile_picture,
+            R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.app_icon,
+            R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.blank_profile_picture,
+            R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.app_icon,
+            R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.blank_profile_picture,
+            R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.app_icon,
+            R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.blank_profile_picture,
+            R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon);
 
 
     @Nullable
