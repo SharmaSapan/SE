@@ -106,10 +106,6 @@ public class nonprofitFragment extends Fragment {
                         }
                     }
                 });
-        //if(passedUID){
-
-
-        //}
 
 
         getFromDatabase(passedUID);
