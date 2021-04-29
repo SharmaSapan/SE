@@ -22,6 +22,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/profilePart" />
 
+    <ImageButton
+        android:id="@+id/btnRemFromFavs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:background="@color/fui_transparent"
+        android:contentDescription="TODO"
+        android:tint="@color/teal_700"
+        android:src="@drawable/ic_baseline_star_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.112"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profilePart" />
+
     <TextView
         android:id="@+id/npNameDisplay"
         android:layout_width="match_parent"

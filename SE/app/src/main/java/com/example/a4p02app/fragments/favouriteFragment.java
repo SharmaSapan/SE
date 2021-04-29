@@ -82,14 +82,10 @@ public class favouriteFragment extends Fragment implements NPOdapter.RowClickLis
                     public void onEvent( QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
                         favs.clear();
-                        //NPO npotest = new NPO();
-                        //npotest.setName("Habitat For Humanity");
-                        //favs.add(npotest);
                         for(DocumentSnapshot snapshot: value) {
                             NPO npo = new NPO();
                             npo.setName(snapshot.getString("name"));
                             npo.setUID(snapshot.getString("UID"));
-                            //npo.setName(snapshot.getString("pWriter")); might need if name becomes field
                             favs.add(npo);
                             System.out.println(npo.getName()+"-------------------------------");
                         }

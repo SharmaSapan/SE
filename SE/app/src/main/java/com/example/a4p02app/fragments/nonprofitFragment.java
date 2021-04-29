@@ -2,10 +2,12 @@ package com.example.a4p02app.fragments;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +19,7 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.example.a4p02app.LoginActivity;
+import com.example.a4p02app.NPO;
 import com.example.a4p02app.R;
 
 import android.widget.ImageButton;
@@ -26,12 +29,16 @@ import android.widget.Toast;
 
 import com.example.a4p02app.userData;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
@@ -39,6 +46,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 //the default profile picture is from https://pixabay.com/vectors/blank-profile-picture-mystery-man-973460/
 
@@ -63,6 +71,7 @@ public class nonprofitFragment extends Fragment {
     private ImageView btnOrg;
     private ImageView btnWeb;
     private ImageButton btnAddtoFavs;
+    private ImageButton btnRemFromFavs;
 
     //get an instance of Firebase so that the firestore database can be used
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -75,25 +84,89 @@ public class nonprofitFragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_non_profit, container, false);
         super.onCreate(savedInstanceState);
 
+
         passedUID = getArguments().getString("UID");
         System.out.println(passedUID + "---------------------------ID-----------------");
+        String uid = userData.getInstance().getUID();
+        DocumentReference fav_reference = userData.getInstance()
+                .getDocRef().collection("favourites").document();
+        db.collection("accounts/"+uid+"/favourites")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
+                    @Override
+                    public void onEvent(QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                        for (DocumentSnapshot snapshot : value) {
+                            if(Objects.equals(snapshot.getString("UID"), passedUID)){
+                                showIsFav();
+                                break;
+                            }else{
+                                addToFav();
+                            }
+                        }
+                    }
+                });
+        //if(passedUID){
+
+
+        //}
 
 
         getFromDatabase(passedUID);
         setInfo();
+        btnRemFromFavs= v.findViewById(R.id.btnRemFromFavs);
         btnAddtoFavs = v.findViewById(R.id.btnAddtoFavs);
         btnAddtoFavs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DocumentReference post_reference = userData.getInstance().getDocRef().collection("favourites").document();//tries to access the documents in the post collection
-                Map<String, Object> post_data = new HashMap<>();
-                post_data.put("UID", passedUID);
-                post_data.put("name", npName);
-                post_reference.set(post_data);
-                Toast.makeText(v.getContext(), "Added to Favourites!", Toast.LENGTH_SHORT).show();
+                    DocumentReference fav_reference = userData.getInstance()
+                            .getDocRef().collection("favourites").document();
+                    //tries to access the documents in the favourites collection
+                    Map<String, Object> fav_data = new HashMap<>();
+                    fav_data.put("UID", passedUID);
+                    fav_data.put("name", npName);
+                    fav_reference.set(fav_data);
+                    Toast.makeText(v.getContext(), "Added to Favourites!", Toast.LENGTH_SHORT).show();
+
+                    //NPO npo = new NPO();
+                    //npo.setFavourite();
+                }
+
+        });
+        btnRemFromFavs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //db.collection("accounts/"+uid+"/favourites")
+                CollectionReference favRef = db.collection("accounts/"+uid+"/favourites");
+                Query query = favRef.whereEqualTo("UID", passedUID);
+                query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot document : task.getResult()) {
+                                favRef.document(document.getId()).delete();
+                            }
+                        }
+                    }
+                });
+                Toast.makeText(v.getContext(), "Removed From Favourites", Toast.LENGTH_SHORT).show();
+
             }
+
         });
         return v;
+    }
+
+    private void addToFav() {
+
+        btnRemFromFavs.setVisibility(View.GONE);
+        btnAddtoFavs.setVisibility(View.VISIBLE);
+    }
+
+    private void showIsFav() {
+        btnAddtoFavs.setVisibility(View.GONE);
+        btnRemFromFavs.setVisibility(View.VISIBLE);
+
     }
 
     @Override
