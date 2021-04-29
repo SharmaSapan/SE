@@ -89,7 +89,10 @@ public class SignUpActivity extends AppCompatActivity {
                                 Log.d(TAG, "createUserWithEmail:success");
 
                                 int accountType = 0;
-                                if (!rdoPersonal.isChecked()){
+                                if (rdoPersonal.isChecked()){
+                                    accountType = 0;
+                                }
+                                else if (rdoBusiness.isChecked()){
                                     accountType = 1;
                                 }
 

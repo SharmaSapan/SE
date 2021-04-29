@@ -81,7 +81,12 @@ public class postFragment extends Fragment {
                         post_data.put("if_npo_url", userData.getInstance().getNpo_url());
                     }
                     post_reference.set(post_data);
-
+                    title.getText().clear();
+                    description.getText().clear();
+                    item.getText().clear();
+                    dropoff_location.getText().clear();
+                    tags.getText().clear();
+                    Toast.makeText(getActivity().getApplicationContext(), "Post uploaded!", Toast.LENGTH_SHORT).show();
 
                 }
             }
