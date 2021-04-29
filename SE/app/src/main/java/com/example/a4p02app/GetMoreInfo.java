@@ -3,6 +3,7 @@ package com.example.a4p02app;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,7 +31,21 @@ public class GetMoreInfo extends AppCompatActivity {
     TextInputEditText nponame;
     TextInputEditText url;
     Button save;
+    Button Upload_im;
     TextView np;
+
+    private final int PICK_IMAGE_REQUEST = 71;
+    Uri filePath;
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            filePath = data.getData();
+            imageHandler ima = new imageHandler(filePath);
+            ima.uploadProfile();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +80,7 @@ public class GetMoreInfo extends AppCompatActivity {
         }
 
         save = (Button) findViewById(R.id.save);
+        Upload_im = (Button) findViewById(R.id.Upload_im);
 
         save.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -89,6 +105,9 @@ public class GetMoreInfo extends AppCompatActivity {
                     create_details.put("user_last_name", lastname.getText().toString());
                     create_details.put("phoneNumber", phone.getText().toString());
                     create_details.put("UID", userData.getInstance().getUID());
+                    if (filePath!=null){
+                        create_details.put("image_path", filePath.getLastPathSegment().toString());
+                    }
                     if (userPrivilege.equalsIgnoreCase("npo")) {
                         create_details.put("if_npo_desc", description.getText().toString());
                         create_details.put("if_npo_name", nponame.getText().toString());
@@ -100,6 +119,14 @@ public class GetMoreInfo extends AppCompatActivity {
                 }
             }
         });
-
+        save.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+            }
+        });
     }
 }

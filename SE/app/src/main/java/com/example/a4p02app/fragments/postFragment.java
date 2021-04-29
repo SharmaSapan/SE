@@ -39,8 +39,6 @@ public class postFragment extends Fragment {
     EditText title;
     Button Upload;
 
-    private FirebaseStorage storage = FirebaseStorage.getInstance();
-    private StorageReference storageRef = storage.getReference();
     private final int PICK_IMAGE_REQUEST = 71;
     Uri filePath;
 

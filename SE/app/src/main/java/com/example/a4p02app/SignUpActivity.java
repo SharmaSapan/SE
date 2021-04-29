@@ -105,6 +105,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 deets.put("user_first_name", "");
                                 deets.put("user_last_name", "");
                                 deets.put("phoneNumber", "");
+                                deets.put("image_path", "");
                                 deets.put("if_npo_desc", "");
                                 deets.put("if_npo_name", "");
                                 deets.put("if_npo_url", "");
