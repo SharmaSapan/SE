@@ -226,7 +226,7 @@
             android:layout_marginTop="29dp"
             android:layout_marginBottom="673dp"
             android:text="Additional Details"
-            android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
