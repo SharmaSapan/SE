@@ -1,5 +1,6 @@
 package com.example.a4p02app;
 
+import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
@@ -23,7 +24,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class PostInstrumentedTest {
+public class PostAddDeleteInstrumentedTest {
 
     private String title;
     private String item;
@@ -47,7 +48,7 @@ public class PostInstrumentedTest {
     @Test
     public void testPost() {
 
-        //Load Edit
+        //Load Editplist
         onView(withId(R.id.post)).perform(click());
         onView(withId(R.id.postFrag)).check(matches(isDisplayed()));
 
@@ -60,5 +61,11 @@ public class PostInstrumentedTest {
 
         onView(withId(R.id.Post)).perform(click());
         onView(withId(R.id.homeFrag)).check(matches(isDisplayed()));
+
+        //Always select newest @ pos 0
+        onView(withId(R.id.plist)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.postDetails)).check(matches(isDisplayed()));
+
+        onView(withId(R.id.deletePost)).perform(click());
     }
 }

@@ -66,6 +66,10 @@ public class GetMoreInfo extends AppCompatActivity {
         np = findViewById(R.id.textView5);
         userPrivilege = userData.getInstance().getUser_privilege();
 
+        if (MainActivity.isTesting){
+            userPrivilege = "npo";
+        }
+
         if (userPrivilege.equalsIgnoreCase("npo")) {
             np.setVisibility(View.VISIBLE);
             description.setVisibility(View.VISIBLE);

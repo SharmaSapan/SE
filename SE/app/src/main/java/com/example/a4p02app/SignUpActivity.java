@@ -45,6 +45,13 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        try {
+            FirebaseFunctions.checkForEmulator(mAuth, db);
+        }
+        catch (Exception e){
+            System.err.println("Already initialized");
+        }
+
         mAuth = FirebaseAuth.getInstance();
 
         btnSignup = findViewById(R.id.btnSignUp);

@@ -24,7 +24,6 @@ public class FirebaseFunctions {
         store = FirebaseFirestore.getInstance();
 
         if (MainActivity.isTesting) {
-
             auth.useEmulator("10.0.2.2", 9099);
             store.useEmulator("10.0.2.2", 8080);
 
@@ -32,6 +31,8 @@ public class FirebaseFunctions {
                     .setPersistenceEnabled(false)
                     .build();
             store.setFirestoreSettings(settings);
+
+            System.out.println("Connected to emulator");
         }
     }
 

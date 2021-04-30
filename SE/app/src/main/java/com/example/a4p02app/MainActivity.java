@@ -70,14 +70,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (!begunTest) {
-            try {
-                FirebaseFunctions.checkForEmulator(mAuth, db);
-            }
-            catch (Exception e){
-                System.err.println("Already initialized");
-            }
-            begunTest = false;
+        //FirebaseAuth.getInstance().signOut();
+
+        try {
+            FirebaseFunctions.checkForEmulator(mAuth, db);
+        }
+        catch (Exception e){
+            System.err.println("Already initialized");
         }
 
 

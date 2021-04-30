@@ -30,12 +30,15 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    useLibrary 'android.test.runner'
+    //useLibrary 'android.test.runner'
     useLibrary 'android.test.base'
     useLibrary 'android.test.mock'
 }
 
 dependencies {
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.mockito:mockito-core:2.28.2'
+
     implementation platform('com.google.firebase:firebase-bom:26.5.0')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-storage:16.1.0'
@@ -64,8 +67,6 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     implementation 'com.firebaseui:firebase-ui-storage:7.1.1'
     annotationProcessor('com.github.bumptech.glide:compiler:4.11.0')
-
-    testImplementation 'junit:junit:4.12'
 
     // Core library
     androidTestImplementation 'androidx.test:core:1.0.0'
