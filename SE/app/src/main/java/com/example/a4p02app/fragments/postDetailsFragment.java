@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.a4p02app.LoginActivity;
 import com.example.a4p02app.MainActivity;
+import com.example.a4p02app.Post;
 import com.example.a4p02app.R;
 import com.example.a4p02app.updateProfile;
 import com.example.a4p02app.userData;
@@ -40,6 +41,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 public class postDetailsFragment extends Fragment {
@@ -70,10 +72,10 @@ public class postDetailsFragment extends Fragment {
         linkNPO = (Button) v.findViewById(R.id.linkToNPO);
 
 
-        passedUID = getArguments().getString("UID");
-        passedPostID = getArguments().getString("authid");
-        System.out.println(passedUID + "---------------------------ID-----------------");
-
+        passedPostID = getArguments().getString("UID");
+        passedUID = getArguments().getString("authid");
+        //System.out.println(passedUID + "---------------------------ID-----------------");
+        //System.out.println(passedPostID + "---------------------------ID-----------------");
         getFromDatabase(passedUID, passedPostID);
 
         linkNPO.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +92,42 @@ public class postDetailsFragment extends Fragment {
                         .commit();
             }
         });
+
+        //find post author name
+        /*db.collectionGroup("accounts")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    //adds all current field in firestore to the lists
+                    @RequiresApi(api = Build.VERSION_CODES.N)
+                    @Override
+                    public void onEvent( QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                        for(DocumentSnapshot snapshot: value){
+                            if(Objects.equals(snapshot.getString("UID"), passedUID)){
+                                showIsFav();
+                                break;
+                            }else{
+                                addToFav();
+                            }
+
+
+
+                            Post post = new Post();
+                            post.setContent(snapshot.getString("description"));
+                            post.setName(snapshot.getString("title"));
+                            post.setUID(snapshot.getId());
+                            post.setAuthID(snapshot.getString("author_id"));
+
+                            post.setDateTime((Objects.requireNonNull(snapshot.getTimestamp("post_date"))).toDate());
+                            //for sorting by date
+                            postList.add(post);
+                            System.out.println(post.getUID()+"------UID-post--");
+                        }
+
+
+                    }
+                });
+
+         */
 
 
         /*String uid = userData.getInstance().getUID();
@@ -156,7 +194,7 @@ public class postDetailsFragment extends Fragment {
                     DocumentSnapshot document = task.getResult();
                     assert document != null;
                     if (document.exists()) {
-                        // Log.d("TAG: ", "DocumentSnapshot data: " + document.getData());
+                        Log.d("TAG: ", "DocumentSnapshot data: " + document.getData());
                         postTitle = document.getString("title");
                         postDesc = document.getString("description");
                         postItem = document.getString("item");

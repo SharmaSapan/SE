@@ -10,6 +10,7 @@ public class Post {
     private String uid;
     private Date datetime;
     private String authid;
+    private String authname;
 
     public String getName(){
         return name;
@@ -57,5 +58,13 @@ public class Post {
 
     public void setAuthID(String authuid){
         this.authid = authuid;
+    }
+
+    public String getAuthName(){
+        return authname;
+    }
+
+    public void setAuthName(String authname){
+        this.authname = authname;
     }
 }

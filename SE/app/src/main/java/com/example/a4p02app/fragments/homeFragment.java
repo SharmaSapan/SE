@@ -92,11 +92,11 @@ public class homeFragment extends Fragment implements PostAdapter.RowClickListen
                     post.setDateTime((Objects.requireNonNull(snapshot.getTimestamp("post_date"))).toDate());
                     //for sorting by date
                     postList.add(post);
-
+                    System.out.println(post.getUID()+"------UID-post--");
                 }
                 //Collections.sort();
                 postList.sort(Comparator.comparing(Post::getDateTime).reversed());
-                System.out.println("The Object after sorting is : ");
+                /*System.out.println("The Object after sorting is : ");
                         //sort by date, then make toString();
                 for(int i=0;i<postList.size();i++){
                     Date dt = postList.get(i).getDateTime();
@@ -105,6 +105,8 @@ public class homeFragment extends Fragment implements PostAdapter.RowClickListen
                     System.out.println(dt+", ");
 
                 }
+
+                 */
                 initRecycler(postList);
 
             }
