@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:textSize="16sp"
-        android:layout_marginBottom="50dp" />
+        android:layout_marginBottom="20dp" />
 
     <TextView
         android:id="@+id/postItem"
@@ -33,7 +33,7 @@
 
     <TextView
         android:id="@+id/item"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/postDesc"
         app:layout_constraintStart_toEndOf="@id/postItem"
@@ -54,7 +54,7 @@
         android:textSize="16sp"/>
     <TextView
         android:id="@+id/dropoff"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/item"
         app:layout_constraintStart_toEndOf="@id/dropoffHeading"
@@ -81,20 +81,21 @@
         android:id="@+id/deletePost"
         android:layout_width="wrap_content"
         android:layout_height="51dp"
-        android:backgroundTint="@color/teal_darkgrey"
-        android:layout_marginTop="30dp"
-        android:text="Go To Profile"
+        android:layout_marginTop="120dp"
+        android:backgroundTint="@color/dark_orange"
+        android:text="Delete Post"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dropoffHeading"
+        app:layout_constraintTop_toBottomOf="@+id/dropoff"
         tools:ignore="MissingConstraints"
         android:fontFamily="@font/raleway_bold"/>
 
+
     <TextView
         android:id="@+id/postTitle"
-        android:layout_width="300dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toTopOf="@id/postAuth"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,7 +107,7 @@
         android:id="@+id/postAuth"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toTopOf="@id/postDesc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

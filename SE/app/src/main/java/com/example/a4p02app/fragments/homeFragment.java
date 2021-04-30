@@ -96,7 +96,7 @@ public class homeFragment extends Fragment implements PostAdapter.RowClickListen
                 }
                 //Collections.sort();
                 postList.sort(Comparator.comparing(Post::getDateTime).reversed());
-                /*System.out.println("The Object after sorting is : ");
+                System.out.println("The Object after sorting is : ");
                         //sort by date, then make toString();
                 for(int i=0;i<postList.size();i++){
                     Date dt = postList.get(i).getDateTime();
@@ -106,7 +106,7 @@ public class homeFragment extends Fragment implements PostAdapter.RowClickListen
 
                 }
 
-                 */
+
                 initRecycler(postList);
 
             }

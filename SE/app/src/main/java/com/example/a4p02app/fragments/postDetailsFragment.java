@@ -30,19 +30,25 @@ import com.example.a4p02app.R;
 import com.example.a4p02app.updateProfile;
 import com.example.a4p02app.userData;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.Comparator;
 import java.util.Objects;
+
+import static android.content.ContentValues.TAG;
 
 public class postDetailsFragment extends Fragment {
 
@@ -54,9 +60,12 @@ public class postDetailsFragment extends Fragment {
     String postDrop;
     String passedUID;
     String passedPostID;
+    String user;
+    String postAuth;
     private View v;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Button linkNPO;
+    private Button deleter;
 
     @Nullable
     @Override
@@ -66,14 +75,20 @@ public class postDetailsFragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_post_details, container, false);
 
 
-
+        user = userData.getInstance().getUID();
 
 
         linkNPO = (Button) v.findViewById(R.id.linkToNPO);
-
+        deleter = (Button) v.findViewById(R.id.deletePost);
+        deleter.setVisibility(View.GONE);
+        linkNPO.setVisibility(View.GONE);
 
         passedPostID = getArguments().getString("UID");
         passedUID = getArguments().getString("authid");
+
+        if(user.equals(passedUID)){
+            showDelete();
+        }
         //System.out.println(passedUID + "---------------------------ID-----------------");
         //System.out.println(passedPostID + "---------------------------ID-----------------");
         getFromDatabase(passedUID, passedPostID);
@@ -93,41 +108,64 @@ public class postDetailsFragment extends Fragment {
             }
         });
 
+       deleter.setOnClickListener(new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View v) {
+                                           //db.collection("accounts/"+uid+"/favourites")
+                                           db.collection("accounts/" + passedUID + "/post")
+                                                   .document(passedPostID)
+                                                   .delete()
+                                                   .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                       @Override
+                                                       public void onSuccess(Void aVoid) {
+                                                           Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                                                           Toast.makeText(v.getContext(), "Post Deleted", Toast.LENGTH_SHORT).show();
+                                                           FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
+                                                           Bundle args = new Bundle();
+                                                           MainActivity.homeFrag.setArguments(args);
+                                                           fragmentTransaction
+                                                                   .replace(R.id.fragment_container, MainActivity.homeFrag)
+                                                                   .addToBackStack(null)
+                                                                   .commit();
+                                                       }
+                                                   })
+                                                   .addOnFailureListener(new OnFailureListener() {
+                                                       @Override
+                                                       public void onFailure(@NonNull Exception e) {
+                                                           Log.w(TAG, "Error deleting document", e);
+                                                           Toast.makeText(v.getContext(), "Post Not Deleted", Toast.LENGTH_SHORT).show();
+                                                       }
+                                                   });
+
+                                       }
+                                   });
+
         //find post author name
-        /*db.collectionGroup("accounts")
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    //adds all current field in firestore to the lists
-                    @RequiresApi(api = Build.VERSION_CODES.N)
+        DocumentReference npoRef = db.collection("accounts")//find npo and set post author
+                .document(passedUID);
+                npoRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
-                    public void onEvent( QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
 
-                        for(DocumentSnapshot snapshot: value){
-                            if(Objects.equals(snapshot.getString("UID"), passedUID)){
-                                showIsFav();
-                                break;
-                            }else{
-                                addToFav();
+                                if(Objects.equals(document.getString("user_privilege"), "npo")){
+                                    postAuth = document.getString("if_npo_name");
+                                    showNPOlink();
+                                }else{postAuth = document.getString("user_first_name")+" "+document.getString("user_last_name");}
+                            } else {
+                                Log.d(TAG, "No such document");
+
                             }
-
-
-
-                            Post post = new Post();
-                            post.setContent(snapshot.getString("description"));
-                            post.setName(snapshot.getString("title"));
-                            post.setUID(snapshot.getId());
-                            post.setAuthID(snapshot.getString("author_id"));
-
-                            post.setDateTime((Objects.requireNonNull(snapshot.getTimestamp("post_date"))).toDate());
-                            //for sorting by date
-                            postList.add(post);
-                            System.out.println(post.getUID()+"------UID-post--");
+                        } else {
+                            Log.d(TAG, "get failed with ", task.getException());
                         }
-
-
                     }
                 });
 
-         */
+
 
 
         /*String uid = userData.getInstance().getUID();
@@ -154,6 +192,17 @@ public class postDetailsFragment extends Fragment {
 
          */
         return v;
+
+    }
+
+    private void showNPOlink() {
+        linkNPO.setVisibility(View.VISIBLE);
+    }
+
+    private void showDelete() {
+
+        deleter.setVisibility(View.VISIBLE);
+
     }
 
     @Override
@@ -198,7 +247,7 @@ public class postDetailsFragment extends Fragment {
                         postTitle = document.getString("title");
                         postDesc = document.getString("description");
                         postItem = document.getString("item");
-                        postTime = document.getTimestamp("post_date").toDate().toString();
+                        postTime = Objects.requireNonNull(document.getTimestamp("post_date")).toDate().toString();
                         postDrop = document.getString("dropoff_location");
                         //profilePicName = document.getString("profilePic");
                         //webURL = document.getString("if_npo_url");
@@ -233,6 +282,9 @@ public class postDetailsFragment extends Fragment {
 
         TextView pItem = (TextView) v.findViewById(R.id.item);
         pItem.setText(postItem);
+
+        TextView pAuth = (TextView) v.findViewById(R.id.postAuth);
+        pAuth.setText(postAuth);
 
         //postDate as well
 
