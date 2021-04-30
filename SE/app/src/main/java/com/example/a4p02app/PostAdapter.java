@@ -13,6 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,15 +24,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
 
     private static final String TAG = "PostAdapter";
 
-    List<Integer> profPic;
+    //List<Integer> profPic;
     List<Post> postListFilt;
     List<Post> postListAll;
     PostAdapter.RowClickListener clickListener;
 
-    public PostAdapter(List<Post> postListFilt, List<Integer> pics, PostAdapter.RowClickListener clickListener) {
+    public PostAdapter(List<Post> postListFilt, PostAdapter.RowClickListener clickListener) {
         this.postListFilt = postListFilt;
         postListAll = postListFilt;
-        this.profPic = pics;
+        //this.profPic = pics;
         //System.out.println(postListAll.get(0).getName());
         this.clickListener = clickListener;
     }
@@ -47,8 +51,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
         holder.npoName.setText(postListFilt.get(position).getName());
         holder.postContent.setText(postListFilt.get(position).getContent());
         holder.postDate.setText(postListFilt.get(position).getDate());
-        holder.npoPic.setImageResource(profPic.get(position));
-
+        //holder.npoPic.setImageResource(postListFilt.get(position).getImagePath());
+        String path = postListFilt.get(position).getAuthID()+"/"+postListFilt.get(position).getImagePath();
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(path);
+        Glide.with(holder.itemView.getContext()).load(storageReference).into(holder.npoPic);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,6 +130,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
             npoPic = itemView.findViewById(R.id.NPO_pic);
             postDate = itemView.findViewById(R.id.postDate);
             cLayout = itemView.findViewById(R.id.row);
+
+
+
         }
     }
     public interface RowClickListener{

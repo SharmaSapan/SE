@@ -2,7 +2,6 @@ package com.example.a4p02app.fragments;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,13 +16,10 @@ import android.view.inputmethod.EditorInfo;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.SearchView;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.a4p02app.ChatActivity;
 import com.example.a4p02app.LoginActivity;
 import com.example.a4p02app.MainActivity;
-import com.example.a4p02app.NPOdapter;
 import com.example.a4p02app.Post;
 import com.example.a4p02app.PostAdapter;
 import com.example.a4p02app.R;
@@ -32,12 +28,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -50,7 +44,7 @@ public class homeFragment extends Fragment implements PostAdapter.RowClickListen
     RecyclerView plist;
     PostAdapter pAdapter;
     ArrayList<Post> postList;
-    List<Integer> postPic = Arrays.asList(R.drawable.app_icon,R.drawable.blank_profile_picture,
+    /*List<Integer> postPic = Arrays.asList(R.drawable.app_icon,R.drawable.blank_profile_picture,
             R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon,
             R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.blank_profile_picture,
             R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon,
@@ -64,7 +58,7 @@ public class homeFragment extends Fragment implements PostAdapter.RowClickListen
             R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.app_icon,
             R.drawable.blank_profile_picture,R.drawable.app_icon,R.drawable.blank_profile_picture,
             R.drawable.app_icon,R.drawable.blank_profile_picture,R.drawable.app_icon);
-
+*/
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -88,7 +82,7 @@ public class homeFragment extends Fragment implements PostAdapter.RowClickListen
                     post.setName(snapshot.getString("title"));
                     post.setUID(snapshot.getId());
                     post.setAuthID(snapshot.getString("author_id"));
-
+                    post.setImagePath(snapshot.getString("image_path"));
                     post.setDateTime((Objects.requireNonNull(snapshot.getTimestamp("post_date"))).toDate());
                     //for sorting by date
                     postList.add(post);
@@ -117,7 +111,7 @@ public class homeFragment extends Fragment implements PostAdapter.RowClickListen
 
     private void initRecycler(ArrayList<Post> postList) {
         plist = homeview.findViewById(R.id.plist);
-        pAdapter = new PostAdapter(postList, postPic, this);
+        pAdapter = new PostAdapter(postList, this);
         plist.setAdapter(pAdapter);
     }
 

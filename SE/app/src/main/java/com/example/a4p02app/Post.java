@@ -11,6 +11,7 @@ public class Post {
     private Date datetime;
     private String authid;
     private String authname;
+    private String imagepath;
 
     public String getName(){
         return name;
@@ -42,6 +43,14 @@ public class Post {
 
     public void setDate(String pDate){
         this.date=pDate;
+    }
+
+    public void setImagePath(String imagepath){
+        this.imagepath=imagepath;
+    }
+
+    public String getImagePath(){
+        return imagepath;
     }
 
     public Date getDateTime(){
