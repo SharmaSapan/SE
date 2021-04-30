@@ -86,32 +86,19 @@ public class nonprofitFragment extends Fragment {
 
 
         passedUID = getArguments().getString("UID");
-        System.out.println(passedUID + "---------------------------ID-----------------");
+        System.out.println(passedUID + "---------------------------npoID-----------------");
         String uid = userData.getInstance().getUID();
-        DocumentReference fav_reference = userData.getInstance()
-                .getDocRef().collection("favourites").document();
-        db.collection("accounts/"+uid+"/favourites")
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @RequiresApi(api = Build.VERSION_CODES.N)
-                    @Override
-                    public void onEvent(QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
-                        for (DocumentSnapshot snapshot : value) {
-                            if(Objects.equals(snapshot.getString("UID"), passedUID)){
-                                showIsFav();
-                                break;
-                            }else{
-                                addToFav();
-                            }
-                        }
-                    }
-                });
+        //DocumentReference fav_reference = userData.getInstance()
+                //.getDocRef().collection("favourites").document();
+
 
 
         getFromDatabase(passedUID);
         setInfo();
         btnRemFromFavs= v.findViewById(R.id.btnRemFromFavs);
         btnAddtoFavs = v.findViewById(R.id.btnAddtoFavs);
+        btnRemFromFavs.setVisibility(View.GONE);
         btnAddtoFavs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,6 +137,27 @@ public class nonprofitFragment extends Fragment {
             }
 
         });
+
+        db.collection("accounts/"+uid+"/favourites")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
+                    @Override
+                    public void onEvent(QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                        for (DocumentSnapshot snapshot : value) {
+                            if(Objects.equals(snapshot.getString("UID"), passedUID)){
+
+                                showIsFav();
+                                //break;
+                            }else{
+                                addToFav();
+                            }
+                        }
+                    }
+                });
+
+
+
         return v;
     }
 
