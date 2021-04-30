@@ -83,7 +83,9 @@ public class NPO_ListFragment extends Fragment implements NPOdapter.RowClickList
                     NPOs.add(npo);
                 }
                 NPOs.sort(Comparator.comparing(NPO::getName));//sort by alphabetical
+
             }
+
         });
         npolist = npoListview.findViewById(R.id.npolist);
         npoAdapter = new NPOdapter(NPOs, postPic, this);
@@ -92,6 +94,8 @@ public class NPO_ListFragment extends Fragment implements NPOdapter.RowClickList
 
         return npoListview;
     }
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
