@@ -1,6 +1,7 @@
 package com.example.a4p02app;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -91,6 +92,8 @@ public class updateProfile extends Activity {
         toast.show();
         // update data app wide
         userData.getInstance().updateData();
+        updateProfile.super.onBackPressed();
+
     }
 
     private void goBack(View v){
