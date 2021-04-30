@@ -62,6 +62,7 @@ public class nonprofitFragment extends Fragment {
     private String unitNum;
     private String address;
     private String city;
+    private String sName;
     private String province;
     private String postalCode;
     private String emailAddress;
@@ -72,6 +73,7 @@ public class nonprofitFragment extends Fragment {
     private ImageView btnWeb;
     private ImageButton btnAddtoFavs;
     private ImageButton btnRemFromFavs;
+    String combine;
 
     //get an instance of Firebase so that the firestore database can be used
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -206,6 +208,7 @@ public class nonprofitFragment extends Fragment {
         //not done yet
         //for more info on this, go to https://firebase.google.com/docs/firestore/query-data/get-data
         public void getFromDatabase(String passedUID) {
+
             DocumentReference docRef = db.collection("accounts").document(passedUID);;
             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
@@ -219,9 +222,12 @@ public class nonprofitFragment extends Fragment {
                             npDesc = document.getString("if_npo_desc");
                             //profilePicName = document.getString("profilePic");
                             webURL = document.getString("if_npo_url");
-                            address = document.getString("address");
+                            unitNum = document.getString("address_unit");
+                            city = document.getString("address_city");
+                            postalCode = document.getString("address_postal");
                             phoneNum = document.getString("phoneNumber");
                             emailAddress = document.getString("user_email");
+
                             //update the page
                             setInfo();
                         } else {
@@ -238,6 +244,7 @@ public class nonprofitFragment extends Fragment {
 
         //this method updates the page to match the non-profit's info
         public void setInfo() {
+            combine = unitNum + " " + sName + "\n" + city + " " + province + "\n" + postalCode;
             //update non-profit's name
             TextView nonProfitName = (TextView) v.findViewById(R.id.nameDisplay);
             nonProfitName.setText(npName);
@@ -254,7 +261,7 @@ public class nonprofitFragment extends Fragment {
             profileContact.setText(pe);
 
             TextView profileAddress = (TextView) v.findViewById(R.id.npoAddress);
-            String a = address;
+            String a = combine;
             profileAddress.setText(a);
 
             TextView profileDesc = (TextView) v.findViewById(R.id.profileDesc);

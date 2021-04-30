@@ -70,19 +70,6 @@ public class GetMoreInfo extends AppCompatActivity {
             userPrivilege = "npo";
         }
 
-        if (userPrivilege.equalsIgnoreCase("npo")) {
-            np.setVisibility(View.VISIBLE);
-            description.setVisibility(View.VISIBLE);
-            nponame.setVisibility(View.VISIBLE);
-            url.setVisibility(View.VISIBLE);
-        }
-        else if (userPrivilege.equalsIgnoreCase("donor")) {
-            np.setVisibility(View.GONE);
-            description.setVisibility(View.GONE);
-            nponame.setVisibility(View.GONE);
-            url.setVisibility(View.GONE);
-        }
-
         save = (Button) findViewById(R.id.save);
         Upload_im = (Button) findViewById(R.id.Upload_im);
 
@@ -112,10 +99,19 @@ public class GetMoreInfo extends AppCompatActivity {
                     if (filePath!=null){
                         create_details.put("image_path", filePath.getLastPathSegment().toString());
                     }
+                    else {
+                        create_details.put("image_path", "");
+                    }
+
                     if (userPrivilege.equalsIgnoreCase("npo")) {
                         create_details.put("if_npo_desc", description.getText().toString());
                         create_details.put("if_npo_name", nponame.getText().toString());
                         create_details.put("if_npo_url", url.getText().toString());
+                    }
+                    else{
+                        create_details.put("if_npo_desc", "");
+                        create_details.put("if_npo_name", "");
+                        create_details.put("if_npo_url", "");
                     }
                     post_reference.set(create_details);
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);

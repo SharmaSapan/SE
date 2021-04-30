@@ -29,6 +29,14 @@ public class Post {
         this.content=pContent;
     }
 
+    public void setImagePath(String imagepath){
+        this.imagepath=imagepath;
+    }
+
+    public String getImagePath(){
+        return imagepath;
+    }
+
     public String getUID(){
         return uid;
     }
@@ -45,13 +53,6 @@ public class Post {
         this.date=pDate;
     }
 
-    public void setImagePath(String imagepath){
-        this.imagepath=imagepath;
-    }
-
-    public String getImagePath(){
-        return imagepath;
-    }
 
     public Date getDateTime(){
         return datetime;
