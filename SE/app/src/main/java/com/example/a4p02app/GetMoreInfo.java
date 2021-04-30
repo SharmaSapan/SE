@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -52,7 +53,6 @@ public class GetMoreInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_more_info);
         userData.getInstance().updateData();
-
         unit = findViewById(R.id.unit);
         street = findViewById(R.id.street);
         postal = findViewById(R.id.postal);
@@ -73,10 +73,10 @@ public class GetMoreInfo extends AppCompatActivity {
             url.setVisibility(View.VISIBLE);
         }
         else if (userPrivilege.equalsIgnoreCase("donor")) {
-            np.setVisibility(View.INVISIBLE);
-            description.setVisibility(View.INVISIBLE);
-            nponame.setVisibility(View.INVISIBLE);
-            url.setVisibility(View.INVISIBLE);
+            np.setVisibility(View.GONE);
+            description.setVisibility(View.GONE);
+            nponame.setVisibility(View.GONE);
+            url.setVisibility(View.GONE);
         }
 
         save = (Button) findViewById(R.id.save);

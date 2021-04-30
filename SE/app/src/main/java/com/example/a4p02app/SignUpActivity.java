@@ -55,7 +55,6 @@ public class SignUpActivity extends AppCompatActivity {
         rdoPersonal = findViewById(R.id.rdoPersonal);
         rdoBusiness = findViewById(R.id.rdoBusiness);
 
-
         btnSignup.setOnClickListener(v -> {
             try {
                 firebaseUserSignup();

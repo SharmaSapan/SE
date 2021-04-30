@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
     public static postDetailsFragment postDetailsFrag;
     public static Fragment nonprofitFrag;
     private static postFragment postFrag;
-    private static infoFragment infoFrag;
     private NPO_ListFragment npoListFrag;
 
     public boolean begunTest = false;
@@ -127,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
         homeFrag = new homeFragment();
         nonprofitFrag = new nonprofitFragment();
         postFrag = new postFragment();
-        infoFrag = new infoFragment();
         npoListFrag = new NPO_ListFragment();
         postDetailsFrag = new postDetailsFragment();
 

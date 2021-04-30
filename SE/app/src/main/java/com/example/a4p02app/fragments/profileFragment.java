@@ -42,7 +42,6 @@ public class profileFragment extends Fragment {
     private String emailAddress;
 
     private View v;
-    private ImageView newpic;
     private ImageView pic;
     private Button btnEdit;
     private Button btnDonations;
@@ -58,6 +57,7 @@ public class profileFragment extends Fragment {
 
         super.onCreate(savedInstanceState);
         v = inflater.inflate(R.layout.fragment_profile, container, false);
+        userData.getInstance().updateData();
         first_name = userData.getInstance().getUser_first();
         last_name = userData.getInstance().getUser_last();
         idtype = userData.getInstance().getUser_privilege();
